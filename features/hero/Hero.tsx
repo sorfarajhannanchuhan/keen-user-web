@@ -23,7 +23,7 @@ export default function Hero() {
   const zoom = content?.hero?.imageZoom ?? 100;
 
   return (
-    <section className="relative min-h-[85vh] lg:min-h-[90vh] xl:min-h-screen w-full flex items-center bg-[#0E1410] border-b border-brand-sand overflow-hidden">
+    <section className="-mt-[92px] md:-mt-[138px] relative min-h-screen w-full flex items-center bg-[#0E1410] border-b border-brand-sand overflow-hidden">
       {/* Full-Bleed Background Image with Photography */}
       <div className="absolute inset-0 z-0">
         <img
@@ -46,7 +46,7 @@ export default function Hero() {
       </div>
 
       {/* Main Content Container - Aligned towards Left Side */}
-      <div className="w-full max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-20 py-20 lg:py-28 flex items-center justify-between relative z-10">
+      <div className="w-full max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-20 pt-32 sm:pt-36 md:pt-44 lg:pt-48 pb-16 sm:pb-20 lg:pb-28 flex items-center justify-between relative z-10">
         <div className="max-w-2xl text-left space-y-6 sm:space-y-8 z-10">
           {/* Eyebrow badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#0E1410]/80 backdrop-blur-md text-brand-gold text-[11px] uppercase tracking-[0.25em] font-semibold border border-brand-sand">

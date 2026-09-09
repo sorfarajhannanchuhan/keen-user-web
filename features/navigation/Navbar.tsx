@@ -437,24 +437,44 @@ export default function Navbar() {
     };
   }, []);
 
-  // Scroll tracking: Throttled hysteresis to keep ONLY Bar 3 (ss 5) when scrolled down
-  const [isScrolledDown, setIsScrolledDown] = useState(false);
+  // Scroll tracking: Detect scroll direction and top threshold
+  // - At top (scrollY <= 30): All 3 bars shown, floating glassmorphic over hero on homepage
+  // - Scrolling down: Collapse top 2 bars, Category Bar (Bar 3) remains sticky at top
+  // - Scrolling up: Smoothly slide down / reveal the full 3-bar header (Screenshot 2)
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
+  const [isAtTop, setIsAtTop] = useState(true);
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     let ticking = false;
+
+    if (typeof window !== "undefined") {
+      setIsAtTop(window.scrollY <= 30);
+      lastScrollYRef.current = window.scrollY;
+    }
 
     const onScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
-          // Smooth hysteresis:
-          // Past 70px -> collapse top bars, keeping ONLY Bar 3 (ss 5)
-          // Near top (<= 25px) -> restore top 2 bars
-          if (currentScrollY > 70) {
-            setIsScrolledDown(true);
-          } else if (currentScrollY <= 25) {
-            setIsScrolledDown(false);
+          const lastScrollY = lastScrollYRef.current;
+          const deltaY = currentScrollY - lastScrollY;
+
+          // Top boundary threshold
+          if (currentScrollY <= 30) {
+            setIsAtTop(true);
+            setScrollDirection("up");
+          } else {
+            setIsAtTop(false);
+            // Require > 6px scroll movement to prevent micro-bounce jitter
+            if (deltaY > 6) {
+              setScrollDirection("down");
+            } else if (deltaY < -6) {
+              setScrollDirection("up");
+            }
           }
+
+          lastScrollYRef.current = currentScrollY;
           ticking = false;
         });
         ticking = true;
@@ -465,9 +485,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // When scrolled down, collapse top 2 bars (Bar 1 & Bar 2) permanently until scrolled back to top
-  // Hovering on Bar 3 options will NEVER uncollapse Bar 1 & Bar 2, preventing jitter / lag!
-  const isCollapsed = isScrolledDown && !isSearchDropdownOpen;
+  // When scrolling DOWN (scrollDirection === "down" and !isAtTop), collapse top 2 bars
+  // When scrolling UP (scrollDirection === "up") OR at top, restore all 3 bars smoothly!
+  // If search dropdown is open, keep uncollapsed
+  const isCollapsed = !isAtTop && scrollDirection === "down" && !isSearchDropdownOpen;
+  const isFloatingOverHero = isAtTop && pathname === "/";
 
   // Filter products based on search input
   const searchResults = useMemo(() => {
@@ -529,8 +551,12 @@ export default function Navbar() {
           {/* Bar 1: Top Announcement Bar (Solid, slides smoothly with topBars container) */}
           <div
             ref={announcementRef}
-            style={announcementStyles.style}
-            className={`w-full text-[11px] sm:text-xs text-center tracking-widest uppercase font-medium flex items-center justify-center gap-2 select-none shadow-xs z-50 py-2 px-4 border-b ${announcementStyles.className}`}
+            style={isFloatingOverHero ? undefined : announcementStyles.style}
+            className={`w-full text-[11px] sm:text-xs text-center tracking-widest uppercase font-medium flex items-center justify-center gap-2 select-none shadow-xs z-50 py-2 px-4 border-b transition-colors duration-300 ${
+              isFloatingOverHero
+                ? "bg-black/35 backdrop-blur-md border-white/10 text-stone-200"
+                : announcementStyles.className
+            }`}
           >
             <Sparkles className="w-3 h-3 text-brand-gold animate-pulse shrink-0" />
             <span className="font-semibold text-stone-100">
@@ -558,12 +584,16 @@ export default function Navbar() {
 
           {/* Bar 2: Main Luxury Brand Logo & Utility Bar */}
           <div
-            style={headerStyles.style}
+            style={isFloatingOverHero ? undefined : headerStyles.style}
             className={`w-full border-b transition-all duration-300 ${
               isSearchDropdownOpen ? "relative z-50" : "relative z-20"
             } ${
-              isCollapsed ? "shadow-md" : "shadow-xs"
-            } ${headerStyles.className}`}
+              isFloatingOverHero
+                ? "bg-black/25 backdrop-blur-md border-white/10 text-white shadow-none"
+                : isCollapsed
+                ? "shadow-md bg-brand-linen/95 dark:bg-[#0E1410]/95 backdrop-blur-md border-stone-200/80 dark:border-stone-800/80"
+                : "shadow-xs bg-brand-linen/95 dark:bg-[#0E1410]/95 backdrop-blur-md border-stone-200/60 dark:border-stone-800/60"
+            } ${!isFloatingOverHero ? headerStyles.className : ""}`}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div
@@ -585,10 +615,14 @@ export default function Navbar() {
                   />
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="font-brandon text-xl sm:text-2xl font-semibold tracking-[0.22em] text-brand-charcoal uppercase group-hover:text-brand-gold transition-colors leading-none">
+                  <span className={`font-brandon text-xl sm:text-2xl font-semibold tracking-[0.22em] uppercase group-hover:text-brand-gold transition-colors leading-none ${
+                    isFloatingOverHero ? "text-white" : "text-brand-charcoal"
+                  }`}>
                     KEEN CHIT
                   </span>
-                  <span className="font-sans text-[8px] sm:text-[9px] uppercase tracking-[0.32em] text-brand-charcoal-muted font-normal mt-1">
+                  <span className={`font-sans text-[8px] sm:text-[9px] uppercase tracking-[0.32em] font-normal mt-1 transition-colors ${
+                    isFloatingOverHero ? "text-stone-300" : "text-brand-charcoal-muted"
+                  }`}>
                     {t("brandTagline")}
                   </span>
                 </div>
@@ -609,6 +643,8 @@ export default function Navbar() {
                   className={`w-full flex items-center border-b pb-1 px-1 transition-all group cursor-text ${
                     isSearchDropdownOpen
                       ? "border-brand-gold relative z-50"
+                      : isFloatingOverHero
+                      ? "border-white/30 focus-within:border-brand-gold"
                       : "border-stone-300/80 dark:border-stone-700/80 focus-within:border-brand-gold"
                   }`}
                 >
@@ -626,7 +662,9 @@ export default function Navbar() {
                     placeholder=""
                     autoComplete="off"
                     spellCheck="false"
-                    className="w-full bg-transparent text-xs tracking-wide text-brand-charcoal focus:outline-none placeholder:text-transparent cursor-text"
+                    className={`w-full bg-transparent text-xs tracking-wide focus:outline-none placeholder:text-transparent cursor-text ${
+                      isFloatingOverHero ? "text-white placeholder:text-stone-300" : "text-brand-charcoal dark:text-stone-100"
+                    }`}
                   />
                   {searchQuery && (
                     <button
@@ -884,7 +922,9 @@ export default function Navbar() {
               {/* Mobile Search Button */}
               <button
                 onClick={() => setIsSearchModalOpen(true)}
-                className="md:hidden p-2 text-stone-700 dark:text-stone-200 hover:text-brand-gold cursor-pointer transition-colors"
+                className={`md:hidden p-2 hover:text-brand-gold cursor-pointer transition-colors ${
+                  isFloatingOverHero ? "text-white" : "text-stone-700 dark:text-stone-200"
+                }`}
                 aria-label="Search"
               >
                 <Search className="w-5 h-5 text-brand-gold" />
@@ -896,7 +936,9 @@ export default function Navbar() {
               {/* Cart / Shopping Bag Button */}
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="relative p-2 text-stone-700 dark:text-stone-200 hover:text-brand-gold transition-colors group flex items-center justify-center cursor-pointer"
+                className={`relative p-2 hover:text-brand-gold transition-colors group flex items-center justify-center cursor-pointer ${
+                  isFloatingOverHero ? "text-white" : "text-stone-700 dark:text-stone-200"
+                }`}
                 aria-label="View Shopping Bag"
                 title={`Shopping Bag (${totalItems} items)`}
               >
@@ -913,7 +955,9 @@ export default function Navbar() {
               {/* Mobile Hamburger Menu Toggle */}
               <button
                 onClick={() => setIsMoreDrawerOpen(!isMoreDrawerOpen)}
-                className="p-2 text-stone-700 dark:text-stone-200 hover:text-brand-gold md:hidden cursor-pointer"
+                className={`p-2 hover:text-brand-gold md:hidden cursor-pointer ${
+                  isFloatingOverHero ? "text-white" : "text-stone-700 dark:text-stone-200"
+                }`}
                 aria-label="Toggle navigation menu"
               >
                 {isMoreDrawerOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -927,14 +971,16 @@ export default function Navbar() {
 
       {/* Bar 3: Option Bar (Category Navigation Strip & Hover Mega-Menu - Sticky at top when scrolling down) */}
       <header
-        style={headerStyles.style}
+        style={isFloatingOverHero ? undefined : headerStyles.style}
         className={`relative z-10 w-full border-b transition-all duration-300 hidden md:block ${
           isSearchDropdownOpen ? "blur-[2.5px] opacity-75 pointer-events-none" : "blur-none opacity-100"
         } ${
-          isCollapsed
-            ? "shadow-md bg-white/95 dark:bg-[#0E1410]/95 backdrop-blur-md border-stone-200/80 dark:border-stone-800/80"
-            : "shadow-xs border-stone-200/60 dark:border-stone-800/60"
-        } ${headerStyles.className}`}
+          isFloatingOverHero
+            ? "bg-black/20 backdrop-blur-md border-white/10 text-stone-200 shadow-none"
+            : isCollapsed
+            ? "shadow-md bg-white/95 dark:bg-[#0E1410]/95 backdrop-blur-md border-stone-200/80 dark:border-stone-800/80 text-stone-700 dark:text-stone-300"
+            : "shadow-xs bg-white/90 dark:bg-[#0E1410]/90 backdrop-blur-md border-stone-200/60 dark:border-stone-800/60 text-stone-700 dark:text-stone-300"
+        } ${!isFloatingOverHero ? headerStyles.className : ""}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
@@ -945,7 +991,9 @@ export default function Navbar() {
             <nav
               ref={navContainerRef}
               onMouseLeave={handleMouseLeaveMenu}
-              className="relative flex items-center justify-center gap-6 lg:gap-8 text-[11px] uppercase tracking-[0.2em] py-2.5 font-medium text-stone-700 dark:text-stone-300 select-none"
+              className={`relative flex items-center justify-center gap-6 lg:gap-8 text-[11px] uppercase tracking-[0.2em] py-2.5 font-medium select-none transition-colors duration-300 ${
+                isFloatingOverHero ? "text-stone-200" : "text-stone-700 dark:text-stone-300"
+              }`}
             >
               {navCategories.map((cat) => {
                 const isCurrentPage = activePageKey === cat.key;
@@ -965,6 +1013,8 @@ export default function Navbar() {
                           ? "text-brand-gold font-semibold"
                           : isCurrentPage
                           ? "text-brand-gold font-bold"
+                          : isFloatingOverHero
+                          ? "text-stone-200 hover:text-brand-gold"
                           : "text-stone-700 dark:text-stone-300 hover:text-brand-gold"
                       }`}
                     >

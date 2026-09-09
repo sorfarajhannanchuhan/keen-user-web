@@ -87,12 +87,13 @@ export default function Footer() {
           {/* Brand Col (2 cols span) */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="relative w-9 h-9 overflow-hidden rounded-full border border-brand-gold/40">
+              <div className="relative w-9 h-9 min-w-[36px] min-h-[36px] overflow-hidden rounded-full border border-brand-gold/40 shrink-0">
                 <Image
                   src="/logo.jpg"
                   alt="KEEN CHIT Logo"
-                  fill
-                  className="object-cover"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-cover"
                 />
               </div>
               <span className="font-brandon text-2xl tracking-[0.22em] font-semibold text-white uppercase">
