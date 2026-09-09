@@ -1,0 +1,505 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ========================================================================
+   Brandon Grotesque & Brandon Text Self-Hosted Webfonts (WOFF2)
+   Zero external latency, crisp cross-platform rendering
+   ======================================================================== */
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('/fonts/brandon/BrandonGrotesque-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('/fonts/brandon/BrandonGrotesque-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('/fonts/brandon/BrandonGrotesque-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('/fonts/brandon/BrandonGrotesque-Bold.woff2') format('woff2');
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('/fonts/brandon/BrandonGrotesque-Black.woff2') format('woff2');
+  font-weight: 800 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Brandon Text definition for cards, labels, and text accents */
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('/fonts/brandon/BrandonGrotesque-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('/fonts/brandon/BrandonGrotesque-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('/fonts/brandon/BrandonGrotesque-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('/fonts/brandon/BrandonGrotesque-Bold.woff2') format('woff2');
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('/fonts/brandon/BrandonGrotesque-Black.woff2') format('woff2');
+  font-weight: 800 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-brandon: 'Brandon Grotesque', 'Brandon Text', 'Hind Siliguri', 'Nirmala UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-brandon-text: 'Brandon Text', 'Brandon Grotesque', 'Hind Siliguri', 'Nirmala UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-jost: var(--font-brandon);
+  --font-heading: var(--font-brandon);
+  --font-sans: 'Plus Jakarta Sans', 'Hind Siliguri', 'Nirmala UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-bengali: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+  --font-serif: var(--font-brandon);
+
+  /* ========================================================================
+     Light Mode: Belgian Oatmeal & Tuscan Olive
+     ======================================================================== */
+  --bg-canvas: #F8F6F0;
+  --bg-card: #FFFFFF;
+  --bg-card-subtle: #F0ECE1;
+  --bg-elevated: #EDE8DD;
+  --border-subtle: #E2DDD5;
+  --border-hover: #CFC7BA;
+  --border-accent: #3F4D38;
+  --text-main: #162018;
+  --text-muted: #556253;
+  --text-light: #7E8C7C;
+  --accent-gold: #D4AF37;
+  --accent-gold-hover: #E5C04E;
+  --accent-olive: #3F4D38;
+  --nav-bg: rgba(248, 246, 240, 0.94);
+  --footer-bg: #121A14;
+  --footer-text: #EAE4DC;
+  --scrollbar-track: #F8F6F0;
+  --scrollbar-thumb: #D8D2C5;
+}
+
+html.dark {
+  /* ========================================================================
+     Dark Mode: Tuscan Olive Noir & Champagne Gold
+     ======================================================================== */
+  --bg-canvas: #0E1410;
+  --bg-card: #151E17;
+  --bg-card-subtle: #1A241D;
+  --bg-elevated: #1F2C23;
+  --border-subtle: #233026;
+  --border-hover: #334537;
+  --border-accent: #D4AF37;
+  --text-main: #F5F5F0;
+  --text-muted: #A8B5A5;
+  --text-light: #7E8C7C;
+  --accent-gold: #D4AF37;
+  --accent-gold-hover: #E5C04E;
+  --accent-olive: #3F4D38;
+  --nav-bg: rgba(14, 20, 16, 0.94);
+  --footer-bg: #080C0A;
+  --footer-text: #EAE4DC;
+  --scrollbar-track: #0E1410;
+  --scrollbar-thumb: #233026;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-canvas);
+}
+
+body {
+  color: var(--text-main);
+  background-color: var(--bg-canvas);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, .font-jost, .font-heading, .font-serif, .font-brandon {
+  font-family: var(--font-brandon);
+}
+
+.font-brandon-text {
+  font-family: var(--font-brandon-text);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Subtle custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* Selection highlight */
+::selection {
+  background-color: #D4AF37;
+  color: #0E1410;
+}
+
+/* ==========================================================================
+   Apple Intelligence / Siri Aura Dynamic Rotating Glow Border
+   ========================================================================== */
+
+@property --aura-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes aura-spin {
+  0% {
+    --aura-angle: 0deg;
+  }
+  100% {
+    --aura-angle: 360deg;
+  }
+}
+
+/* Gravitational physics rotation:
+   - 0% to 30%: Free-fall gravity drop from top (0°) to bottom (180°) fast and accelerating
+   - 30% to 100%: Climbing upward against gravity from bottom (180°) back to top (360°) slow and decelerating */
+@keyframes aura-gravity-rotate {
+  0% {
+    transform: rotate(0deg);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  30% {
+    transform: rotate(180deg);
+    animation-timing-function: cubic-bezier(0.1, 0.85, 0.25, 1);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes aura-spin-gravity {
+  0% {
+    --aura-angle: 0deg;
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  30% {
+    --aura-angle: 180deg;
+    animation-timing-function: cubic-bezier(0.1, 0.85, 0.25, 1);
+  }
+  100% {
+    --aura-angle: 360deg;
+  }
+}
+
+@keyframes aura-spin-continuous {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-aura-spin {
+  animation: aura-spin-continuous 2.8s linear infinite;
+  will-change: transform;
+}
+
+.animate-aura-gravity {
+  animation: aura-gravity-rotate 2.4s infinite;
+  will-change: transform;
+}
+
+/* True Gravitational Physics Curve (.25x Faster & Ultra-Smooth 20-Step Continuous Harmonic Motion):
+   - 0% to 32%: Accelerating Freefall Waterfall Drop down the Right side (0° to 180°) in 32% of cycle time (~1.63s)
+   - 32% to 100%: Decelerated Upward Ascent fighting gravity up the Left side (180° to 360°) in 68% of cycle time (~3.47s)
+   - Total duration: 5.1s (tuned 25% faster, silky smooth and responsive) */
+@keyframes aura-gravity-fluid {
+  0% { transform: rotate(0deg); }
+  4% { transform: rotate(8deg); }
+  8% { transform: rotate(20deg); }
+  12% { transform: rotate(38deg); }
+  16% { transform: rotate(65deg); }
+  20% { transform: rotate(98deg); }
+  24% { transform: rotate(132deg); }
+  28% { transform: rotate(162deg); }
+  32% { transform: rotate(180deg); }
+  38% { transform: rotate(200deg); }
+  44% { transform: rotate(218deg); }
+  50% { transform: rotate(236deg); }
+  56% { transform: rotate(254deg); }
+  62% { transform: rotate(270deg); }
+  68% { transform: rotate(286deg); }
+  74% { transform: rotate(301deg); }
+  80% { transform: rotate(316deg); }
+  86% { transform: rotate(330deg); }
+  92% { transform: rotate(343deg); }
+  96% { transform: rotate(352deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-aura-gravity-fluid {
+  animation: aura-gravity-fluid 5.1s linear infinite;
+  will-change: transform;
+}
+
+.animate-aura-water-gravity {
+  animation: aura-gravity-fluid 5.1s linear infinite;
+  will-change: transform;
+}
+
+/* Signature Chatbox 2-Line Thinking & Dynamic Movement Animation */
+@keyframes thinking-line-1 {
+  0% {
+    width: 14px;
+    transform: translateX(0px);
+    opacity: 0.6;
+    background-position: 0% 50%;
+  }
+  50% {
+    width: 28px;
+    transform: translateX(2px);
+    opacity: 1;
+    background-position: 100% 50%;
+  }
+  100% {
+    width: 14px;
+    transform: translateX(0px);
+    opacity: 0.6;
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes thinking-line-2 {
+  0% {
+    width: 24px;
+    transform: translateX(2px);
+    opacity: 0.95;
+    background-position: 100% 50%;
+  }
+  50% {
+    width: 12px;
+    transform: translateX(0px);
+    opacity: 0.5;
+    background-position: 200% 50%;
+  }
+  100% {
+    width: 24px;
+    transform: translateX(2px);
+    opacity: 0.95;
+    background-position: 300% 50%;
+  }
+}
+
+.animate-thinking-line-1 {
+  animation: thinking-line-1 1.35s ease-in-out infinite;
+  background-size: 200% 100%;
+  will-change: width, transform, opacity;
+}
+
+.animate-thinking-line-2 {
+  animation: thinking-line-2 1.35s ease-in-out infinite;
+  background-size: 200% 100%;
+  will-change: width, transform, opacity;
+}
+
+/* Base Aura Border Box */
+.aura-border-box {
+  --aura-speed: 2.8s;
+  --aura-emerald: #D4AF37;
+  --aura-cyan: #06B6D4;
+  --aura-lavender: #8B5CF6;
+  --aura-magenta: #EC4899;
+  --aura-border-width: 2.5px;
+  --aura-radius: 26px;
+  position: relative;
+  border-radius: var(--aura-radius);
+  isolation: isolate;
+}
+
+/* Sharp inner border trace */
+.aura-border-box::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--aura-border-width));
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--aura-angle, 0deg),
+    transparent 0deg,
+    var(--aura-emerald) 50deg,
+    var(--aura-cyan) 110deg,
+    var(--aura-lavender) 175deg,
+    var(--aura-magenta) 230deg,
+    transparent 285deg,
+    transparent 360deg
+  );
+  animation: aura-spin-gravity var(--aura-speed) infinite;
+  z-index: -1;
+}
+
+/* Soft diffused outer glow */
+.aura-border-box::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--aura-angle, 0deg),
+    transparent 0deg,
+    var(--aura-emerald) 50deg,
+    var(--aura-cyan) 110deg,
+    var(--aura-lavender) 175deg,
+    var(--aura-magenta) 230deg,
+    transparent 285deg,
+    transparent 360deg
+  );
+  filter: blur(14px);
+  opacity: 0.75;
+  animation: aura-spin-gravity var(--aura-speed) infinite;
+  z-index: -2;
+  pointer-events: none;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.aura-border-box:hover::after {
+  opacity: 1;
+  filter: blur(18px);
+}
+
+
+/* ==========================================================================
+   Specialized Gold & Warm Amber Aura Pin (Image 1 Teardrop Speech Bubble Shape)
+   ========================================================================== */
+.aura-gold-pin {
+  --aura-speed: 2.6s;
+  --aura-gold-1: #F5D042;
+  --aura-gold-2: #D4AF37;
+  --aura-gold-3: #E5A93C;
+  --aura-accent: #10B981;
+  --aura-border-width: 2.5px;
+  position: relative;
+  border-radius: 30px 30px 30px 8px;
+  isolation: isolate;
+}
+
+.aura-gold-pin::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--aura-border-width));
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--aura-angle, 0deg),
+    transparent 0deg,
+    var(--aura-gold-1) 55deg,
+    var(--aura-gold-2) 115deg,
+    var(--aura-gold-3) 175deg,
+    var(--aura-accent) 225deg,
+    transparent 280deg,
+    transparent 360deg
+  );
+  animation: aura-spin-gravity var(--aura-speed) infinite;
+  z-index: -1;
+}
+
+.aura-gold-pin::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--aura-angle, 0deg),
+    transparent 0deg,
+    var(--aura-gold-1) 55deg,
+    var(--aura-gold-2) 115deg,
+    var(--aura-gold-3) 175deg,
+    var(--aura-accent) 225deg,
+    transparent 280deg,
+    transparent 360deg
+  );
+  filter: blur(14px);
+  opacity: 0.75;
+  animation: aura-spin-gravity var(--aura-speed) infinite;
+  z-index: -2;
+  pointer-events: none;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* ==========================================================================
+   Continuous Right-to-Left Auto-Scroll Marquee (Featured Categories)
+   ========================================================================== */
+@keyframes marquee-rtl {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-rtl {
+  display: flex;
+  width: max-content;
+  animation: marquee-rtl 28s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-rtl:hover {
+  animation-play-state: paused;
+}
+
+.aura-gold-pin:hover::after {
+  opacity: 1;
+  filter: blur(18px);
+}
