@@ -32,138 +32,168 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const isFavorited = isInWishlist(product.id);
 
-  // Bengali badge translation helper
-  const getDisplayBadge = (badge?: string) => {
-    if (!badge) return null;
-    if (!isBangla) return badge;
-    if (badge.toLowerCase().includes("best")) return "সেরা বিক্রিত";
-    if (badge.toLowerCase().includes("new")) return "নতুন কালেকশন";
-    if (badge.toLowerCase().includes("signature")) return "সিগনেচার";
-    return badge;
+  // Primary Badge (Top-Left)
+  const getPrimaryBadge = () => {
+    if (product.badge) {
+      if (product.badge.toLowerCase().includes("best")) return "🔥 BEST SELLING";
+      if (product.badge.toLowerCase().includes("artisan") || product.badge.toLowerCase().includes("master")) return "MASTER ARTISAN";
+      return product.badge.toUpperCase();
+    }
+    if (product.isBestSeller) return "🔥 BEST SELLING";
+    return null;
   };
+
+  // Secondary Badge (Top-Right)
+  const getSecondaryBadge = () => {
+    if (product.id === "kc-cushion-01" || product.name.toLowerCase().includes("marais")) return "100%";
+    if (product.id === "kc-cushion-02" || product.name.toLowerCase().includes("nakshi")) return "HANDSPUN";
+    if (product.id === "kc-cushion-03" || product.name.toLowerCase().includes("sienna")) return "ULTRA-DENSE";
+    if (product.fabric.toLowerCase().includes("waffle")) return "380 GSM";
+    if (product.fabric.toLowerCase().includes("silk")) return "RAW SILK";
+    if (product.fabric.toLowerCase().includes("patchwork")) return "BESPOKE";
+    return product.fabric.split(" ")[0].toUpperCase();
+  };
+
+  // Subtitle
+  const getSubtitle = () => {
+    if (product.originalPrice && product.originalPrice > product.price) {
+      return isBangla ? "কম্বো অফার: ১০% ছাড়" : "Bundle and Save 10%";
+    }
+    if (product.category === "velvet" || product.name.toLowerCase().includes("velvet")) {
+      return isBangla ? "হাতে বোনা আভিজাত্য" : "Handcrafted Artisan Weave";
+    }
+    return isBangla ? "হাতে বোনা আভিজাত্য" : "Handcrafted Artisan Weave";
+  };
+
+  const primaryBadge = getPrimaryBadge();
+  const secondaryBadge = getSecondaryBadge();
 
   return (
     <div
-      className="group flex flex-col bg-brand-linen-dark border border-brand-sand hover:border-brand-gold/80 transition-all duration-300 hover:shadow-luxury-hover shadow-luxury"
+      className="group flex flex-col bg-[#0E1410] border border-stone-800/90 hover:border-brand-gold transition-all duration-300 hover:shadow-2xl shadow-lg relative overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Product Image Area */}
-      <div className="relative aspect-square overflow-hidden bg-brand-linen/40 cursor-pointer" onClick={() => setQuickViewProduct(product)}>
+      <div
+        className="relative aspect-square overflow-hidden bg-[#162019] cursor-pointer"
+        onClick={() => setQuickViewProduct(product)}
+      >
         {/* Primary Image */}
         <Image
           src={isHovered && product.secondaryImage ? product.secondaryImage : product.primaryImage}
           alt={product.name}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
         {/* Top Badges & Wishlist Action */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-          {product.badge ? (
-            <span className={`backdrop-blur-md text-[9px] uppercase tracking-[0.2em] font-bold px-2.5 py-1 shadow-sm ${
-              product.badge.includes("Best")
-                ? "bg-[#3F4D38] text-brand-gold border border-brand-gold/60 shadow-md"
-                : "bg-[#3F4D38]/90 text-[#F8F6F0] border border-white/20"
-            }`}>
-              {getDisplayBadge(product.badge)}
+        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+          {primaryBadge ? (
+            <span className="backdrop-blur-md text-[9.5px] uppercase tracking-[0.18em] font-bold px-2.5 py-1 bg-[#142017]/90 text-brand-gold border border-brand-gold/40 shadow-sm">
+              {primaryBadge}
             </span>
-          ) : <div />}
-          
+          ) : (
+            <div />
+          )}
+
           <div className="flex items-center gap-1.5 pointer-events-auto">
+            {/* Dark Circular Heart Button */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 toggleWishlist(product);
               }}
-              className="w-7 h-7 rounded-full bg-brand-linen/95 dark:bg-[#0E1410]/95 backdrop-blur-md border border-brand-sand hover:border-brand-gold flex items-center justify-center text-brand-charcoal hover:text-brand-gold transition-all shadow-sm cursor-pointer hover:scale-110 active:scale-95"
+              className="w-7 h-7 rounded-full bg-black/80 hover:bg-black backdrop-blur-md border border-white/25 hover:border-brand-gold flex items-center justify-center text-white transition-all shadow-md cursor-pointer hover:scale-110 active:scale-95"
               title={isFavorited ? "Remove from wishlist" : "Add to wishlist"}
               aria-label="Wishlist"
             >
               <Heart
                 className={`w-3.5 h-3.5 transition-colors ${
-                  isFavorited ? "text-rose-500 fill-rose-500" : "text-brand-charcoal hover:text-brand-gold"
+                  isFavorited ? "text-rose-500 fill-rose-500" : "text-white hover:text-brand-gold"
                 }`}
               />
             </button>
-            <span className="text-[9px] uppercase tracking-wider font-semibold text-[#3F4D38] dark:text-brand-gold bg-[#3F4D38]/10 dark:bg-[#3F4D38]/40 px-2 py-0.5 border border-[#3F4D38]/25 dark:border-brand-gold/30 backdrop-blur-md">
-              {product.fabric.split(" ")[0]}
-            </span>
+
+            {/* Secondary Fabric / Quality Pill */}
+            {secondaryBadge && (
+              <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#141C16] bg-[#8C7E52] px-2 py-0.5 border border-[#A69768]/50 shadow-sm">
+                {secondaryBadge}
+              </span>
+            )}
           </div>
         </div>
 
-        {/* Bottom Scrim / Gradient for guaranteed high-contrast readability on any product photo */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/75 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        {/* Subtle Dark Gradient at Bottom on Hover */}
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/85 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-        {/* Quick Action Overlay on Hover */}
-        <div className="absolute inset-x-3 bottom-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1.5 group-hover:translate-y-0 pointer-events-auto z-10">
-          {/* Quick View Button (Left/Center) */}
+        {/* Quick Action Overlay on Hover - Matching User Reference Screenshot */}
+        <div className="absolute inset-x-2.5 bottom-2.5 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1.5 group-hover:translate-y-0 pointer-events-auto z-20">
+          {/* Quick View Button (Left) */}
           <button
             onClick={(e) => {
               e.stopPropagation();
               setQuickViewProduct(product);
             }}
-            className="group/qv flex-1 bg-[#121A14]/90 hover:bg-brand-gold text-[#F8F6F0] hover:text-[#0E1410] text-[11px] uppercase tracking-[0.18em] font-semibold py-2.5 px-3 flex items-center justify-center gap-2 backdrop-blur-md border border-white/25 hover:border-brand-gold shadow-lg transition-all duration-200 cursor-pointer"
-            title="Open Quick View"
+            className="flex-1 bg-[#141B16] hover:bg-black text-[#D8C7A8] hover:text-white text-[11px] uppercase tracking-[0.2em] font-bold py-2.5 px-3 flex items-center justify-center gap-2 border border-stone-800 shadow-xl transition-all duration-200 cursor-pointer"
+            title="Quick View"
             aria-label={`Quick view ${product.name}`}
           >
-            <Eye className="w-3.5 h-3.5 text-brand-gold group-hover/qv:text-[#0E1410] transition-colors" />
-            <span>{t("quickView")}</span>
+            <Eye className="w-3.5 h-3.5 text-brand-gold" />
+            <span>{isBangla ? t("quickView") : "QUICK VIEW"}</span>
           </button>
-          
-          {/* Add to Bag Button (Right) */}
+
+          {/* Add to Bag Button (Right - Square Gold Button) */}
           <button
             onClick={handleQuickAdd}
-            className="bg-brand-gold hover:bg-brand-gold-hover text-[#0E1410] p-2.5 shadow-lg border border-brand-gold/60 transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shrink-0"
+            className="bg-brand-gold hover:bg-brand-gold-hover text-[#0E1410] w-10 h-10 flex items-center justify-center shadow-xl border border-brand-gold transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shrink-0"
             title="Add directly to bag"
             aria-label="Add to bag"
           >
             {addedAnim ? (
               <Check className="w-4 h-4 text-emerald-950 font-bold" />
             ) : (
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="w-4 h-4 text-[#0E1410] stroke-[2.2]" />
             )}
           </button>
         </div>
       </div>
 
-      {/* Product Details Section - Matching User Reference Screenshot */}
-      <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between space-y-2.5 bg-brand-linen-dark">
+      {/* Product Details Section - Exact Match with Reference Screenshot */}
+      <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-[#0E1410]">
         <div className="space-y-1">
-          {/* Title: Brandon Text Bold Uppercase with balanced micro-bold and 5% letter spacing */}
+          {/* Title: Jost Bold Uppercase Crisp White */}
           <h3
             onClick={() => setQuickViewProduct(product)}
-            className="font-brandon-text font-bold text-[14px] sm:text-[14.5px] uppercase tracking-[0.05em] text-stone-900 dark:text-stone-100 hover:text-brand-gold cursor-pointer transition-colors leading-[1.3] line-clamp-2 max-w-[220px] sm:max-w-[245px] [-webkit-text-stroke:0.18px_currentColor] dark:[-webkit-text-stroke:0.10px_currentColor]"
+            className="font-jost font-bold text-[14px] sm:text-[14.5px] uppercase tracking-[0.05em] text-white hover:text-brand-gold cursor-pointer transition-colors leading-[1.3] line-clamp-2 max-w-[260px]"
           >
             {product.name}
           </h3>
 
-          {/* Subtitle: Fabric / Promo Note (Warm Cognac / Camel) */}
-          <div className="font-sans text-[12px] sm:text-[12.5px] text-[#996c49] dark:text-[#E5B586] font-medium tracking-normal pt-0.5">
-            {product.originalPrice && product.originalPrice > product.price
-              ? (content?.products?.bundlePromoText ||
-                (isBangla ? `কম্বো সেটে ${Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% ছাড়` : `Bundle and Save ${Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%`))
-              : (content?.products?.fabricBadgeDefault || (isBangla ? "হাতে বোনা আভিজাত্য" : "Handcrafted Artisan Weave"))}
+          {/* Subtitle: Warm Terracotta/Amber Promo Note */}
+          <div className="font-sans text-[12px] sm:text-[12.5px] text-[#E07A5F] font-medium tracking-normal pt-0.5">
+            {getSubtitle()}
           </div>
 
-          {/* Pricing Line: From in muted sans, ৳ and price in terracotta bold sans */}
-          <div className="flex items-baseline gap-1.5 pt-1 font-sans">
-            <span className="text-xs sm:text-[13px] text-stone-500 dark:text-stone-400 font-normal">
-              {content?.products?.pricePrefix || t("priceFromPrefix")}
+          {/* Pricing Line: "From" in muted gray, original in strikethrough, active in bold terracotta */}
+          <div className="flex items-baseline gap-1.5 pt-1.5 font-sans">
+            <span className="text-xs sm:text-[13px] text-stone-400 font-normal">
+              {content?.products?.pricePrefix || (isBangla ? "শুরু" : "From")}
             </span>
-            {product.originalPrice && (
-              <span className="text-xs sm:text-[13px] text-stone-400 dark:text-stone-500 line-through font-normal">
+            {product.originalPrice && product.originalPrice > product.price && (
+              <span className="text-xs sm:text-[13px] text-stone-500 line-through font-normal mr-1">
                 ৳{product.originalPrice.toLocaleString("en-BD")}
               </span>
             )}
-            <span className="text-base sm:text-lg font-semibold text-[#993D2C] dark:text-[#E07A5F]">
+            <span className="text-base sm:text-lg font-bold text-[#FF5C35]">
               ৳{product.price.toLocaleString("en-BD")}
             </span>
           </div>
         </div>
 
-        {/* Color Swatches - Exact match with reference screenshot */}
-        <div className="flex items-center gap-2 pt-2.5 border-t border-brand-sand/50">
+        {/* Color Swatches - Crisp Squares with Thin White Active Ring */}
+        <div className="flex items-center gap-2 pt-3 mt-2 border-t border-stone-700/60">
           {product.colors.map((col, idx) => {
             const isSelected = selectedColor.name === col.name;
             return (
@@ -173,9 +203,9 @@ export default function ProductCard({ product }: ProductCardProps) {
                   e.stopPropagation();
                   setSelectedColor(col);
                 }}
-                className={`w-[19px] h-[19px] flex items-center justify-center transition-all cursor-pointer ${
+                className={`w-[18px] h-[18px] flex items-center justify-center transition-all cursor-pointer ${
                   isSelected
-                    ? "border border-stone-800 dark:border-stone-200 p-[2px]"
+                    ? "border border-white p-[2px]"
                     : "border border-transparent hover:scale-105"
                 }`}
                 title={col.name}
@@ -193,3 +223,4 @@ export default function ProductCard({ product }: ProductCardProps) {
     </div>
   );
 }
+
