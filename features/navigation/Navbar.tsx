@@ -265,6 +265,7 @@ export default function Navbar() {
   // Navigation active, hover, and single sliding indicator state
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const megaMenuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const navContainerRef = useRef<HTMLElement>(null);
@@ -278,6 +279,10 @@ export default function Navbar() {
     width: 0,
     opacity: 0,
   });
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Identify active page key based on current URL path
   const activePageKey = useMemo(() => {
@@ -367,9 +372,10 @@ export default function Navbar() {
     if (megaMenuTimeoutRef.current) {
       clearTimeout(megaMenuTimeoutRef.current);
     }
+    // Instantly glide back to active page key with smooth physics
+    setHoveredKey(null);
     megaMenuTimeoutRef.current = setTimeout(() => {
       setActiveMegaMenu(null);
-      setHoveredKey(null);
     }, 150);
   };
 
@@ -548,15 +554,11 @@ export default function Navbar() {
       >
         {/* Top Collapsible Region (Bar 1: Announcement Bar + Bar 2: Brand Logo Bar) */}
         <div ref={topBarsRef} className="w-full">
-          {/* Bar 1: Top Announcement Bar (Solid, slides smoothly with topBars container) */}
+          {/* Bar 1: Top Announcement Bar (Solid Tuscan Olive matching Screenshot 4, zero cloudy gray haze) */}
           <div
             ref={announcementRef}
-            style={isFloatingOverHero ? undefined : announcementStyles.style}
-            className={`w-full text-[11px] sm:text-xs tracking-widest uppercase font-medium select-none shadow-xs z-50 py-2 px-4 sm:px-6 lg:px-8 border-b transition-colors duration-300 ${
-              isFloatingOverHero
-                ? "bg-black/35 backdrop-blur-md border-white/10 text-stone-200"
-                : announcementStyles.className
-            }`}
+            style={announcementStyles.style}
+            className={`w-full text-[11px] sm:text-xs tracking-widest uppercase font-medium select-none shadow-xs z-50 py-2 px-4 sm:px-6 lg:px-8 border-b transition-colors duration-300 ${announcementStyles.className}`}
           >
             <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
               {/* 1. Left: WhatsApp Direct Concierge Contact */}
@@ -1045,46 +1047,49 @@ export default function Navbar() {
                     <Link
                       href={cat.href}
                       onClick={handleCategoryClick}
-                      className={`inline-flex items-center gap-1 transition-colors duration-200 py-1 ${
+                      className={`inline-flex items-center gap-1.5 transition-colors duration-200 py-1 ${
                         isHovered
                           ? "text-brand-gold font-semibold"
                           : isCurrentPage
                           ? "text-brand-gold font-bold"
                           : isFloatingOverHero
-                          ? "text-white/95 hover:text-brand-gold drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]"
+                          ? "text-white hover:text-brand-gold drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)] [text-shadow:_0_1px_8px_rgba(0,0,0,0.85)]"
                           : "text-stone-700 dark:text-stone-300 hover:text-brand-gold"
                       }`}
                     >
+                      {/* Name text span with exact ref measurement */}
                       <span
                         ref={(el) => {
                           navItemRefs.current[cat.key] = el;
                         }}
-                        className="inline-flex items-center gap-1.5 whitespace-nowrap"
+                        className="whitespace-nowrap inline-block"
                       >
                         {cat.name}
-                        {hasSubmenu && (
-                          <ChevronDown
-                            className={`w-3 h-3 transition-transform duration-300 ${
-                              isHovered
-                                ? "rotate-180 text-brand-gold"
-                                : isFloatingOverHero
-                                ? "text-white/80 group-hover:text-brand-gold drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]"
-                                : "text-stone-400 group-hover:text-brand-gold"
-                            }`}
-                          />
-                        )}
                       </span>
+                      {hasSubmenu && (
+                        <ChevronDown
+                          className={`w-3 h-3 transition-transform duration-300 ${
+                            isHovered
+                              ? "rotate-180 text-brand-gold"
+                              : isFloatingOverHero
+                              ? "text-white/90 group-hover:text-brand-gold drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
+                              : "text-stone-400 group-hover:text-brand-gold"
+                          }`}
+                        />
+                      )}
                     </Link>
                   </div>
                 );
               })}
 
-              {/* Single Smooth Sliding Underline Indicator Bar (Glides effortlessly from item to item, matching exact text width) */}
+              {/* Single Smooth Sliding Underline Indicator Bar (Glides effortlessly, matching exact text width of option name) */}
               <span
                 aria-hidden="true"
-                className={`absolute bottom-0 left-0 m-0 h-[1.5px] bg-brand-gold rounded-full pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
-                  indicatorStyle.opacity > 0 ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute bottom-0.5 left-0 m-0 h-[2px] bg-brand-gold rounded-full pointer-events-none will-change-transform ${
+                  isMounted
+                    ? "transition-all duration-350 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                    : "transition-none"
+                } ${indicatorStyle.opacity > 0 ? "opacity-100" : "opacity-0"}`}
                 style={{
                   transform: `translateX(${indicatorStyle.left}px)`,
                   width: `${indicatorStyle.width}px`,
