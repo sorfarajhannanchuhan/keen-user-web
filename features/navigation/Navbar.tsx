@@ -1005,17 +1005,17 @@ export default function Navbar() {
       </div>
     </div>
 
-      {/* Bar 3: Option Bar (Category Navigation Strip & Hover Mega-Menu - Sticky at top when scrolling down) */}
+      {/* Bar 3: Option Bar (Category Navigation Strip & Hover Mega-Menu - Floating directly over Hero with 100% transparency) */}
       <header
         style={isFloatingOverHero ? undefined : headerStyles.style}
-        className={`relative z-10 w-full border-b transition-all duration-300 hidden md:block ${
+        className={`relative z-10 w-full transition-all duration-300 hidden md:block ${
           isSearchDropdownOpen ? "blur-[2.5px] opacity-75 pointer-events-none" : "blur-none opacity-100"
         } ${
           isFloatingOverHero
-            ? "bg-black/20 backdrop-blur-md border-white/10 text-stone-200 shadow-none"
+            ? "bg-transparent border-b border-transparent shadow-none"
             : isCollapsed
-            ? "shadow-md bg-white/95 dark:bg-[#0E1410]/95 backdrop-blur-md border-stone-200/80 dark:border-stone-800/80 text-stone-700 dark:text-stone-300"
-            : "shadow-xs bg-white/90 dark:bg-[#0E1410]/90 backdrop-blur-md border-stone-200/60 dark:border-stone-800/60 text-stone-700 dark:text-stone-300"
+            ? "shadow-md bg-white/95 dark:bg-[#0E1410]/95 backdrop-blur-md border-b border-stone-200/80 dark:border-stone-800/80 text-stone-700 dark:text-stone-300"
+            : "shadow-xs bg-white/90 dark:bg-[#0E1410]/90 backdrop-blur-md border-b border-stone-200/60 dark:border-stone-800/60 text-stone-700 dark:text-stone-300"
         } ${!isFloatingOverHero ? headerStyles.className : ""}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1027,30 +1027,31 @@ export default function Navbar() {
             <nav
               ref={navContainerRef}
               onMouseLeave={handleMouseLeaveMenu}
-              className={`relative flex items-center justify-center gap-6 lg:gap-8 text-[11px] uppercase tracking-[0.2em] py-2.5 font-medium select-none transition-colors duration-300 ${
-                isFloatingOverHero ? "text-stone-200" : "text-stone-700 dark:text-stone-300"
+              className={`relative flex items-center justify-center gap-6 lg:gap-8 text-[11.5px] uppercase tracking-[0.18em] py-2.5 font-medium select-none transition-colors duration-300 ${
+                isFloatingOverHero ? "text-white" : "text-stone-700 dark:text-stone-300"
               }`}
             >
               {navCategories.map((cat) => {
                 const isCurrentPage = activePageKey === cat.key;
                 const isHovered = hoveredKey === cat.key;
+                const hasSubmenu = ["cushions", "curtains", "quilts", "shawls"].includes(cat.key);
 
                 return (
                   <div
                     key={cat.key}
                     onMouseEnter={() => handleMouseEnterMenu(cat.key)}
-                    className="relative py-1 cursor-pointer"
+                    className="relative py-1 cursor-pointer group"
                   >
                     <Link
                       href={cat.href}
                       onClick={handleCategoryClick}
-                      className={`transition-colors duration-200 py-1 block ${
+                      className={`inline-flex items-center gap-1 transition-colors duration-200 py-1 ${
                         isHovered
                           ? "text-brand-gold font-semibold"
                           : isCurrentPage
                           ? "text-brand-gold font-bold"
                           : isFloatingOverHero
-                          ? "text-stone-200 hover:text-brand-gold"
+                          ? "text-white/95 hover:text-brand-gold drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]"
                           : "text-stone-700 dark:text-stone-300 hover:text-brand-gold"
                       }`}
                     >
@@ -1058,9 +1059,20 @@ export default function Navbar() {
                         ref={(el) => {
                           navItemRefs.current[cat.key] = el;
                         }}
-                        className="inline-block whitespace-nowrap"
+                        className="inline-flex items-center gap-1.5 whitespace-nowrap"
                       >
                         {cat.name}
+                        {hasSubmenu && (
+                          <ChevronDown
+                            className={`w-3 h-3 transition-transform duration-300 ${
+                              isHovered
+                                ? "rotate-180 text-brand-gold"
+                                : isFloatingOverHero
+                                ? "text-white/80 group-hover:text-brand-gold drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]"
+                                : "text-stone-400 group-hover:text-brand-gold"
+                            }`}
+                          />
+                        )}
                       </span>
                     </Link>
                   </div>
