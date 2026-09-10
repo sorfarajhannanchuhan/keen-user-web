@@ -12,6 +12,7 @@ import {
 import { CartProvider, CartDrawer } from "@/features/cart";
 import { WishlistProvider, WishlistDrawer } from "@/features/wishlist";
 import { ProductQuickView } from "@/features/catalog";
+import { MarketingCampaignModal } from "@/features/marketing";
 import AuraChatWidget from "@/features/chat-concierge";
 import { ScrollToTop, AppCanvas, GoogleAnalytics } from "@/features/utilities";
 import { AppearanceProvider, FrontendContentProvider } from "@/features/appearance";
@@ -84,6 +85,7 @@ export default function RootLayout({
                       <CartDrawer />
                       <WishlistDrawer />
                       <ProductQuickView />
+                      <MarketingCampaignModal />
                       <ScrollToTop />
                       <AuraChatWidget position="bottom-right" />
                       <MobileBottomNav />

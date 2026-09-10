@@ -93,11 +93,46 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      const savedCoupon = localStorage.getItem("keenchit_applied_coupon");
+      if (savedCoupon) {
+        setAppliedCoupon(savedCoupon);
+      }
+    } catch (e) {
+      console.error("Could not load coupon from localStorage", e);
+    }
+  }, []);
+
+  const applyCoupon = (code: string) => {
+    const normalized = code.trim().toUpperCase();
+    if (normalized === "KEEN10" || normalized === "PRIVILEGE10" || normalized === "WELCOME10") {
+      setAppliedCoupon(normalized);
+      try {
+        localStorage.setItem("keenchit_applied_coupon", normalized);
+      } catch (e) {}
+      return { success: true, message: "10% Atelier Privilege Applied" };
+    }
+    return { success: false, message: "Invalid voucher code" };
+  };
+
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+    try {
+      localStorage.removeItem("keenchit_applied_coupon");
+    } catch (e) {}
+  };
+
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0
   );
+
+  const discountAmount = appliedCoupon ? Math.round(subtotal * 0.1) : 0;
+  const grandTotal = Math.max(0, subtotal - discountAmount);
 
   return (
     <CartContext.Provider
@@ -110,6 +145,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         updateQuantity,
         totalItems,
         subtotal,
+        appliedCoupon,
+        discountAmount,
+        grandTotal,
+        applyCoupon,
+        removeCoupon,
         quickViewProduct,
         setQuickViewProduct,
       }}

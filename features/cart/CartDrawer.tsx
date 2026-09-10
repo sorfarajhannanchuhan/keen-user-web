@@ -15,9 +15,15 @@ export default function CartDrawer() {
     updateQuantity,
     totalItems,
     subtotal,
+    appliedCoupon,
+    discountAmount,
+    applyCoupon,
+    removeCoupon,
   } = useCart();
   const { t, isBangla } = useLanguage();
 
+  const [couponInput, setCouponInput] = useState("");
+  const [couponMsg, setCouponMsg] = useState<{ text: string; isError?: boolean } | null>(null);
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -32,7 +38,7 @@ export default function CartDrawer() {
   const FREE_SHIPPING_THRESHOLD = 3000;
   const isFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
   const deliveryCharge = isFreeShipping ? 0 : deliveryArea === "inside" ? 80 : 150;
-  const grandTotal = subtotal + deliveryCharge;
+  const grandTotal = Math.max(0, subtotal - discountAmount) + deliveryCharge;
 
   // Build WhatsApp order message
   const generateWhatsAppUrl = () => {
@@ -41,6 +47,11 @@ export default function CartDrawer() {
       message += `%0A${idx + 1}. ${encodeURIComponent(item.product.name)}%0A   - Size: ${encodeURIComponent(item.selectedSize)}%0A   - Color: ${encodeURIComponent(item.selectedColor.name)}%0A   - Quantity: ${item.quantity}%0A   - Price: ৳${(item.product.price * item.quantity).toLocaleString()}%0A`;
     });
     message += `%0ASubtotal: ৳${subtotal.toLocaleString()}%0A`;
+    if (appliedCoupon && discountAmount > 0) {
+      message += `Atelier Privilege Voucher (${appliedCoupon}): -৳${discountAmount.toLocaleString()}%0A`;
+    }
+    message += `Delivery: ${deliveryCharge === 0 ? "Free White-Glove" : `৳${deliveryCharge}`}%0A`;
+    message += `Estimated Total: ৳${grandTotal.toLocaleString()}%0A`;
     if (customerName) message += `Customer Name: ${encodeURIComponent(customerName)}%0A`;
     if (customerPhone) message += `Phone: ${encodeURIComponent(customerPhone)}%0A`;
     if (customerAddress) message += `Address: ${encodeURIComponent(customerAddress)}%0A`;
@@ -276,10 +287,78 @@ export default function CartDrawer() {
                     ৳{subtotal.toLocaleString("en-BD")}
                   </span>
                 </div>
+
+                {appliedCoupon && discountAmount > 0 && (
+                  <div className="flex justify-between text-[#E07A5F] font-medium">
+                    <span>{isBangla ? `প্রিভিলেজ ছাড় (${appliedCoupon})` : `Privilege Courtesy (${appliedCoupon})`}</span>
+                    <span>-৳{discountAmount.toLocaleString("en-BD")}</span>
+                  </div>
+                )}
+
                 <div className="flex justify-between text-[11px]">
                   <span>{t("cartDelivery")}</span>
                   <span>{isFreeShipping ? t("cartDeliveryFree") : (isBangla ? "অর্ডার কনফার্ম করার সময় নির্ধারিত হবে" : "Calculated at checkout (৳80 - ৳150)")}</span>
                 </div>
+
+                <div className="flex justify-between pt-2 border-t border-brand-sand/50 font-semibold text-sm text-brand-charcoal">
+                  <span>{isBangla ? "সর্বমোট" : "Estimated Total"}</span>
+                  <span className="text-brand-gold font-sans text-base">
+                    ৳{grandTotal.toLocaleString("en-BD")}
+                  </span>
+                </div>
+              </div>
+
+              {/* Atelier Privilege / Coupon Section */}
+              <div className="pt-2 border-t border-brand-sand/40">
+                {appliedCoupon ? (
+                  <div className="flex items-center justify-between p-2 bg-brand-gold/10 border border-brand-gold/40 text-xs">
+                    <div className="flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-brand-gold" />
+                      <span className="font-semibold text-brand-gold font-mono">{appliedCoupon}</span>
+                      <span className="text-stone-300 text-[11px]">(10% Privilege Applied)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-[#E07A5F]">-৳{discountAmount.toLocaleString("en-BD")}</span>
+                      <button
+                        onClick={removeCoupon}
+                        className="text-stone-400 hover:text-red-400 p-0.5"
+                        title="Remove coupon"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-1.5">
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={couponInput}
+                        onChange={(e) => setCouponInput(e.target.value)}
+                        placeholder={isBangla ? "ভাউচার কোড (e.g. KEEN10)" : "Privilege Code (e.g. KEEN10)"}
+                        className="flex-1 bg-black/40 border border-brand-sand/60 px-2.5 py-1.5 text-xs text-white placeholder-stone-400 uppercase font-mono focus:border-brand-gold focus:outline-none"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!couponInput.trim()) return;
+                          const res = applyCoupon(couponInput);
+                          setCouponMsg({ text: res.message, isError: !res.success });
+                          if (res.success) setCouponInput("");
+                          setTimeout(() => setCouponMsg(null), 3000);
+                        }}
+                        className="px-3 py-1.5 bg-brand-gold hover:bg-brand-gold-hover text-[#0E1410] text-[11px] uppercase font-bold tracking-wider cursor-pointer"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                    {couponMsg && (
+                      <div className={`text-[10.5px] ${couponMsg.isError ? "text-red-400" : "text-emerald-400"}`}>
+                        {couponMsg.text}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className="space-y-2 pt-2">

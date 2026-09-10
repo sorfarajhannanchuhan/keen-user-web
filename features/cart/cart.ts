@@ -26,6 +26,12 @@ export interface CartContextType {
   updateQuantity: (productId: string, size: string, colorName: string, quantity: number) => void;
   totalItems: number;
   subtotal: number;
+  appliedCoupon: string | null;
+  discountAmount: number;
+  grandTotal: number;
+  applyCoupon: (code: string) => { success: boolean; message: string };
+  removeCoupon: () => void;
   quickViewProduct: Product | null;
   setQuickViewProduct: (product: Product | null) => void;
 }
+
