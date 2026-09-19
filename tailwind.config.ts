@@ -32,9 +32,7 @@ const config: Config = {
         brandon: ["'Brandon Grotesque'", "'Brandon Text'", "'Hind Siliguri'", "'Nirmala UI'", "sans-serif"],
         "brandon-text": ["'Brandon Text'", "'Brandon Grotesque'", "'Hind Siliguri'", "'Nirmala UI'", "sans-serif"],
         heading: ["'Brandon Grotesque'", "'Brandon Text'", "'Hind Siliguri'", "'Nirmala UI'", "sans-serif"],
-        jost: ["'Brandon Grotesque'", "'Brandon Text'", "'Hind Siliguri'", "'Nirmala UI'", "sans-serif"],
         sans: ["'Plus Jakarta Sans'", "'Hind Siliguri'", "'Nirmala UI'", "-apple-system", "sans-serif"],
-        serif: ["'Brandon Grotesque'", "'Brandon Text'", "'Hind Siliguri'", "'Nirmala UI'", "sans-serif"],
         bengali: ["'Hind Siliguri'", "'Plus Jakarta Sans'", "sans-serif"],
       },
       boxShadow: {

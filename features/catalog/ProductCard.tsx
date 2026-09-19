@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Eye, ShoppingBag, Check, Heart } from "lucide-react";
 import { Product } from "./products";
 import { useCart } from "@/features/cart";
@@ -14,6 +16,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const router = useRouter();
   const { addToCart, setQuickViewProduct } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { content } = useFrontendContent();
@@ -32,103 +35,70 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const isFavorited = isInWishlist(product.id);
 
-  // Primary Badge (Top-Left)
-  const getPrimaryBadge = () => {
-    if (product.badge) {
-      if (product.badge.toLowerCase().includes("best")) return "🔥 BEST SELLING";
-      if (product.badge.toLowerCase().includes("artisan") || product.badge.toLowerCase().includes("master")) return "MASTER ARTISAN";
-      return product.badge.toUpperCase();
-    }
-    if (product.isBestSeller) return "🔥 BEST SELLING";
-    return null;
-  };
-
-  // Secondary Badge (Top-Right)
-  const getSecondaryBadge = () => {
-    if (product.id === "kc-cushion-01" || product.name.toLowerCase().includes("marais")) return "100%";
-    if (product.id === "kc-cushion-02" || product.name.toLowerCase().includes("nakshi")) return "HANDSPUN";
-    if (product.id === "kc-cushion-03" || product.name.toLowerCase().includes("sienna")) return "ULTRA-DENSE";
-    if (product.fabric.toLowerCase().includes("waffle")) return "380 GSM";
-    if (product.fabric.toLowerCase().includes("silk")) return "RAW SILK";
-    if (product.fabric.toLowerCase().includes("patchwork")) return "BESPOKE";
-    return product.fabric.split(" ")[0].toUpperCase();
-  };
-
-  // Subtitle
-  const getSubtitle = () => {
-    if (product.originalPrice && product.originalPrice > product.price) {
-      return isBangla ? "কম্বো অফার: ১০% ছাড়" : "Bundle and Save 10%";
-    }
-    if (product.category === "velvet" || product.name.toLowerCase().includes("velvet")) {
-      return isBangla ? "হাতে বোনা আভিজাত্য" : "Handcrafted Artisan Weave";
-    }
-    return isBangla ? "হাতে বোনা আভিজাত্য" : "Handcrafted Artisan Weave";
-  };
-
-  const primaryBadge = getPrimaryBadge();
-  const secondaryBadge = getSecondaryBadge();
 
   return (
     <div
-      className="group flex flex-col bg-[#0E1410] border border-stone-800/90 hover:border-brand-gold transition-all duration-300 hover:shadow-2xl shadow-lg relative overflow-hidden"
+      className="group flex flex-col bg-white dark:bg-[#0E1410] border border-stone-200/90 dark:border-stone-800/90 hover:border-brand-gold transition-all duration-300 hover:shadow-2xl shadow-md relative overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Product Image Area */}
+      {/* Product Image Area with Direct Navigation to /product/[id] */}
       <div
-        className="relative aspect-square overflow-hidden bg-[#162019] cursor-pointer"
-        onClick={() => setQuickViewProduct(product)}
+        className="relative aspect-square overflow-hidden bg-stone-100 dark:bg-[#162019] cursor-pointer"
+        onClick={() => router.push(`/product/${product.id}`)}
       >
-        {/* Primary Image */}
+        {/* Base Primary Image */}
         <Image
-          src={isHovered && product.secondaryImage ? product.secondaryImage : product.primaryImage}
+          src={product.primaryImage}
           alt={product.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
         />
 
-        {/* Top Badges & Wishlist Action */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
-          {primaryBadge ? (
-            <span className="backdrop-blur-md text-[9.5px] uppercase tracking-[0.18em] font-bold px-2.5 py-1 bg-[#142017]/90 text-brand-gold border border-brand-gold/40 shadow-sm">
-              {primaryBadge}
+        {/* Secondary Image for Smooth 1-Time Cross-Fade Hover (Matching SS 4) */}
+        {product.secondaryImage && (
+          <Image
+            src={product.secondaryImage}
+            alt={`${product.name} alternate view`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-opacity duration-700 ease-in-out opacity-0 group-hover:opacity-100"
+          />
+        )}
+
+        {/* Top-Left SS 3 Style Badge (e.g. BEST SELLER) */}
+        {product.isBestSeller && (
+          <div className="absolute top-3 left-3 z-10 pointer-events-none">
+            <span className="bg-[#111111] text-[#D4AF37] border border-[#D4AF37]/30 text-[10px] sm:text-[10.5px] font-bold tracking-widest px-2.5 py-1 uppercase shadow-md inline-block">
+              {isBangla ? "বেস্ট সেলার" : "BEST SELLER"}
             </span>
-          ) : (
-            <div />
-          )}
-
-          <div className="flex items-center gap-1.5 pointer-events-auto">
-            {/* Dark Circular Heart Button */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleWishlist(product);
-              }}
-              className="w-7 h-7 rounded-full bg-black/80 hover:bg-black backdrop-blur-md border border-white/25 hover:border-brand-gold flex items-center justify-center text-white transition-all shadow-md cursor-pointer hover:scale-110 active:scale-95"
-              title={isFavorited ? "Remove from wishlist" : "Add to wishlist"}
-              aria-label="Wishlist"
-            >
-              <Heart
-                className={`w-3.5 h-3.5 transition-colors ${
-                  isFavorited ? "text-rose-500 fill-rose-500" : "text-white hover:text-brand-gold"
-                }`}
-              />
-            </button>
-
-            {/* Secondary Fabric / Quality Pill */}
-            {secondaryBadge && (
-              <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#141C16] bg-[#8C7E52] px-2 py-0.5 border border-[#A69768]/50 shadow-sm">
-                {secondaryBadge}
-              </span>
-            )}
           </div>
+        )}
+
+        {/* Top Wishlist Action Only (Matching User SS 5 Directive) */}
+        <div className="absolute top-3 right-3 z-10 pointer-events-auto">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleWishlist(product);
+            }}
+            className="w-8 h-8 rounded-full bg-black/70 hover:bg-black backdrop-blur-md border border-white/20 hover:border-brand-gold flex items-center justify-center text-white transition-all shadow-md cursor-pointer hover:scale-110 active:scale-95"
+            title={isFavorited ? "Remove from wishlist" : "Add to wishlist"}
+            aria-label="Wishlist"
+          >
+            <Heart
+              className={`w-4 h-4 transition-colors ${
+                isFavorited ? "text-rose-500 fill-rose-500" : "text-white hover:text-brand-gold"
+              }`}
+            />
+          </button>
         </div>
 
         {/* Subtle Dark Gradient at Bottom on Hover */}
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/85 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-        {/* Quick Action Overlay on Hover - Matching User Reference Screenshot */}
+        {/* Quick Action Overlay on Hover - Black Normal with Gilded Champagne (#D4AF37) Hover */}
         <div className="absolute inset-x-2.5 bottom-2.5 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1.5 group-hover:translate-y-0 pointer-events-auto z-20">
           {/* Quick View Button (Left) */}
           <button
@@ -136,64 +106,67 @@ export default function ProductCard({ product }: ProductCardProps) {
               e.stopPropagation();
               setQuickViewProduct(product);
             }}
-            className="flex-1 bg-[#141B16] hover:bg-black text-[#D8C7A8] hover:text-white text-[11px] uppercase tracking-[0.2em] font-bold py-2.5 px-3 flex items-center justify-center gap-2 border border-stone-800 shadow-xl transition-all duration-200 cursor-pointer"
+            className="flex-1 bg-[#111111] hover:bg-[#D4AF37] text-white hover:text-[#0E1410] text-[11px] uppercase tracking-[0.2em] font-bold py-2.5 px-3 flex items-center justify-center gap-2 border border-black/40 hover:border-[#D4AF37] shadow-xl hover:shadow-[0_4px_22px_rgba(212,175,55,0.35)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer group/qv"
             title="Quick View"
             aria-label={`Quick view ${product.name}`}
           >
-            <Eye className="w-3.5 h-3.5 text-brand-gold" />
+            <Eye className="w-3.5 h-3.5 text-[#D4AF37] group-hover/qv:text-[#0E1410] transition-colors" />
             <span>{isBangla ? t("quickView") : "QUICK VIEW"}</span>
           </button>
 
-          {/* Add to Bag Button (Right - Square Gold Button) */}
+          {/* Add to Bag Button (Right - Square Button) */}
           <button
             onClick={handleQuickAdd}
-            className="bg-brand-gold hover:bg-brand-gold-hover text-[#0E1410] w-10 h-10 flex items-center justify-center shadow-xl border border-brand-gold transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shrink-0"
+            className="bg-[#111111] hover:bg-[#D4AF37] text-white hover:text-[#0E1410] w-10 h-10 flex items-center justify-center shadow-xl border border-white/10 hover:border-[#D4AF37] hover:shadow-[0_4px_22px_rgba(212,175,55,0.35)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer hover:scale-105 active:scale-95 shrink-0 group/add"
             title="Add directly to bag"
             aria-label="Add to bag"
           >
             {addedAnim ? (
-              <Check className="w-4 h-4 text-emerald-950 font-bold" />
+              <Check className="w-4 h-4 text-emerald-400 dark:text-emerald-950 font-bold" />
             ) : (
-              <ShoppingBag className="w-4 h-4 text-[#0E1410] stroke-[2.2]" />
+              <ShoppingBag className="w-4 h-4 text-white group-hover/add:text-[#0E1410] transition-colors stroke-[2.2]" />
             )}
           </button>
         </div>
       </div>
 
-      {/* Product Details Section - Exact Match with Reference Screenshot */}
-      <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-[#0E1410]">
-        <div className="space-y-1">
-          {/* Title: Jost Bold Uppercase Crisp White */}
-          <h3
-            onClick={() => setQuickViewProduct(product)}
-            className="font-jost font-bold text-[14px] sm:text-[14.5px] uppercase tracking-[0.05em] text-white hover:text-brand-gold cursor-pointer transition-colors leading-[1.3] line-clamp-2 max-w-[260px]"
+      {/* Product Details Section - High Contrast Minimal Luxury */}
+      <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-white dark:bg-[#0E1410] border-t border-stone-100 dark:border-stone-800/80">
+        <div>
+          {/* Title: Brandon Grotesque Bold Uppercase with Eye-Catching Scale (Matching SS 1) */}
+          <Link
+            href={`/product/${product.id}`}
+            title={product.name}
+            className="font-brandon font-bold text-[15.5px] sm:text-[16px] uppercase tracking-[0.08em] text-[#111111] dark:text-white hover:text-[#D4AF37] dark:hover:text-[#D4AF37] cursor-pointer transition-colors leading-[1.3] line-clamp-1 block"
           >
             {product.name}
-          </h3>
+          </Link>
 
-          {/* Subtitle: Warm Terracotta/Amber Promo Note */}
-          <div className="font-sans text-[12px] sm:text-[12.5px] text-[#E07A5F] font-medium tracking-normal pt-0.5">
-            {getSubtitle()}
-          </div>
+          {/* Subtle Craft Tagline (Restoring SS 1 & SS 3 Visual Balance) */}
+          {product.tagline && (
+            <p className="text-xs text-[#C87A65] dark:text-[#C5A059] font-medium line-clamp-1 mt-1 tracking-wide">
+              {product.tagline}
+            </p>
+          )}
 
-          {/* Pricing Line: "From" in muted gray, original in strikethrough, active in bold terracotta */}
-          <div className="flex items-baseline gap-1.5 pt-1.5 font-sans">
-            <span className="text-xs sm:text-[13px] text-stone-400 font-normal">
+          {/* Pricing Line: Direct after title & tagline with refined vertical spacing */}
+          <div className="flex items-baseline gap-1.5 mt-2 font-sans">
+            <span className="text-xs sm:text-[13px] text-stone-500 dark:text-stone-400 font-normal">
               {content?.products?.pricePrefix || (isBangla ? "শুরু" : "From")}
             </span>
             {product.originalPrice && product.originalPrice > product.price && (
-              <span className="text-xs sm:text-[13px] text-stone-500 line-through font-normal mr-1">
+              <span className="text-xs sm:text-[13px] text-stone-400 dark:text-stone-500 line-through font-normal mr-1">
                 ৳{product.originalPrice.toLocaleString("en-BD")}
               </span>
             )}
-            <span className="text-base sm:text-lg font-bold text-[#FF5C35]">
+            <span className="text-base sm:text-lg font-semibold text-[#111111] dark:text-[#F5F5F0]">
               ৳{product.price.toLocaleString("en-BD")}
             </span>
           </div>
         </div>
 
-        {/* Color Swatches - Crisp Squares with Thin White Active Ring */}
-        <div className="flex items-center gap-2 pt-3 mt-2 border-t border-stone-700/60">
+        {/* Color Swatches - Crisp Squares with Thin Active Ring */}
+        <div className="flex items-center gap-2 pt-3 mt-2 border-t border-stone-200/80 dark:border-stone-700/60">
           {product.colors.map((col, idx) => {
             const isSelected = selectedColor.name === col.name;
             return (
@@ -205,7 +178,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 }}
                 className={`w-[18px] h-[18px] flex items-center justify-center transition-all cursor-pointer ${
                   isSelected
-                    ? "border border-white p-[2px]"
+                    ? "border border-stone-900 dark:border-white p-[2px]"
                     : "border border-transparent hover:scale-105"
                 }`}
                 title={col.name}

@@ -29,7 +29,7 @@ export default function PrivacyPolicyPage() {
           <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-bold block mb-2">
             LEGAL & CLIENT PRIVACY
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl text-brand-charcoal font-normal">
+          <h1 className="font-brandon text-4xl sm:text-5xl text-brand-charcoal font-normal">
             Privacy Policy
           </h1>
           <p className="text-xs text-stone-400 mt-2 font-light">
@@ -41,7 +41,7 @@ export default function PrivacyPolicyPage() {
         <div className="space-y-10 text-xs sm:text-sm text-stone-300 leading-relaxed font-light">
           
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               1. Our Commitment to Client Confidentiality
             </h2>
             <p>
@@ -50,7 +50,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               2. Information We Collect
             </h2>
             <p>When you acquire pieces from our collections or consult with our bespoke concierge, we collect necessary details to fulfill your requests:</p>
@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               3. Purpose of Processing
             </h2>
             <p>Your details are used solely to:</p>
@@ -75,7 +75,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               4. Third-Party Disclosures & Courier Logistics
             </h2>
             <p>
@@ -84,7 +84,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               5. Data Security
             </h2>
             <p>
@@ -93,7 +93,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               6. Your Rights & Concierge Inquiries
             </h2>
             <p>

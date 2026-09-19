@@ -21,15 +21,21 @@ export function MoreDrawerProvider({ children }: { children: React.ReactNode }) 
     setIsMoreDrawerOpen((prev) => !prev);
   };
 
-  // Lock body scroll when drawer is open
+  // Lock body scroll when drawer is open and prevent Windows scrollbar shift
   useEffect(() => {
     if (isMoreDrawerOpen) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
     } else {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     }
     return () => {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     };
   }, [isMoreDrawerOpen]);
 

@@ -32,6 +32,208 @@ interface MegaMenuConfig {
 }
 
 const MEGA_MENUS: Record<string, MegaMenuConfig> = {
+  sashiko: {
+    columns: [
+      {
+        title: "Heritage Stitchwork",
+        links: [
+          { label: "Traditional Indigo Geometry", href: "/collections?category=sashiko" },
+          { label: "Hitomezashi Single-Stitch Grids", href: "/collections?category=sashiko" },
+          { label: "Raw Unbleached Cotton Canvas", href: "/collections?category=sashiko" },
+          { label: "Contrast Ecru Threadwork", href: "/collections?category=sashiko" },
+          { label: "Shop All Sashiko Pieces →", href: "/collections?category=sashiko" },
+        ],
+      },
+      {
+        title: "Atelier Curations",
+        links: [
+          { label: "Japandi Living Room Accents", href: "/collections?category=sashiko" },
+          { label: "Architectural Lumbar Cushions", href: "/collections?category=sashiko" },
+          { label: "Bespoke Inlay Commissions", href: "/contact" },
+          { label: "Indigo & Bone Monochrome", href: "/collections?category=sashiko" },
+        ],
+      },
+    ],
+    featured: [
+      {
+        badge: "NEW ARRIVAL",
+        title: "Geometric Running-Stitch Cushion",
+        subtitle: "Natural indigo organic cotton with precision hand-sewn lines",
+        image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=sashiko",
+        ctaText: "Discover Sashiko →",
+      },
+      {
+        badge: "ATELIER EDIT",
+        title: "Hitomezashi Accent Lumbar",
+        subtitle: "Over 35 hours of rhythmic Japanese geometric threadwork",
+        image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=sashiko",
+        ctaText: "Explore Collection →",
+      },
+    ],
+  },
+  patchwork: {
+    columns: [
+      {
+        title: "Artisanal Assemblage",
+        links: [
+          { label: "Belgian Flax & Silk Collage", href: "/collections?category=patchwork" },
+          { label: "Wabi-Sabi Boro Remnants", href: "/collections?category=patchwork" },
+          { label: "Handspun Khadi Piecing", href: "/collections?category=patchwork" },
+          { label: "Earth-Dyed Linen Inlays", href: "/collections?category=patchwork" },
+          { label: "Shop All Patchwork →", href: "/collections?category=patchwork" },
+        ],
+      },
+      {
+        title: "Living Room Styling",
+        links: [
+          { label: "Tone-on-Tone Palettes", href: "/collections?category=patchwork" },
+          { label: "Textile Fragment Storytelling", href: "/about" },
+          { label: "Limited Studio Batches", href: "/collections?category=patchwork" },
+        ],
+      },
+    ],
+    featured: [
+      {
+        badge: "LIMITED EDITION",
+        title: "The Boro Artisanal Collage Cushion",
+        subtitle: "Hand-pieced vintage linen and indigo-dyed remnant squares",
+        image: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=patchwork",
+        ctaText: "Explore Patchwork →",
+      },
+      {
+        badge: "STUDIO DROP",
+        title: "Terracotta & Flax Assemblage",
+        subtitle: "Warm stone-washed raw silk and organic flax collage",
+        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=patchwork",
+        ctaText: "View Pieces →",
+      },
+    ],
+  },
+  "one-line-art": {
+    columns: [
+      {
+        title: "Continuous Contour",
+        links: [
+          { label: "Minimalist Botanical Contours", href: "/collections?category=one-line-art" },
+          { label: "Modern Silhouette Threadwork", href: "/collections?category=one-line-art" },
+          { label: "Monochrome Black on Oatmeal", href: "/collections?category=one-line-art" },
+          { label: "Organic Line Cushions", href: "/collections?category=one-line-art" },
+          { label: "Shop All One Line Art →", href: "/collections?category=one-line-art" },
+        ],
+      },
+      {
+        title: "Interior Aesthetic",
+        links: [
+          { label: "Japandi & Scandinavian Decor", href: "/collections?category=one-line-art" },
+          { label: "Gallery Wall Cushion Pairings", href: "/collections?category=one-line-art" },
+          { label: "Care for Fine Line Embroidery", href: "/care-guide" },
+        ],
+      },
+    ],
+    featured: [
+      {
+        badge: "SIGNATURE DESIGN",
+        title: "Minimalist Silhouette Contour Cushion",
+        subtitle: "Single uninterrupted thread contour on unbleached Belgian linen",
+        image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=one-line-art",
+        ctaText: "Explore Line Art →",
+      },
+      {
+        badge: "CURATOR'S CHOICE",
+        title: "Abstract Flora Line Threadwork",
+        subtitle: "Sculptural continuous thread lines on stone-washed canvas",
+        image: "https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=one-line-art",
+        ctaText: "Shop Collection →",
+      },
+    ],
+  },
+  "solid-pattern": {
+    columns: [
+      {
+        title: "Pure Natural Flax",
+        links: [
+          { label: "Stone-Washed Belgian Linen", href: "/collections?category=solid-pattern" },
+          { label: "Heavy Tactile Waffle Weaves", href: "/collections?category=solid-pattern" },
+          { label: "Frayed Raw Border Cushions", href: "/collections?category=solid-pattern" },
+          { label: "Double-Pile Italian Velvet", href: "/collections?category=solid-pattern" },
+          { label: "Shop All Solid Patterns →", href: "/collections?category=solid-pattern" },
+        ],
+      },
+      {
+        title: "Atelier Palettes",
+        links: [
+          { label: "Oatmeal & Bone White", href: "/collections?category=solid-pattern" },
+          { label: "Warm Terracotta & Clay", href: "/collections?category=solid-pattern" },
+          { label: "Muted Forest Olive", href: "/collections?category=solid-pattern" },
+          { label: "Midnight Cypress Noir", href: "/collections?category=solid-pattern" },
+        ],
+      },
+    ],
+    featured: [
+      {
+        badge: "BESTSELLER",
+        title: "The Marais Pure Belgian Flax",
+        subtitle: "Pre-washed with natural pumice stones for unmatched tactile softness",
+        image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=solid-pattern",
+        ctaText: "Discover Solid Linen →",
+      },
+      {
+        badge: "NEW ARRIVAL",
+        title: "Avignon Tactile Honeycomb Flax",
+        subtitle: "380 GSM deep 3D waffle weave with unbleached organic yarn",
+        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=solid-pattern",
+        ctaText: "Shop Waffle Weave →",
+      },
+    ],
+  },
+  "wall-hanging": {
+    columns: [
+      {
+        title: "Architectural Tapestry",
+        links: [
+          { label: "Handwoven Fiber Art Murals", href: "/collections?category=wall-hanging" },
+          { label: "Textured Linen & Wool Weaves", href: "/collections?category=wall-hanging" },
+          { label: "Solid Brass Hanging Rods", href: "/collections?category=wall-hanging" },
+          { label: "Bespoke Wall Installations", href: "/contact" },
+          { label: "Shop All Wall Hangings →", href: "/collections?category=wall-hanging" },
+        ],
+      },
+      {
+        title: "Installation & Spaces",
+        links: [
+          { label: "Foyer & Staircase Tapestries", href: "/collections?category=wall-hanging" },
+          { label: "Acoustic Wall Fiber Panels", href: "/collections?category=wall-hanging" },
+          { label: "Living Room Art Direction", href: "/about" },
+        ],
+      },
+    ],
+    featured: [
+      {
+        badge: "ARCHITECTURAL ART",
+        title: "The Woven Sanctuary Tapestry",
+        subtitle: "Hand-spun unbleached wool and natural linen fiber mural",
+        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=wall-hanging",
+        ctaText: "Explore Tapestries →",
+      },
+      {
+        badge: "NEW IN ATELIER",
+        title: "Sculptural Woven Wall Scroll",
+        subtitle: "Textural contrast with brushed solid brass mounting bar",
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
+        href: "/collections?category=wall-hanging",
+        ctaText: "View Fiber Art →",
+      },
+    ],
+  },
   cushions: {
     columns: [
       {
@@ -208,6 +410,81 @@ const MEGA_MENUS: Record<string, MegaMenuConfig> = {
   },
 };
 
+/**
+ * Bespoke 3-Line Atelier Menu Glyph with Modified Artisan Dot Structure
+ */
+function AtelierMenuGlyph({ isOpen }: { isOpen: boolean }) {
+  if (isOpen) {
+    return (
+      <div className="relative w-[18px] h-[15px] flex items-center justify-center">
+        <span className="absolute w-[16px] h-[1.5px] bg-current rotate-45 transition-transform duration-300 rounded-full" />
+        <span className="absolute w-[16px] h-[1.5px] bg-current -rotate-45 transition-transform duration-300 rounded-full" />
+        <span className="absolute w-1.5 h-1.5 bg-brand-gold rounded-full transition-transform duration-300 shadow-[0_0_8px_rgba(212,175,55,0.6)]" />
+      </div>
+    );
+  }
+
+  return (
+    <svg
+      width="20"
+      height="15"
+      viewBox="0 0 20 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="shrink-0 transition-transform duration-300 group-hover:scale-105"
+      aria-hidden="true"
+    >
+      {/* Top Bar + Gold Artisan Bead */}
+      <rect
+        x="0"
+        y="1"
+        width="14"
+        height="1.5"
+        rx="0.75"
+        className="fill-current transition-all duration-300 group-hover:w-[15px]"
+      />
+      <circle
+        cx="17.5"
+        cy="1.75"
+        r="1.5"
+        className="fill-brand-gold transition-transform duration-300 group-hover:scale-125"
+      />
+
+      {/* Middle: Gold Artisan Bead + Staggered Bar */}
+      <circle
+        cx="2"
+        cy="7.25"
+        r="1.5"
+        className="fill-brand-gold transition-transform duration-300 group-hover:scale-125"
+      />
+      <rect
+        x="5.5"
+        y="6.5"
+        width="13.5"
+        height="1.5"
+        rx="0.75"
+        className="fill-current transition-all duration-300 group-hover:translate-x-0.5"
+      />
+
+      {/* Bottom Bar + Gold Artisan Bead */}
+      <rect
+        x="0"
+        y="12"
+        width="14"
+        height="1.5"
+        rx="0.75"
+        className="fill-current transition-all duration-300 group-hover:w-[15px]"
+      />
+      <circle
+        cx="17.5"
+        cy="12.75"
+        r="1.5"
+        className="fill-brand-gold transition-transform duration-300 group-hover:scale-125"
+      />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -244,17 +521,22 @@ export default function Navbar() {
         }));
     }
     return [
-      { key: "cushions", name: t("navCushions"), href: "/collections" },
-      { key: "curtains", name: t("navCurtains"), href: "/curtains" },
-      { key: "quilts", name: t("navQuilts"), href: "/quilts" },
-      { key: "shawls", name: t("navShawls"), href: "/shawls" },
-      { key: "care-guide", name: isBangla ? "কেয়ার গাইড" : "Care Guide", href: "/care-guide" },
-      { key: "about", name: t("navAbout"), href: "/about" },
-      { key: "concierge", name: isBangla ? "কনসিয়ার্জ" : "Concierge", href: "/contact" },
+      { key: "sashiko", name: isBangla ? "শাশিকো" : "SASHIKO", href: "/collections?category=sashiko" },
+      { key: "patchwork", name: isBangla ? "প্যাচওয়ার্ক" : "PATCHWORK", href: "/collections?category=patchwork" },
+      { key: "one-line-art", name: isBangla ? "ওয়ান লাইন আর্ট" : "ONE LINE ART", href: "/collections?category=one-line-art" },
+      { key: "solid-pattern", name: isBangla ? "সলিড প্যাটার্ন" : "SOLID PATTERN", href: "/collections?category=solid-pattern" },
+      { key: "wall-hanging", name: isBangla ? "ওয়াল হ্যাঙ্গিং" : "WALL HANGING", href: "/collections?category=wall-hanging" },
+      { key: "curtains", name: isBangla ? "কার্টেনস" : "CURTAIN", href: "/curtains" },
+      { key: "quilts", name: isBangla ? "কাঁথা কুইল্টস" : "KANTHA QUILTS", href: "/quilts" },
     ];
   }, [content?.navigation, t, isBangla]);
 
-  const currentMegaMenus = content?.megaMenus || MEGA_MENUS;
+  const currentMegaMenus = useMemo(() => {
+    return {
+      ...MEGA_MENUS,
+      ...(content?.megaMenus || {}),
+    };
+  }, [content?.megaMenus]);
 
   // Compact Minimalist Inline Search State
   const [searchQuery, setSearchQuery] = useState("");
@@ -262,91 +544,65 @@ export default function Navbar() {
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // Navigation active, hover, and single sliding indicator state
+  // Navigation active, hover state
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const megaMenuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const navContainerRef = useRef<HTMLElement>(null);
-  const navItemRefs = useRef<Record<string, HTMLElement | null>>({});
-  const [indicatorStyle, setIndicatorStyle] = useState<{
-    left: number;
-    width: number;
-    opacity: number;
-  }>({
-    left: 0,
-    width: 0,
-    opacity: 0,
-  });
+  // Reactive URL search query tracking for active category highlight (e.g. ?category=solid-pattern)
+  const [currentCategoryParam, setCurrentCategoryParam] = useState<string | null>(null);
+
+  const syncCategoryFromUrl = useCallback(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get("category");
+    setCurrentCategoryParam(cat ? cat.toLowerCase() : null);
+  }, []);
 
   useEffect(() => {
     setIsMounted(true);
-  }, []);
+    syncCategoryFromUrl();
+    window.addEventListener("popstate", syncCategoryFromUrl);
+    window.addEventListener("keen-category-change", syncCategoryFromUrl);
+    const interval = setInterval(syncCategoryFromUrl, 150);
+    return () => {
+      window.removeEventListener("popstate", syncCategoryFromUrl);
+      window.removeEventListener("keen-category-change", syncCategoryFromUrl);
+      clearInterval(interval);
+    };
+  }, [syncCategoryFromUrl, pathname]);
 
-  // Identify active page key based on current URL path
+  // Identify active page key based on current URL path and query parameters
   const activePageKey = useMemo(() => {
     if (!pathname) return null;
+
+    // When on /collections page, match category query param
+    if (pathname === "/collections" || pathname.startsWith("/collections/")) {
+      if (currentCategoryParam) {
+        const match = navCategories.find((cat) => {
+          if (cat.href.includes("category=")) {
+            const catHrefParam = cat.href.split("category=")[1]?.toLowerCase();
+            return catHrefParam === currentCategoryParam;
+          }
+          return false;
+        });
+        if (match) return match.key;
+      }
+    }
+
+    // Otherwise match path (e.g. /curtains, /quilts, /about, etc.)
     const match = navCategories.find((cat) => {
       if (cat.href === "/") {
         return pathname === "/";
       }
+      if (cat.href.startsWith("/collections?category=")) {
+        return false;
+      }
       return pathname === cat.href || pathname.startsWith(cat.href + "/");
     });
     return match ? match.key : null;
-  }, [pathname, navCategories]);
-
-  // Recalculate single smooth sliding underline indicator position
-  const updateIndicator = useCallback(() => {
-    const targetKey = hoveredKey || activePageKey;
-    if (!targetKey) {
-      setIndicatorStyle((prev) => ({ ...prev, opacity: 0 }));
-      return;
-    }
-    const itemEl = navItemRefs.current[targetKey];
-    const containerEl = navContainerRef.current;
-    if (itemEl && containerEl) {
-      const itemRect = itemEl.getBoundingClientRect();
-      const containerRect = containerEl.getBoundingClientRect();
-      const left = itemRect.left - containerRect.left;
-      const width = itemRect.width;
-      setIndicatorStyle({
-        left,
-        width,
-        opacity: 1,
-      });
-    } else {
-      setIndicatorStyle((prev) => ({ ...prev, opacity: 0 }));
-    }
-  }, [hoveredKey, activePageKey]);
-
-  useEffect(() => {
-    updateIndicator();
-    if (typeof document !== "undefined" && document.fonts) {
-      document.fonts.ready.then(() => {
-        updateIndicator();
-      });
-    }
-  }, [updateIndicator, navCategories]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      updateIndicator();
-    };
-    window.addEventListener("resize", handleResize);
-    if (typeof document !== "undefined" && document.fonts) {
-      document.fonts.ready.then(() => {
-        updateIndicator();
-      });
-    }
-    const timer1 = setTimeout(updateIndicator, 60);
-    const timer2 = setTimeout(updateIndicator, 250);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, [updateIndicator]);
+  }, [pathname, currentCategoryParam, navCategories]);
 
   // On route change: immediately close mega menu and search dropdown without lag
   useEffect(() => {
@@ -372,20 +628,30 @@ export default function Navbar() {
     if (megaMenuTimeoutRef.current) {
       clearTimeout(megaMenuTimeoutRef.current);
     }
-    // Instantly glide back to active page key with smooth physics
     setHoveredKey(null);
     megaMenuTimeoutRef.current = setTimeout(() => {
       setActiveMegaMenu(null);
     }, 150);
   };
 
-  const handleCategoryClick = () => {
+  const handleCategoryClick = (catHref?: string) => {
     if (megaMenuTimeoutRef.current) {
       clearTimeout(megaMenuTimeoutRef.current);
       megaMenuTimeoutRef.current = null;
     }
     setActiveMegaMenu(null);
     setHoveredKey(null);
+
+    if (catHref && catHref.includes("category=")) {
+      const catParam = catHref.split("category=")[1]?.split("&")[0]?.toLowerCase();
+      setCurrentCategoryParam(catParam || null);
+    } else if (catHref && !catHref.includes("category=")) {
+      setCurrentCategoryParam(null);
+    }
+
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("keen-category-change"));
+    }
   };
 
   // Close search dropdown on click outside or Escape key
@@ -449,6 +715,8 @@ export default function Navbar() {
   // - Scrolling up: Smoothly slide down / reveal the full 3-bar header (Screenshot 2)
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
   const [isAtTop, setIsAtTop] = useState(true);
+  const [isInDeckSection, setIsInDeckSection] = useState(false);
+  const isInDeckSectionRef = useRef(false);
   const lastScrollYRef = useRef(0);
 
   useEffect(() => {
@@ -465,6 +733,21 @@ export default function Navbar() {
           const currentScrollY = window.scrollY;
           const lastScrollY = lastScrollYRef.current;
           const deltaY = currentScrollY - lastScrollY;
+
+          // Check if scrolling within the 4-layer stacked carousel deck
+          const deckEl = document.querySelector('section[data-deck-carousel="true"]');
+          if (deckEl) {
+            const deckRect = deckEl.getBoundingClientRect();
+            // Active within deck with hysteresis to prevent boundary flapping / scroll freeze
+            const inDeck = isInDeckSectionRef.current
+              ? deckRect.top <= 160 && deckRect.bottom >= 60
+              : deckRect.top <= 90 && deckRect.bottom >= 140;
+            isInDeckSectionRef.current = inDeck;
+            setIsInDeckSection(inDeck);
+          } else {
+            isInDeckSectionRef.current = false;
+            setIsInDeckSection(false);
+          }
 
           // Top boundary threshold
           if (currentScrollY <= 30) {
@@ -492,9 +775,13 @@ export default function Navbar() {
   }, []);
 
   // When scrolling DOWN (scrollDirection === "down" and !isAtTop), collapse top 2 bars
-  // When scrolling UP (scrollDirection === "up") OR at top, restore all 3 bars smoothly!
-  // If search dropdown is open, keep uncollapsed
-  const isCollapsed = !isAtTop && scrollDirection === "down" && !isSearchDropdownOpen;
+  // CRITICAL USER DIRECTIVE: During the 4 deck sections (What's New, Best Sellers, Back in Stock, Upcoming),
+  // PAUSE the 3-bar expansion on scroll up! Keep STRICTLY in the SS 2 collapsed single-bar state (Bar 3 only)
+  // so the 4 deck carousels have unobstructed, butter-smooth scroll space!
+  // Once passed, normal scroll-up 3-bar expansion automatically resumes.
+  const isCollapsed =
+    !isSearchDropdownOpen &&
+    (isInDeckSection || (!isAtTop && scrollDirection === "down"));
   const isFloatingOverHero = isAtTop && pathname === "/";
 
   // Filter products based on search input
@@ -635,13 +922,13 @@ export default function Navbar() {
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div
-                className={`flex items-center justify-between gap-3 lg:gap-6 py-2 md:py-2.5 ${
+                className={`grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] items-center gap-3 lg:gap-6 py-2 md:py-2.5 w-full ${
                   isSearchDropdownOpen ? "relative z-50" : "relative z-20"
                 }`}
               >
             
             {/* 1. LEFT COLUMN: Brand Logo & Title */}
-            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+            <div className="flex items-center gap-2.5 sm:gap-3 justify-self-start shrink-0">
               <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
                 <div className="relative w-9 h-9 sm:w-10 sm:h-10 border border-brand-sand overflow-hidden rounded-full shadow-2xs group-hover:border-brand-gold transition-colors">
                   <Image
@@ -667,11 +954,11 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* 2. CENTER COLUMN: Compact, Simple & Refined Search Bar (Desktop) */}
-            <div className="hidden md:flex flex-1 items-center justify-center px-2 lg:px-4">
+            {/* 2. CENTER COLUMN: Balanced, Refined Search Bar (Desktop - Exact Middle) */}
+            <div className="hidden md:flex justify-self-center items-center justify-center w-full max-w-[320px] lg:max-w-[380px] xl:max-w-[420px] px-2">
               <div
                 ref={searchContainerRef}
-                className={`relative w-full max-w-[240px] lg:max-w-[280px] xl:max-w-[320px] ${
+                className={`relative w-full ${
                   isSearchDropdownOpen ? "z-50" : "z-20"
                 }`}
               >
@@ -686,7 +973,7 @@ export default function Navbar() {
                       : "border-stone-300/80 dark:border-stone-700/80 focus-within:border-brand-gold"
                   }`}
                 >
-                  <Search className="w-3.5 h-3.5 text-brand-gold shrink-0 mr-2 transition-transform group-focus-within:scale-110" />
+                  <Search className="w-4 h-4 text-brand-gold shrink-0 mr-2.5 transition-transform group-focus-within:scale-105 stroke-[1.9]" />
                   <input
                     ref={searchInputRef}
                     type="text"
@@ -825,7 +1112,7 @@ export default function Navbar() {
                                   </span>
                                 </div>
                               </div>
-                              <h5 className="font-jost text-xs sm:text-sm font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
+                              <h5 className="font-brandon text-xs sm:text-sm font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
                                 {t("cardNewArrivalTitle")}
                               </h5>
                               <p className="font-sans text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
@@ -852,7 +1139,7 @@ export default function Navbar() {
                                   </span>
                                 </div>
                               </div>
-                              <h5 className="font-jost text-xs sm:text-sm font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
+                              <h5 className="font-brandon text-xs sm:text-sm font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
                                 {t("cardBackInStockTitle")}
                               </h5>
                               <p className="font-sans text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
@@ -879,7 +1166,7 @@ export default function Navbar() {
                                   </span>
                                 </div>
                               </div>
-                              <h5 className="font-jost text-xs sm:text-sm font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
+                              <h5 className="font-brandon text-xs sm:text-sm font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
                                 {t("cardUpcomingTitle")}
                               </h5>
                               <p className="font-sans text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
@@ -895,7 +1182,7 @@ export default function Navbar() {
                       <div>
                         {searchResults.length === 0 ? (
                           <div className="py-6 text-center space-y-1">
-                            <p className="text-xs font-serif text-stone-800 dark:text-stone-200">
+                            <p className="text-xs font-brandon text-stone-800 dark:text-stone-200">
                               {isBangla ? `"${searchQuery}" এর জন্য কোনো প্রোডাক্ট পাওয়া যায়নি` : `No pieces found for "${searchQuery}"`}
                             </p>
                             <p className="text-[10px] text-stone-400">
@@ -923,7 +1210,7 @@ export default function Navbar() {
                                     />
                                   </div>
                                   <div className="min-w-0">
-                                    <h5 className="font-jost text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover/item:text-brand-gold transition-colors truncate">
+                                    <h5 className="font-brandon text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover/item:text-brand-gold transition-colors truncate">
                                       {product.name}
                                     </h5>
                                     <span className="text-[9px] text-stone-400 dark:text-stone-500 block truncate">
@@ -955,12 +1242,12 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* 3. RIGHT COLUMN: Actions (LanguageToggle, ThemeToggle, Bag) */}
-            <div className="flex items-center space-x-2 sm:space-x-2.5 md:space-x-3 shrink-0">
+            {/* 3. RIGHT COLUMN: Actions (ThemeToggle, Shopping Bag with Top-Right Badge, Atelier Menu) */}
+            <div className="flex items-center justify-self-end gap-3.5 sm:gap-4 md:gap-4.5 shrink-0">
               {/* Mobile Search Button */}
               <button
                 onClick={() => setIsSearchModalOpen(true)}
-                className={`md:hidden p-2 hover:text-brand-gold cursor-pointer transition-colors ${
+                className={`md:hidden w-9 h-9 rounded-full flex items-center justify-center hover:text-brand-gold cursor-pointer transition-colors ${
                   isFloatingOverHero ? "text-white" : "text-stone-700 dark:text-stone-200"
                 }`}
                 aria-label="Search"
@@ -968,37 +1255,51 @@ export default function Navbar() {
                 <Search className="w-5 h-5 text-brand-gold" />
               </button>
 
-              {/* Light / Dark Mode Toggle */}
+              {/* Light / Dark Mode Toggle (100% UNTOUCHED & PRESERVED) */}
               <ThemeToggle />
 
-              {/* Cart / Shopping Bag Button */}
+              {/* Cart / Shopping Bag Button (Original Bag Icon Kept • Top-Right Badge • Balanced Spacing) */}
               <button
                 onClick={() => setIsCartOpen(true)}
-                className={`relative p-2 hover:text-brand-gold transition-colors group flex items-center justify-center cursor-pointer ${
-                  isFloatingOverHero ? "text-white" : "text-stone-700 dark:text-stone-200"
+                className={`relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300 group cursor-pointer focus:outline-none ${
+                  isFloatingOverHero
+                    ? "text-white hover:text-brand-gold hover:bg-white/10"
+                    : "text-stone-800 dark:text-stone-200 hover:text-brand-gold dark:hover:text-brand-gold hover:bg-stone-100/80 dark:hover:bg-stone-800/60"
                 }`}
                 aria-label="View Shopping Bag"
                 title={`Shopping Bag (${totalItems} items)`}
               >
-                <div className="relative">
-                  <ShoppingBag className="w-5 h-5 text-brand-gold transition-transform group-hover:scale-110" />
-                  <span
-                    className="absolute -top-1 -right-1.5 text-[9.5px] w-4 h-4 min-w-[16px] rounded-full flex items-center justify-center font-bold font-sans transition-all bg-brand-gold text-[#0E1410] shadow-sm border border-[#F8F6F0] dark:border-[#141A16] select-none leading-none"
-                  >
-                    {totalItems}
-                  </span>
+                <div className="relative flex items-center justify-center">
+                  <ShoppingBag className={`w-[21px] h-[21px] transition-transform group-hover:scale-105 stroke-[1.9] ${
+                    isFloatingOverHero ? "text-white" : "text-[#111111] dark:text-[#F5F5F0]"
+                  }`} />
+                  {totalItems > 0 && (
+                    <span
+                      className="absolute -top-1.5 -right-2 sm:-top-2 sm:-right-2.5 text-[11px] min-w-[22px] h-[22px] px-1 rounded-full flex items-center justify-center font-extrabold font-sans transition-transform group-hover:scale-110 bg-[#D4AF37] text-[#0E1410] shadow-[0_2px_8px_rgba(0,0,0,0.3)] border-2 border-white dark:border-[#0E1410] select-none leading-none tabular-nums"
+                    >
+                      {totalItems}
+                    </span>
+                  )}
                 </div>
               </button>
 
-              {/* Mobile Hamburger Menu Toggle */}
+              {/* ====================================================================
+                  BESPOKE TOP-RIGHT ATELIER MENU TRIGGER (Desktop + Mobile)
+                  - Sleek Minimalist Icon Button with Matching Circular Baseline
+                  - Seamlessly Aligned with Bag, Wishlist, and Search
+                  ==================================================================== */}
               <button
                 onClick={() => setIsMoreDrawerOpen(!isMoreDrawerOpen)}
-                className={`p-2 hover:text-brand-gold md:hidden cursor-pointer ${
-                  isFloatingOverHero ? "text-white" : "text-stone-700 dark:text-stone-200"
+                type="button"
+                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full transition-all duration-300 cursor-pointer select-none group flex items-center justify-center focus:outline-none ${
+                  isFloatingOverHero
+                    ? "text-white hover:text-brand-gold hover:bg-white/10"
+                    : "text-stone-700 dark:text-stone-300 hover:text-brand-gold dark:hover:text-brand-gold hover:bg-stone-100/80 dark:hover:bg-stone-800/60"
                 }`}
-                aria-label="Toggle navigation menu"
+                aria-label={isMoreDrawerOpen ? "Close Atelier Menu" : "Open Atelier Menu"}
+                aria-expanded={isMoreDrawerOpen}
               >
-                {isMoreDrawerOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                <AtelierMenuGlyph isOpen={isMoreDrawerOpen} />
               </button>
             </div>
 
@@ -1027,16 +1328,17 @@ export default function Navbar() {
             }`}
           >
             <nav
-              ref={navContainerRef}
               onMouseLeave={handleMouseLeaveMenu}
-              className={`relative flex items-center justify-center gap-6 lg:gap-8 text-[11.5px] uppercase tracking-[0.18em] py-2.5 font-medium select-none transition-colors duration-300 ${
+              className={`relative flex items-center justify-center gap-6 lg:gap-8 font-brandon text-[12px] sm:text-[12.5px] uppercase tracking-[0.18em] py-2.5 font-medium select-none transition-colors duration-300 ${
                 isFloatingOverHero ? "text-white" : "text-stone-700 dark:text-stone-300"
               }`}
             >
               {navCategories.map((cat) => {
                 const isCurrentPage = activePageKey === cat.key;
                 const isHovered = hoveredKey === cat.key;
-                const hasSubmenu = ["cushions", "curtains", "quilts", "shawls"].includes(cat.key);
+                const hasSubmenu = ["sashiko", "patchwork", "one-line-art", "solid-pattern", "wall-hanging", "curtains", "quilts"].includes(cat.key);
+                const isChevronUp = isHovered || isCurrentPage;
+                const isLineActive = isHovered || (isCurrentPage && hoveredKey === null);
 
                 return (
                   <div
@@ -1046,8 +1348,8 @@ export default function Navbar() {
                   >
                     <Link
                       href={cat.href}
-                      onClick={handleCategoryClick}
-                      className={`inline-flex items-center gap-1.5 transition-colors duration-200 py-1 ${
+                      onClick={() => handleCategoryClick(cat.href)}
+                      className={`inline-flex items-center gap-1.5 transition-colors duration-200 py-1 outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 ${
                         isHovered
                           ? "text-brand-gold font-semibold"
                           : isCurrentPage
@@ -1057,19 +1359,23 @@ export default function Navbar() {
                           : "text-stone-700 dark:text-stone-300 hover:text-brand-gold"
                       }`}
                     >
-                      {/* Name text span with exact ref measurement */}
-                      <span
-                        ref={(el) => {
-                          navItemRefs.current[cat.key] = el;
-                        }}
-                        className="whitespace-nowrap inline-block"
-                      >
+                      {/* Text wrapper with exact-width underline bar matching text only */}
+                      <span className="relative inline-block whitespace-nowrap">
                         {cat.name}
+
+                        {/* Butter-Smooth Center-Out Expanding / Center-Shrinking Gold Underline Bar */}
+                        <span
+                          aria-hidden="true"
+                          className={`absolute -bottom-1 left-0 right-0 h-[2.5px] bg-brand-gold rounded-full pointer-events-none will-change-transform origin-center transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_1px_4px_rgba(212,175,55,0.4)] ${
+                            isLineActive ? "scale-x-100" : "scale-x-0"
+                          }`}
+                        />
                       </span>
+
                       {hasSubmenu && (
                         <ChevronDown
-                          className={`w-3 h-3 transition-transform duration-300 ${
-                            isHovered
+                          className={`w-3 h-3 transition-transform duration-300 shrink-0 ${
+                            isChevronUp
                               ? "rotate-180 text-brand-gold"
                               : isFloatingOverHero
                               ? "text-white/90 group-hover:text-brand-gold drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
@@ -1081,20 +1387,6 @@ export default function Navbar() {
                   </div>
                 );
               })}
-
-              {/* Single Smooth Sliding Underline Indicator Bar (Glides effortlessly, matching exact text width of option name) */}
-              <span
-                aria-hidden="true"
-                className={`absolute bottom-0.5 left-0 m-0 h-[2px] bg-brand-gold rounded-full pointer-events-none will-change-transform ${
-                  isMounted
-                    ? "transition-all duration-350 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                    : "transition-none"
-                } ${indicatorStyle.opacity > 0 ? "opacity-100" : "opacity-0"}`}
-                style={{
-                  transform: `translateX(${indicatorStyle.left}px)`,
-                  width: `${indicatorStyle.width}px`,
-                }}
-              />
             </nav>
 
             {/* Editorial Mega-Menu Dropdown Panel on Hover */}
@@ -1115,7 +1407,7 @@ export default function Navbar() {
                     <div className="col-span-5 grid grid-cols-2 gap-6 border-r border-stone-200/80 dark:border-stone-800/80 pr-6">
                       {currentMegaMenus[activeMegaMenu].columns.map((col, idx) => (
                         <div key={idx} className="space-y-3">
-                          <span className="font-jost text-sm font-semibold tracking-wider text-stone-900 dark:text-stone-100 uppercase block pb-1 border-b border-stone-100 dark:border-stone-800">
+                          <span className="font-brandon text-sm font-semibold tracking-wider text-stone-900 dark:text-stone-100 uppercase block pb-1 border-b border-stone-100 dark:border-stone-800">
                             {col.title}
                           </span>
                           <ul className="space-y-2.5">
@@ -1123,7 +1415,7 @@ export default function Navbar() {
                               <li key={lIdx}>
                                 <Link
                                   href={link.href}
-                                  onClick={handleCategoryClick}
+                                  onClick={() => handleCategoryClick(link.href)}
                                   className="text-xs text-stone-600 dark:text-stone-400 hover:text-brand-gold dark:hover:text-brand-gold transition-colors block py-0.5"
                                 >
                                   {link.label}
@@ -1135,40 +1427,46 @@ export default function Navbar() {
                       ))}
                     </div>
 
-                    {/* Right Columns: Exactly 2 Editorial Feature Cards */}
-                    <div className="col-span-7 grid grid-cols-2 gap-5">
-                      {currentMegaMenus[activeMegaMenu].featured.map((item, fIdx) => (
-                        <Link
-                          key={fIdx}
-                          href={item.href}
-                          onClick={handleCategoryClick}
-                          className="group block relative overflow-hidden bg-stone-50 dark:bg-[#111813] border border-stone-200/80 dark:border-stone-800 p-2.5 hover:border-brand-gold/60 transition-all shadow-sm hover:shadow-md"
-                        >
-                          <div className="relative aspect-[16/11] overflow-hidden bg-stone-200 dark:bg-stone-800 mb-3">
-                            <Image
-                              src={item.image}
-                              alt={item.title}
-                              fill
-                              className="object-cover transition-transform duration-700 group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
-                            <div className="absolute top-3 left-3">
-                              <span className="bg-brand-gold text-[#0E1410] text-[9.5px] uppercase tracking-widest font-bold px-2.5 py-1 shadow-md">
-                                {item.badge}
+                    {/* Right Columns: Minimalist Feature Cards (Matching User SS 1 Benchmark) */}
+                    <div className="col-span-7 grid grid-cols-2 gap-6 pl-2">
+                      {currentMegaMenus[activeMegaMenu].featured.slice(0, 2).map((item, fIdx) => {
+                        const isFirst = fIdx === 0;
+                        const label = isFirst
+                          ? (isBangla ? "নতুন কালেকশন" : "New Arrivals")
+                          : (isBangla ? "পুনরায় স্টকে" : "Back in Stock");
+                        const href = isFirst
+                          ? `/collections?filter=new-arrivals&category=${activeMegaMenu}`
+                          : `/collections?filter=back-in-stock&category=${activeMegaMenu}`;
+
+                        return (
+                          <Link
+                            key={fIdx}
+                            href={href}
+                            onClick={() => handleCategoryClick(href)}
+                            className="group block select-none cursor-pointer border-none bg-transparent p-0 shadow-none"
+                          >
+                            {/* Pure Frameless Photography (Matching SS 1) */}
+                            <div className="relative aspect-[16/11] overflow-hidden bg-stone-100 dark:bg-stone-900 border-none shadow-sm">
+                              <Image
+                                src={item.image}
+                                alt={label}
+                                fill
+                                sizes="(max-width: 1024px) 50vw, 30vw"
+                                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                                priority
+                              />
+                            </div>
+
+                            {/* Minimal Editorial Title + Arrow (Matching SS 1) */}
+                            <div className="pt-2.5">
+                              <span className="font-brandon text-[14px] sm:text-[15px] text-stone-800 dark:text-stone-200 group-hover:text-brand-gold flex items-center gap-1.5 transition-colors font-normal tracking-wide">
+                                <span>{label}</span>
+                                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                               </span>
                             </div>
-                          </div>
-                          <h4 className="font-jost text-sm lg:text-base font-bold text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors uppercase tracking-wide">
-                            {item.title}
-                          </h4>
-                          <p className="font-sans text-xs text-stone-500 dark:text-stone-400 mt-1 line-clamp-1">
-                            {item.subtitle}
-                          </p>
-                          <span className="inline-flex items-center gap-1 text-[10.5px] uppercase tracking-widest text-brand-gold font-semibold mt-2 group-hover:underline">
-                            <span>{item.ctaText}</span>
-                          </span>
-                        </Link>
-                      ))}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

@@ -39,7 +39,7 @@ export default function ContactPage() {
           <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-bold block mb-2">
             CONCIERGE & BESPOKE TAILORING
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl text-brand-charcoal font-normal">
+          <h1 className="font-brandon text-4xl sm:text-5xl text-brand-charcoal font-normal">
             Contact & Bespoke Commissions
           </h1>
           <p className="text-xs sm:text-sm text-stone-400 mt-2 font-light max-w-xl leading-relaxed">
@@ -126,7 +126,7 @@ export default function ContactPage() {
                 <div className="w-14 h-14 bg-emerald-950/60 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto text-emerald-400">
                   <Check className="w-7 h-7" />
                 </div>
-                <h3 className="font-serif text-2xl text-brand-charcoal">
+                <h3 className="font-brandon text-2xl text-brand-charcoal">
                   Inquiry Received
                 </h3>
                 <p className="text-xs sm:text-sm text-stone-400 max-w-sm mx-auto font-light">
@@ -141,7 +141,7 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="p-8 bg-brand-linen-dark border border-brand-sand shadow-sm space-y-5">
-                <h3 className="font-serif text-2xl text-brand-charcoal font-normal">
+                <h3 className="font-brandon text-2xl text-brand-charcoal font-normal">
                   Submit a Bespoke or General Inquiry
                 </h3>
 

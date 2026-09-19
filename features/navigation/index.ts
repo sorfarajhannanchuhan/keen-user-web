@@ -9,3 +9,5 @@ export { default as LanguageToggle } from "./LanguageToggle";
 export * from "./ThemeContext";
 export * from "./LanguageContext";
 export * from "./MoreDrawerContext";
+export { default as AtelierBreadcrumbs } from "./AtelierBreadcrumbs";
+export * from "./AtelierBreadcrumbs";

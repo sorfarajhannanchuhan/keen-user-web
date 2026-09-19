@@ -206,6 +206,11 @@ export default function FeaturedCategoriesMarquee() {
               <Link
                 key={`${item.id}-${idx}`}
                 href={item.href}
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new Event("keen-category-change"));
+                  }
+                }}
                 className={`group block shrink-0 select-none cursor-pointer border-none bg-transparent shadow-none ${
                   isDesktop
                     ? "w-[calc((100%-48px)/3)]"
@@ -226,11 +231,11 @@ export default function FeaturedCategoriesMarquee() {
 
                 {/* Centered Clean Typography Below Image (matching user reference screenshot) */}
                 <div className="pt-4 pb-1 text-center">
-                  <h3 className="font-jost text-base sm:text-lg font-medium text-stone-800 dark:text-stone-200 group-hover:text-brand-gold transition-colors duration-300 tracking-wide">
+                  <h3 className="font-brandon text-base sm:text-lg font-medium text-stone-800 dark:text-stone-200 group-hover:text-brand-gold transition-colors duration-300 tracking-wide">
                     {isBangla ? item.bengaliName : item.name}
                   </h3>
-                  {/* Subtle expanding gold hairline accent on hover */}
-                  <div className="w-0 group-hover:w-8 h-[1px] bg-brand-gold mx-auto mt-2 transition-all duration-300 ease-out" />
+                  {/* Butter-Smooth Center-Out Expanding / Center-Shrinking Gold Hairline Accent */}
+                  <div className="w-8 h-[1.5px] bg-brand-gold mx-auto mt-2 origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-350 ease-[cubic-bezier(0.25,1,0.5,1)]" />
                 </div>
               </Link>
             ))}

@@ -25,7 +25,7 @@ export default function WishlistDrawer() {
         <div className="p-4 sm:p-5 bg-brand-linen border-b border-brand-sand flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <Heart className="w-5 h-5 text-brand-gold fill-brand-gold" />
-            <h3 className="font-serif text-base sm:text-lg font-medium text-brand-charcoal">
+            <h3 className="font-brandon text-base sm:text-lg font-medium text-brand-charcoal">
               My Saved Wishlist ({wishlistCount})
             </h3>
           </div>
@@ -46,7 +46,7 @@ export default function WishlistDrawer() {
                 <Heart className="w-7 h-7 text-brand-gold/60" />
               </div>
               <div className="space-y-1">
-                <h4 className="font-serif text-base text-brand-charcoal font-normal">
+                <h4 className="font-brandon text-base text-brand-charcoal font-normal">
                   Your Wishlist is Empty
                 </h4>
                 <p className="text-xs text-brand-charcoal-muted max-w-xs mx-auto">
@@ -121,7 +121,7 @@ export default function WishlistDrawer() {
                           addToCart(item, item.sizes[0], item.colors[0], 1);
                           removeFromWishlist(item.id);
                         }}
-                        className="w-full flex items-center justify-center gap-1.5 bg-brand-gold hover:bg-brand-gold-hover text-[#0E1410] text-[10px] uppercase tracking-wider font-bold py-1.5 px-2 transition-colors cursor-pointer"
+                        className="w-full flex items-center justify-center gap-1.5 bg-stone-900 hover:bg-[#C5A059] text-white hover:text-[#0E1410] dark:bg-stone-800 dark:hover:bg-[#C5A059] dark:text-stone-200 dark:hover:text-[#0E1410] border border-stone-900 hover:border-[#C5A059] dark:border-stone-700 dark:hover:border-[#C5A059] text-[10px] uppercase tracking-wider font-bold py-2 px-2 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer shadow-xs hover:shadow-[0_2px_14px_rgba(197,160,89,0.3)]"
                       >
                         <ShoppingBag className="w-3 h-3" />
                         <span>Move to Bag</span>

@@ -194,7 +194,7 @@ export default function SearchModal({
                         </span>
                       </div>
                     </div>
-                    <h5 className="font-jost text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
+                    <h5 className="font-brandon text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
                       {t("cardNewArrivalTitle")}
                     </h5>
                     <p className="font-sans text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
@@ -221,7 +221,7 @@ export default function SearchModal({
                         </span>
                       </div>
                     </div>
-                    <h5 className="font-jost text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
+                    <h5 className="font-brandon text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
                       {t("cardBackInStockTitle")}
                     </h5>
                     <p className="font-sans text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
@@ -248,7 +248,7 @@ export default function SearchModal({
                         </span>
                       </div>
                     </div>
-                    <h5 className="font-jost text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
+                    <h5 className="font-brandon text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
                       {t("cardUpcomingTitle")}
                     </h5>
                     <p className="font-sans text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
@@ -263,7 +263,7 @@ export default function SearchModal({
             <div>
               {searchResults.length === 0 ? (
                 <div className="py-8 text-center space-y-2">
-                  <p className="text-sm font-jost text-brand-charcoal">
+                  <p className="text-sm font-brandon text-brand-charcoal">
                     {isBangla ? `"${query}" এর জন্য কোনো প্রোডাক্ট পাওয়া যায়নি` : `No matching handcrafted pieces found for "${query}"`}
                   </p>
                   <p className="text-xs text-brand-charcoal-muted max-w-sm mx-auto">
@@ -291,7 +291,7 @@ export default function SearchModal({
                           />
                         </div>
                         <div className="min-w-0">
-                          <h5 className="font-jost text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors truncate">
+                          <h5 className="font-brandon text-xs font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors truncate">
                             {product.name}
                           </h5>
                           <span className="text-[9px] text-stone-400 dark:text-stone-500 block truncate">

@@ -159,7 +159,7 @@ export default function MainHeroSlider() {
         <div key={HERO_SLIDES[currentSlide].id} className="space-y-3 sm:space-y-4">
           
           {/* Main Title (Aarong-Style Minimal Poetry with Optical Glyph Drop-Shadow) */}
-          <h1 className="font-jost text-3xl sm:text-5xl lg:text-6xl text-white font-normal sm:font-medium tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
+          <h1 className="font-brandon text-3xl sm:text-5xl lg:text-6xl text-white font-normal sm:font-medium tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
             {isBangla
               ? HERO_SLIDES[currentSlide].bengaliTitle
               : HERO_SLIDES[currentSlide].title}
@@ -176,7 +176,7 @@ export default function MainHeroSlider() {
           <div className="pt-4 sm:pt-5">
             <Link
               href={HERO_SLIDES[currentSlide].href}
-              className="inline-block bg-[#161F15] hover:bg-[#1B2418] text-[#F7F5F0] hover:text-[#D4AF37] px-9 sm:px-12 py-3.5 sm:py-4 text-xs sm:text-[12.5px] uppercase tracking-[0.26em] font-bold transition-all duration-300 shadow-[0_12px_32px_rgba(22,31,21,0.6)] hover:scale-105 active:scale-95 cursor-pointer font-jost border border-[#161F15] hover:border-[#C5A059]/70"
+              className="inline-block bg-[#161F15] hover:bg-[#1B2418] text-[#F7F5F0] hover:text-[#D4AF37] px-9 sm:px-12 py-3.5 sm:py-4 text-xs sm:text-[12.5px] uppercase tracking-[0.26em] font-bold transition-all duration-300 shadow-[0_12px_32px_rgba(22,31,21,0.6)] hover:scale-105 active:scale-95 cursor-pointer font-brandon border border-[#161F15] hover:border-[#C5A059]/70"
             >
               {isBangla
                 ? HERO_SLIDES[currentSlide].bengaliCtaText

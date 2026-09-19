@@ -49,7 +49,7 @@ export default function CampaignPage() {
             </span>
           </div>
 
-          <h1 className="font-serif italic text-4xl sm:text-6xl md:text-7xl font-normal leading-tight tracking-tight drop-shadow-xl">
+          <h1 className="font-brandon text-4xl sm:text-6xl md:text-7xl font-light sm:font-normal leading-tight tracking-tight drop-shadow-xl">
             {isBangla ? "স্পর্শের কবিতা" : ATELIER_CAMPAIGN_DATA.scriptTitle}
           </h1>
 
@@ -65,10 +65,10 @@ export default function CampaignPage() {
       {/* 4. Editorial Manifesto (Minimal 2-sentence atelier note) */}
       <section className="py-14 sm:py-20 border-b border-stone-200/60 dark:border-stone-800/60 bg-stone-50/50 dark:bg-[#121914]">
         <div className="max-w-3xl mx-auto px-6 text-center space-y-4">
-          <span className="font-jost text-[11px] uppercase tracking-[0.32em] text-brand-gold font-semibold block">
+          <span className="font-brandon text-[11px] uppercase tracking-[0.32em] text-brand-gold font-semibold block">
             {isBangla ? "আটেলিয়ার ম্যানিফেস্টো" : "ATELIER MANIFESTO"}
           </span>
-          <p className="font-serif text-xl sm:text-2xl md:text-3xl text-stone-800 dark:text-stone-100 font-normal leading-relaxed">
+          <p className="font-brandon text-xl sm:text-2xl md:text-3xl text-stone-800 dark:text-stone-100 font-normal leading-relaxed">
             "{isBangla ? ATELIER_CAMPAIGN_DATA.bengaliLeadCopy : ATELIER_CAMPAIGN_DATA.leadCopy}"
           </p>
           <div className="w-12 h-[1px] bg-brand-gold mx-auto pt-2" />
@@ -78,10 +78,10 @@ export default function CampaignPage() {
       {/* 5. Curated Campaign Capsule Grid */}
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="font-jost text-[11px] uppercase tracking-[0.3em] text-brand-gold font-semibold block mb-2">
+          <span className="font-brandon text-[11px] uppercase tracking-[0.3em] text-brand-gold font-semibold block mb-2">
             {isBangla ? "ক্যাম্পেইন কালেকশন" : "CAPSULE EDITIONS"}
           </span>
-          <h2 className="font-jost text-3xl sm:text-4xl font-medium tracking-tight">
+          <h2 className="font-brandon text-3xl sm:text-4xl font-medium tracking-tight">
             {isBangla ? "নির্বাচিত আটেলিয়ার ক্রিয়েশন" : "Curated Campaign Pieces"}
           </h2>
           <div className="w-12 h-[1px] bg-brand-gold mx-auto mt-4 mb-4" />
@@ -103,10 +103,10 @@ export default function CampaignPage() {
       <section className="py-16 sm:py-24 bg-stone-50 dark:bg-[#0B100C] border-y border-stone-200/60 dark:border-stone-800/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-            <span className="font-jost text-[11px] uppercase tracking-[0.3em] text-brand-gold font-semibold block mb-2">
+            <span className="font-brandon text-[11px] uppercase tracking-[0.3em] text-brand-gold font-semibold block mb-2">
               {isBangla ? "ইন্টেরিয়র লুকবুক" : "STYLED INTERIORS"}
             </span>
-            <h2 className="font-jost text-3xl sm:text-4xl font-medium tracking-tight">
+            <h2 className="font-brandon text-3xl sm:text-4xl font-medium tracking-tight">
               {isBangla ? "আর্কিটেকচারাল স্টাইলিং ভিনিয়েট" : "Curated Room Arrangements"}
             </h2>
             <div className="w-12 h-[1px] bg-brand-gold mx-auto mt-4 mb-4" />
@@ -131,7 +131,7 @@ export default function CampaignPage() {
                     <span className="text-[10px] uppercase tracking-[0.24em] text-brand-gold font-semibold block mb-1">
                       {vig.palette}
                     </span>
-                    <h3 className="font-jost text-lg font-semibold text-stone-900 dark:text-stone-100">
+                    <h3 className="font-brandon text-lg font-semibold text-stone-900 dark:text-stone-100">
                       {isBangla ? vig.bengaliTitle : vig.title}
                     </h3>
                     <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-light mt-2 leading-relaxed">
@@ -159,7 +159,7 @@ export default function CampaignPage() {
           
           <div className="p-6 border border-stone-200/70 dark:border-stone-800 text-center space-y-3">
             <Leaf className="w-6 h-6 text-brand-gold mx-auto" />
-            <h4 className="font-jost text-base font-semibold uppercase tracking-wider">
+            <h4 className="font-brandon text-base font-semibold uppercase tracking-wider">
               {isBangla ? "১০০% খাঁটি বেলজিয়ান লিনেন" : "100% Belgian Organic Flax"}
             </h4>
             <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-light leading-relaxed">
@@ -171,7 +171,7 @@ export default function CampaignPage() {
 
           <div className="p-6 border border-stone-200/70 dark:border-stone-800 text-center space-y-3">
             <Scissors className="w-6 h-6 text-brand-gold mx-auto" />
-            <h4 className="font-jost text-base font-semibold uppercase tracking-wider">
+            <h4 className="font-brandon text-base font-semibold uppercase tracking-wider">
               {isBangla ? "ঐতিহ্যবাহী নকশি সূচিকর্ম" : "Ancestral Bengal Needlework"}
             </h4>
             <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-light leading-relaxed">
@@ -183,7 +183,7 @@ export default function CampaignPage() {
 
           <div className="p-6 border border-stone-200/70 dark:border-stone-800 text-center space-y-3">
             <Feather className="w-6 h-6 text-brand-gold mx-auto" />
-            <h4 className="font-jost text-base font-semibold uppercase tracking-wider">
+            <h4 className="font-brandon text-base font-semibold uppercase tracking-wider">
               {isBangla ? "প্রিমিয়াম হাইপোঅ্যালার্জেনিক ইনার" : "Plush Hypoallergenic Inners"}
             </h4>
             <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-light leading-relaxed">
@@ -199,7 +199,7 @@ export default function CampaignPage() {
         <div className="mt-14 text-center">
           <Link
             href="/collections"
-            className="inline-flex items-center gap-2 bg-[#0E1410] dark:bg-stone-100 text-white dark:text-[#0E1410] font-jost text-xs sm:text-sm font-semibold tracking-[0.24em] uppercase px-8 sm:px-10 py-3.5 sm:py-4 shadow-luxury hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-[#0E1410] transition-colors"
+            className="inline-flex items-center gap-2 bg-[#0E1410] dark:bg-stone-100 text-white dark:text-[#0E1410] font-brandon text-xs sm:text-sm font-semibold tracking-[0.24em] uppercase px-8 sm:px-10 py-3.5 sm:py-4 shadow-luxury hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-[#0E1410] transition-colors"
           >
             <span>{isBangla ? "সম্পূর্ণ আর্কাইভ দেখুন (২৪টি পিস)" : "Explore Full Archive (24 Creations)"}</span>
             <ArrowRight className="w-4 h-4" />

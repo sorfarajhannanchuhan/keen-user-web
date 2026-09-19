@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Product, ProductColor } from "@/features/catalog";
-import { CartItem, CartContextType } from "./cart";
+import { CartItem, CartContextType, AddedModalState, DeleteModalState, GiftWrapOption } from "./cart";
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -10,12 +10,36 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  
+  // Added-to-Bag Modal State (SS 2)
+  const [addedModalState, setAddedModalState] = useState<AddedModalState>({
+    isOpen: false,
+    item: null,
+  });
+
+  // Remove Item Confirmation Dialog State (SS 3)
+  const [deleteModalState, setDeleteModalState] = useState<DeleteModalState>({
+    isOpen: false,
+    item: null,
+  });
+
+  // Gift Wrap State (SS 4)
+  const [giftWrapOption, setGiftWrapOption] = useState<GiftWrapOption | null>(null);
+  const [giftNote, setGiftNote] = useState("");
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem("keenchit_cart");
       if (saved) {
         setCart(JSON.parse(saved));
+      }
+      const savedWrap = localStorage.getItem("keenchit_gift_wrap");
+      if (savedWrap) {
+        setGiftWrapOption(JSON.parse(savedWrap));
+      }
+      const savedNote = localStorage.getItem("keenchit_gift_note");
+      if (savedNote) {
+        setGiftNote(savedNote);
       }
     } catch (e) {
       console.error("Could not load cart from localStorage", e);
@@ -30,11 +54,28 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [cart]);
 
+  useEffect(() => {
+    try {
+      if (giftWrapOption) {
+        localStorage.setItem("keenchit_gift_wrap", JSON.stringify(giftWrapOption));
+      } else {
+        localStorage.removeItem("keenchit_gift_wrap");
+      }
+    } catch (e) {}
+  }, [giftWrapOption]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("keenchit_gift_note", giftNote);
+    } catch (e) {}
+  }, [giftNote]);
+
   const addToCart = (
     product: Product,
     size: string,
     color: ProductColor,
-    quantity = 1
+    quantity = 1,
+    openDrawer = false
   ) => {
     setCart((prev) => {
       const existingIndex = prev.findIndex(
@@ -53,7 +94,52 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       return [...prev, { product, selectedSize: size, selectedColor: color, quantity }];
     });
 
-    setIsCartOpen(true);
+    // SS 2: Trigger the Added to Bag Confirmation Modal instead of auto-opening drawer
+    setAddedModalState({
+      isOpen: true,
+      item: { product, selectedSize: size, selectedColor: color, quantity },
+    });
+
+    // If explicit openDrawer is requested and not suppressed, allow it
+    if (openDrawer) {
+      setIsCartOpen(true);
+    }
+  };
+
+  const requestRemoveFromCart = (
+    productId: string,
+    size: string,
+    colorName: string,
+    productName?: string
+  ) => {
+    setDeleteModalState({
+      isOpen: true,
+      item: {
+        productId,
+        size,
+        colorName,
+        productName: productName || "Selected item",
+      },
+    });
+  };
+
+  const confirmRemoveFromCart = () => {
+    if (deleteModalState.item) {
+      const { productId, size, colorName } = deleteModalState.item;
+      removeFromCart(productId, size, colorName);
+    }
+    setDeleteModalState({ isOpen: false, item: null });
+  };
+
+  const cancelRemoveFromCart = () => {
+    setDeleteModalState({ isOpen: false, item: null });
+  };
+
+  const clearCart = () => {
+    setCart([]);
+    try {
+      localStorage.removeItem("keenchit_cart");
+    } catch (e) {}
   };
 
   const removeFromCart = (productId: string, size: string, colorName: string) => {
@@ -125,14 +211,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch (e) {}
   };
 
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
   const subtotal = cart.reduce(
-    (sum, item) => sum + item.product.price * item.quantity,
+    (sum, item) => sum + (item.product?.price ?? (item as unknown as { price?: number }).price ?? 0) * (item.quantity || 0),
     0
   );
 
   const discountAmount = appliedCoupon ? Math.round(subtotal * 0.1) : 0;
-  const grandTotal = Math.max(0, subtotal - discountAmount);
+  const giftWrapPrice = giftWrapOption ? giftWrapOption.price : 0;
+  const grandTotal = Math.max(0, subtotal - discountAmount) + giftWrapPrice;
 
   return (
     <CartContext.Provider
@@ -142,16 +229,29 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setIsCartOpen,
         addToCart,
         removeFromCart,
+        requestRemoveFromCart,
+        confirmRemoveFromCart,
+        cancelRemoveFromCart,
         updateQuantity,
+        clearCart,
         totalItems,
         subtotal,
         appliedCoupon,
         discountAmount,
+        giftWrapOption,
+        setGiftWrapOption,
+        giftNote,
+        setGiftNote,
+        giftWrapPrice,
         grandTotal,
         applyCoupon,
         removeCoupon,
         quickViewProduct,
         setQuickViewProduct,
+        addedModalState,
+        setAddedModalState,
+        deleteModalState,
+        setDeleteModalState,
       }}
     >
       {children}

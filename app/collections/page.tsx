@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function CollectionsPage() {
   return (
     <div className="bg-brand-linen min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-stone-400 hover:text-brand-gold transition-colors font-medium"
@@ -22,7 +22,6 @@ export default function CollectionsPage() {
         </Link>
       </div>
 
-      <CollectionBanners />
       <ProductCatalog />
     </div>
   );

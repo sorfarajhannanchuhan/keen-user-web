@@ -2,14 +2,22 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { X, Check, ShieldCheck, ChevronDown, Heart } from "lucide-react";
+import Link from "next/link";
+import { X, Check, Heart, ArrowRight, Minus, Plus, Clock } from "lucide-react";
 import { useCart } from "@/features/cart";
 import { useWishlist } from "@/features/wishlist";
-import { Product, ProductColor } from "./products";
+import { useLanguage } from "@/features/navigation";
+import {
+  ProductColor,
+  getPriceForSize,
+  getOriginalPriceForSize,
+  STANDARD_SIZES,
+} from "./products";
 
 export default function ProductQuickView() {
   const { quickViewProduct, setQuickViewProduct, addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const { isBangla } = useLanguage();
   const product = quickViewProduct;
 
   const [selectedImage, setSelectedImage] = useState<string>("");
@@ -17,22 +25,58 @@ export default function ProductQuickView() {
   const [selectedColor, setSelectedColor] = useState<ProductColor | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [addedSuccess, setAddedSuccess] = useState(false);
-  const [showCare, setShowCare] = useState(false);
 
+  const effectiveSizes = product?.sizes && product.sizes.length >= 2 ? product.sizes : STANDARD_SIZES;
+
+  // Sync state when product opens
   useEffect(() => {
     if (product) {
+      const sizes = product.sizes && product.sizes.length >= 2 ? product.sizes : STANDARD_SIZES;
       setSelectedImage(product.primaryImage);
-      setSelectedSize(product.sizes[0]);
-      setSelectedColor(product.colors[0]);
+      setSelectedSize(sizes.includes('18" × 18"') ? '18" × 18"' : sizes[0]);
+      setSelectedColor(product.colors?.[0] || null);
       setQuantity(1);
       setAddedSuccess(false);
     }
   }, [product]);
 
+  // Handle ESC key to dismiss modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setQuickViewProduct(null);
+      }
+    };
+    if (product) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [product, setQuickViewProduct]);
+
   if (!product || !selectedColor) return null;
 
+  const currentPrice = getPriceForSize(product.price, selectedSize);
+  const currentOriginalPrice = getOriginalPriceForSize(product.originalPrice, selectedSize);
+
+  const isOutOfStock = !product.inStock || (typeof product.stock === "number" && product.stock <= 0);
+  const isLowStock = typeof product.stock === "number" && product.stock > 0 && product.stock <= 3;
+
   const handleAdd = () => {
-    addToCart(product, selectedSize, selectedColor, quantity);
+    if (isOutOfStock) return;
+    addToCart(
+      {
+        ...product,
+        price: currentPrice,
+        originalPrice: currentOriginalPrice,
+      },
+      selectedSize,
+      selectedColor,
+      quantity
+    );
     setAddedSuccess(true);
     setTimeout(() => {
       setAddedSuccess(false);
@@ -40,242 +84,275 @@ export default function ProductQuickView() {
     }, 1200);
   };
 
+  const isDiscounted = Boolean(currentOriginalPrice && currentOriginalPrice > currentPrice);
+  const discountPercent = isDiscounted
+    ? Math.round((((currentOriginalPrice || 0) - currentPrice) / (currentOriginalPrice || 1)) * 100)
+    : 0;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-brand-linen-dark max-w-4xl w-full border border-brand-sand shadow-2xl relative my-8 overflow-hidden text-brand-charcoal">
-        {/* Close Button */}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 dark:bg-black/80 backdrop-blur-sm transition-opacity duration-300 animate-fadeIn"
+      onClick={() => setQuickViewProduct(null)}
+      role="dialog"
+      aria-modal="true"
+      aria-label={product.name}
+    >
+      <div
+        className="relative w-full max-w-3xl transition-all duration-300"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Floating Close Button at Top-Right Corner (Matching SS 2 & SS 3) */}
         <button
           onClick={() => setQuickViewProduct(null)}
-          className="absolute top-4 right-4 z-10 p-2 text-stone-400 hover:text-white bg-[#1E1E24] rounded-full transition-colors"
+          className="absolute -top-3.5 -right-3.5 sm:-top-4 sm:-right-4 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-[#141B15] hover:bg-[#D4AF37] dark:hover:bg-[#D4AF37] text-stone-800 dark:text-stone-200 hover:text-[#0E1410] dark:hover:text-[#0E1410] border border-stone-200 dark:border-stone-700 shadow-xl flex items-center justify-center transition-all duration-300 hover:rotate-90 hover:scale-110 cursor-pointer"
           aria-label="Close modal"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 stroke-[2.2]" />
         </button>
 
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          
-          {/* Left Column: Gallery */}
-          <div className="p-6 md:p-8 bg-brand-linen flex flex-col justify-between border-b md:border-b-0 md:border-r border-brand-sand">
-            {/* Active Image */}
-            <div className="relative aspect-square overflow-hidden border border-brand-sand shadow-sm bg-brand-linen-dark">
-              <Image
-                src={selectedImage}
-                alt={product.name}
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Thumbnail selector */}
-            <div className="flex items-center gap-3 mt-4">
-              <button
-                onClick={() => setSelectedImage(product.primaryImage)}
-                className={`relative w-16 h-16 border-2 overflow-hidden transition-all ${
-                  selectedImage === product.primaryImage ? "border-[#D4AF37]" : "border-transparent opacity-60 hover:opacity-100"
-                }`}
-              >
-                <Image src={product.primaryImage} alt="Main view" fill className="object-cover" />
-              </button>
-
-              {product.secondaryImage && (
-                <button
-                  onClick={() => setSelectedImage(product.secondaryImage)}
-                  className={`relative w-16 h-16 border-2 overflow-hidden transition-all ${
-                    selectedImage === product.secondaryImage ? "border-[#D4AF37]" : "border-transparent opacity-60 hover:opacity-100"
-                  }`}
-                >
-                  <Image src={product.secondaryImage} alt="Styled view" fill className="object-cover" />
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Right Column: Spec & Add to Bag */}
-          <div className="p-6 md:p-8 space-y-6 flex flex-col justify-between bg-brand-linen-dark">
-            <div className="space-y-4">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[10px] uppercase tracking-[0.25em] text-brand-gold font-bold">
-                    {product.category}
-                  </span>
-                  {product.badge && (
-                    <span className="text-[9px] uppercase tracking-wider bg-brand-sand text-brand-gold border border-[#333340] px-2 py-0.5">
-                      {product.badge}
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="font-brandon font-semibold text-xl sm:text-2xl text-stone-900 dark:text-stone-100 uppercase tracking-[0.08em] leading-tight">
-                  {product.name}
-                </h3>
-
-                <div className="mt-2.5 flex items-baseline gap-2 font-sans flex-wrap">
-                  <span className="text-xs text-stone-500 font-normal">From</span>
-                  {product.originalPrice && (
-                    <span className="text-base text-stone-400 dark:text-stone-500 line-through font-normal">
-                      ৳{product.originalPrice.toLocaleString("en-BD")}
-                    </span>
-                  )}
-                  <span className="text-2xl sm:text-3xl font-semibold text-[#993D2C] dark:text-[#E07A5F]">
-                    ৳{product.price.toLocaleString("en-BD")}
-                  </span>
-                  {product.originalPrice && product.originalPrice > product.price && (
-                    <span className="text-xs text-[#996c49] dark:text-[#C59B6D] font-semibold bg-[#996c49]/10 dark:bg-[#996c49]/20 px-2 py-0.5 border border-[#996c49]/30 rounded-[2px] ml-1">
-                      Save {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <p className="text-xs text-stone-300 font-light leading-relaxed">
-                {product.description}
-              </p>
-
-              {/* Fabric Spec Callout */}
-              <div className="p-3 bg-brand-linen border border-brand-sand text-xs space-y-1">
-                <div className="flex justify-between">
-                  <span className="text-stone-400">Fabric Composition:</span>
-                  <span className="font-medium text-brand-charcoal">{product.fabric}</span>
-                </div>
-                {product.threadCount && (
-                  <div className="flex justify-between">
-                    <span className="text-stone-400">Weight & Weave:</span>
-                    <span className="font-medium text-brand-charcoal">{product.threadCount}</span>
-                  </div>
-                )}
-                <div className="flex justify-between">
-                  <span className="text-stone-400">Closure Type:</span>
-                  <span className="font-medium text-brand-charcoal">{product.closure}</span>
-                </div>
-              </div>
-
-              {/* Color Swatches */}
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-stone-400 mb-2 font-medium">
-                  Selected Color: <strong className="text-brand-charcoal font-semibold">{selectedColor.name}</strong>
-                </label>
-                <div className="flex items-center gap-2">
-                  {product.colors.map((color) => (
-                    <button
-                      key={color.name}
-                      onClick={() => setSelectedColor(color)}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 border text-xs transition-all ${
-                        selectedColor.name === color.name
-                          ? "border-[#D4AF37] bg-brand-sand text-white font-medium"
-                          : "border-brand-sand bg-transparent text-stone-400 hover:border-stone-500"
-                      }`}
-                    >
-                      <span
-                        className="w-3 h-3 rounded-full border border-stone-600"
-                        style={{ backgroundColor: color.hex }}
-                      />
-                      <span>{color.name}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Sizes */}
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-stone-400 mb-2 font-medium">
-                  Select Dimension:
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {product.sizes.map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`px-4 py-2 text-xs uppercase tracking-wider transition-all ${
-                        selectedSize === size
-                          ? "bg-brand-gold text-[#0E1410] font-bold shadow-sm"
-                          : "bg-brand-linen text-stone-300 border border-brand-sand hover:border-stone-500"
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Care Instructions Accordion */}
-              <div className="border-t border-brand-sand pt-3">
-                <button
-                  type="button"
-                  onClick={() => setShowCare(!showCare)}
-                  className="flex items-center justify-between w-full text-xs uppercase tracking-wider text-stone-400 hover:text-brand-gold"
-                >
-                  <span>Atelier Fabric Care & Laundering</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${showCare ? "rotate-180" : ""}`} />
-                </button>
-                {showCare && (
-                  <ul className="mt-2 text-xs text-stone-400 space-y-1 list-disc list-inside pl-1">
-                    {product.careInstructions.map((inst, i) => (
-                      <li key={i}>{inst}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-
-            {/* Actions: Quantity & Add to Bag */}
-            <div className="pt-4 border-t border-brand-sand space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="flex items-center border border-brand-sand bg-brand-linen">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-3 py-3 text-stone-400 hover:bg-[#233026] hover:text-white"
-                  >
-                    -
-                  </button>
-                  <span className="px-4 text-xs font-bold text-brand-charcoal">{quantity}</span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="px-3 py-3 text-stone-400 hover:bg-[#233026] hover:text-white"
-                  >
-                    +
-                  </button>
-                </div>
-
-                <button
-                  onClick={handleAdd}
-                  disabled={addedSuccess}
-                  className="flex-1 bg-brand-gold hover:bg-brand-gold-hover text-[#0E1410] py-3.5 text-xs uppercase tracking-[0.2em] font-bold transition-all flex items-center justify-center gap-2 shadow-luxury"
-                >
-                  {addedSuccess ? (
-                    <>
-                      <Check className="w-4 h-4 text-emerald-900 font-bold" />
-                      <span>Added to Bag</span>
-                    </>
-                  ) : (
-                    <span>Add to Shopping Bag • ৳{(product.price * quantity).toLocaleString("en-BD")}</span>
-                  )}
-                </button>
-
+        <div className="w-full bg-white dark:bg-[#121813] border border-[#E2DDD5] dark:border-[#2B3826] shadow-2xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            {/* Left Column: Image with Pinned Wishlist Heart */}
+            <div className="relative aspect-square md:aspect-auto md:h-full min-h-[320px] md:min-h-[460px] bg-[#F8F6F0] dark:bg-[#151E17] flex flex-col justify-between p-4 sm:p-5 border-b md:border-b-0 md:border-r border-[#E2DDD5] dark:border-[#2B3826]">
+              {/* Main Product Visual */}
+              <div className="relative w-full flex-1 aspect-square overflow-hidden bg-stone-100 dark:bg-[#0E1410]">
+                {/* Wishlist Heart Button (Cleanly Pinned inside Image Frame) */}
                 <button
                   onClick={() => toggleWishlist(product)}
-                  className="p-3.5 border border-brand-sand bg-brand-linen hover:border-brand-gold text-brand-charcoal hover:text-brand-gold transition-colors flex items-center justify-center"
-                  title={isInWishlist(product.id) ? "Remove from wishlist" : "Add to wishlist"}
+                  className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-white/90 dark:bg-black/70 backdrop-blur-md border border-[#E2DDD5] dark:border-stone-700/80 flex items-center justify-center transition-all duration-200 shadow-sm hover:scale-110 active:scale-95 group cursor-pointer"
+                  title={
+                    isInWishlist(product.id)
+                      ? isBangla
+                        ? "উইশলিস্ট থেকে সরান"
+                        : "Remove from wishlist"
+                      : isBangla
+                      ? "উইশলিস্টে যোগ করুন"
+                      : "Add to wishlist"
+                  }
                   aria-label="Toggle Wishlist"
                 >
                   <Heart
-                    className={`w-5 h-5 transition-colors ${
-                      isInWishlist(product.id) ? "text-rose-500 fill-rose-500" : "text-brand-charcoal hover:text-brand-gold"
+                    className={`w-4 h-4 transition-colors ${
+                      isInWishlist(product.id)
+                        ? "text-rose-500 fill-rose-500"
+                        : "text-stone-600 dark:text-stone-300 group-hover:text-rose-500"
                     }`}
                   />
                 </button>
+
+                <Image
+                  src={selectedImage || product.primaryImage}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                  className="object-cover transition-opacity duration-300"
+                />
               </div>
 
-              <div className="flex items-center justify-center gap-2 text-[11px] text-stone-400">
-                <ShieldCheck className="w-3.5 h-3.5 text-brand-gold" />
-                <span>Quality Guaranteed • Hassle-free Exchange within 7 Days</span>
+            {/* Secondary Image Thumbnails (Only rendered when available) */}
+            {product.secondaryImage && (
+              <div className="flex items-center gap-2 pt-3">
+                <button
+                  onClick={() => setSelectedImage(product.primaryImage)}
+                  className={`relative w-12 h-12 overflow-hidden border transition-all duration-200 cursor-pointer ${
+                    selectedImage === product.primaryImage
+                      ? "border-[#D4AF37] ring-1 ring-[#D4AF37]"
+                      : "border-[#E2DDD5] dark:border-stone-700 opacity-60 hover:opacity-100"
+                  }`}
+                  aria-label="Primary image view"
+                >
+                  <Image src={product.primaryImage} alt="Main view" fill className="object-cover" />
+                </button>
+                <button
+                  onClick={() => setSelectedImage(product.secondaryImage)}
+                  className={`relative w-12 h-12 overflow-hidden border transition-all duration-200 cursor-pointer ${
+                    selectedImage === product.secondaryImage
+                      ? "border-[#D4AF37] ring-1 ring-[#D4AF37]"
+                      : "border-[#E2DDD5] dark:border-stone-700 opacity-60 hover:opacity-100"
+                  }`}
+                  aria-label="Secondary image view"
+                >
+                  <Image src={product.secondaryImage} alt="Styled view" fill className="object-cover" />
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Right Column: Essentials & Purchasing Controls */}
+          <div className="p-6 sm:p-8 flex flex-col justify-between bg-white dark:bg-[#121813]">
+            <div className="space-y-5">
+              {/* Category & Low Stock Indicator */}
+              <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] font-medium text-stone-400 dark:text-stone-500">
+                <span>{product.category}</span>
+                {isLowStock && (
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#FAF6EE] dark:bg-[#1E251C] border border-[#E6DEC8] dark:border-[#384632] text-[#B38A38] dark:text-[#D4AF37] text-[10.5px] font-semibold tracking-wide normal-case shadow-xs">
+                    <Clock className="w-2.5 h-2.5 stroke-[2]" />
+                    <span>{isBangla ? `স্টকে মাত্র ${product.stock} টি আছে` : `${product.stock} in stock`}</span>
+                  </span>
+                )}
+              </div>
+
+              {/* Prominent, Eye-Catching Title matching SS 1 */}
+              <div>
+                <h3 className="font-brandon font-bold text-2xl sm:text-3xl text-[#111111] dark:text-white uppercase tracking-[0.07em] leading-tight">
+                  {product.name}
+                </h3>
+                {product.tagline && (
+                  <p className="text-xs sm:text-[13px] font-medium text-[#C87A65] dark:text-[#C5A059] tracking-wide mt-1">
+                    {product.tagline}
+                  </p>
+                )}
+              </div>
+
+              {/* Prominent Pricing Row - Architectural Deep Black (#111111 in light, #F5F5F0 in dark) */}
+              <div className="flex items-baseline gap-2.5 font-sans pt-0.5">
+                <span className="text-2xl sm:text-[26px] font-semibold text-[#111111] dark:text-[#F5F5F0] transition-all">
+                  ৳{currentPrice.toLocaleString("en-BD")}
+                </span>
+                {isDiscounted && (
+                  <>
+                    <span className="text-sm text-stone-400 dark:text-stone-500 line-through font-normal transition-all">
+                      ৳{currentOriginalPrice?.toLocaleString("en-BD")}
+                    </span>
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-[#C5A059] dark:text-[#D4AF37] bg-[#C5A059]/10 dark:bg-[#D4AF37]/15 px-2 py-0.5 border border-[#C5A059]/30">
+                      {discountPercent}% OFF
+                    </span>
+                  </>
+                )}
+              </div>
+
+              {/* Minimal Circular Color Swatches */}
+              {product.colors && product.colors.length > 0 && (
+                <div className="pt-1">
+                  <div className="flex items-center justify-between text-xs mb-2.5">
+                    <span className="text-stone-500 dark:text-stone-400 font-medium">
+                      {isBangla ? "রঙ" : "Color"}:
+                    </span>
+                    <span className="font-medium text-stone-900 dark:text-stone-200">
+                      {selectedColor.name}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {product.colors.map((color) => {
+                      const isSelected = selectedColor.name === color.name;
+                      return (
+                        <button
+                          key={color.name}
+                          onClick={() => setSelectedColor(color)}
+                          className={`relative w-7 h-7 rounded-full transition-transform duration-200 flex items-center justify-center cursor-pointer ${
+                            isSelected ? "scale-110" : "hover:scale-105 opacity-85 hover:opacity-100"
+                          }`}
+                          aria-label={`Select color ${color.name}`}
+                          title={color.name}
+                        >
+                          <span
+                            className="w-full h-full rounded-full border border-black/15 dark:border-white/20 shadow-inner"
+                            style={{ backgroundColor: color.hex }}
+                          />
+                          {isSelected && (
+                            <span className="absolute -inset-1 rounded-full border-2 border-[#D4AF37] pointer-events-none" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Dimension Selector (16*16, 18*18, 20*20) */}
+              <div className="pt-1">
+                <div className="flex items-center justify-between text-xs mb-2.5">
+                  <span className="text-stone-500 dark:text-stone-400 font-medium">
+                    {isBangla ? "সাইজ নির্বাচন করুন" : "Select Dimension"}:
+                  </span>
+                  <span className="font-mono text-[10px] text-[#C5A059] dark:text-[#D4AF37] font-semibold">
+                    {selectedSize}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {effectiveSizes.map((size) => {
+                    const isSelected = selectedSize === size;
+                    return (
+                      <button
+                        key={size}
+                        onClick={() => setSelectedSize(size)}
+                        className={`px-3 py-1.5 text-xs tracking-wider transition-all duration-200 font-medium cursor-pointer ${
+                          isSelected
+                            ? "bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 shadow-sm border border-stone-900 dark:border-stone-100"
+                            : "bg-transparent text-stone-700 dark:text-stone-300 border border-[#E2DDD5] dark:border-[#2B3826] hover:border-stone-400 dark:hover:border-stone-600"
+                        }`}
+                      >
+                        {size} {size.includes("16") ? "(-৳200)" : size.includes("20") ? "(+৳300)" : ""}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
+            {/* Actions: Tactile Stepper & Two Distinct Buttons */}
+            <div className="pt-6 mt-6 border-t border-[#E2DDD5] dark:border-[#2B3826] space-y-3">
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                {/* Quantity Stepper (- 1 +) */}
+                <div className="flex items-center border border-[#E2DDD5] dark:border-[#2B3826] bg-[#F8F6F0] dark:bg-[#1A241D] h-11 shrink-0">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    disabled={quantity <= 1}
+                    className="w-9 h-full flex items-center justify-center text-stone-800 hover:text-black dark:text-stone-200 dark:hover:text-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+                    aria-label="Decrease quantity"
+                  >
+                    <Minus className="w-3.5 h-3.5 stroke-[2.5]" />
+                  </button>
+                  <span className="w-8 text-center text-xs font-bold text-stone-900 dark:text-stone-100 select-none">
+                    {quantity}
+                  </span>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="w-9 h-full flex items-center justify-center text-stone-800 hover:text-black dark:text-stone-200 dark:hover:text-white transition-colors cursor-pointer"
+                    aria-label="Increase quantity"
+                  >
+                    <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+                  </button>
+                </div>
+
+                {/* Primary CTA: ADD TO BAG - Black Normal with Gilded Champagne (#D4AF37) Hover, or disabled when Out of Stock */}
+                <button
+                  onClick={handleAdd}
+                  disabled={isOutOfStock || addedSuccess}
+                  className={`flex-1 h-11 px-4 text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center gap-2 shadow-sm active:scale-[0.99] ${
+                    isOutOfStock
+                      ? "bg-stone-200 dark:bg-stone-800 text-stone-400 dark:text-stone-500 border border-stone-300 dark:border-stone-700 cursor-not-allowed"
+                      : "bg-[#111111] hover:bg-[#D4AF37] text-white hover:text-[#0E1410] dark:bg-[#1B241C] dark:hover:bg-[#D4AF37] dark:text-stone-100 dark:hover:text-[#0E1410] border border-black hover:border-[#D4AF37] dark:border-stone-700/80 dark:hover:border-[#D4AF37] hover:shadow-[0_4px_22px_rgba(212,175,55,0.35)] cursor-pointer"
+                  }`}
+                >
+                  {isOutOfStock ? (
+                    <span>{isBangla ? "স্টক শেষ" : "OUT OF STOCK"}</span>
+                  ) : addedSuccess ? (
+                    <>
+                      <Check className="w-4 h-4 text-emerald-400 dark:text-emerald-950 font-bold" />
+                      <span>{isBangla ? "ব্যাগে যোগ হয়েছে" : "Added to Bag"}</span>
+                    </>
+                  ) : (
+                    <span>{isBangla ? "ব্যাগে যোগ করুন" : "Add to Bag"}</span>
+                  )}
+                </button>
+              </div>
+
+              {/* Secondary CTA: VIEW DETAILS */}
+              <Link
+                href={`/product/${product.id}`}
+                onClick={() => setQuickViewProduct(null)}
+                className="w-full border border-stone-300 dark:border-stone-700 hover:border-[#D4AF37] dark:hover:border-[#D4AF37] text-stone-800 dark:text-stone-200 hover:text-[#0E1410] dark:hover:text-[#0E1410] hover:bg-[#D4AF37]/15 dark:hover:bg-[#D4AF37]/20 h-10 px-4 text-[11px] uppercase tracking-[0.18em] font-medium transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center gap-2 group cursor-pointer"
+              >
+                <span>{isBangla ? "বিস্তারিত দেখুন" : "View Details"}</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
-
         </div>
-
       </div>
     </div>
-  );
+  </div>
+);
 }

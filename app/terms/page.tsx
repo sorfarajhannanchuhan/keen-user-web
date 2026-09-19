@@ -29,7 +29,7 @@ export default function TermsPage() {
           <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-bold block mb-2">
             CLIENT AGREEMENT
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl text-brand-charcoal font-normal">
+          <h1 className="font-brandon text-4xl sm:text-5xl text-brand-charcoal font-normal">
             Terms of Service
           </h1>
           <p className="text-xs text-stone-400 mt-2 font-light">
@@ -41,7 +41,7 @@ export default function TermsPage() {
         <div className="space-y-10 text-xs sm:text-sm text-stone-300 leading-relaxed font-light">
           
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               1. Artisanal Nature of Our Creations
             </h2>
             <p>
@@ -50,7 +50,7 @@ export default function TermsPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               2. Orders & Order Acceptance
             </h2>
             <p>
@@ -59,7 +59,7 @@ export default function TermsPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               3. Pricing & Currency
             </h2>
             <p>
@@ -68,7 +68,7 @@ export default function TermsPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               4. Bespoke & Custom Tailoring
             </h2>
             <p>
@@ -77,7 +77,7 @@ export default function TermsPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-medium">
               5. Intellectual Property
             </h2>
             <p>

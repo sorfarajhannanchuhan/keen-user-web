@@ -73,7 +73,7 @@ export default function MobileBottomNav() {
           <div className="relative">
             <ShoppingBag className="w-5 h-5 mb-0.5 stroke-[1.8]" />
             {totalItems > 0 && (
-              <span className="absolute -top-1 -right-1.5 bg-brand-gold text-[#0E1410] text-[9px] font-bold font-sans w-3.5 h-3.5 rounded-full flex items-center justify-center shadow-sm border border-white dark:border-[#111713] leading-none">
+              <span className="absolute -top-2 -right-2.5 bg-[#D4AF37] text-[#0E1410] text-[10.5px] font-extrabold font-sans min-w-[20px] h-[20px] px-1 rounded-full flex items-center justify-center shadow-[0_2px_6px_rgba(0,0,0,0.25)] border-[1.5px] border-white dark:border-[#111713] leading-none tabular-nums">
                 {totalItems}
               </span>
             )}

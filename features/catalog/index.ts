@@ -1,6 +1,13 @@
 export * from "./products";
+export * from "./showcaseData";
 export { default as ProductCard } from "./ProductCard";
 export { default as ProductCatalog } from "./ProductCatalog";
 export { default as FeaturedCategoriesMarquee } from "./FeaturedCategoriesMarquee";
+export { default as FeaturedCategoriesGrid } from "./FeaturedCategoriesGrid";
+export { default as CuratedShowcaseSlider } from "./CuratedShowcaseSlider";
 export { default as CollectionBanners } from "./CollectionBanners";
 export { default as ProductQuickView } from "./ProductQuickView";
+export { default as DualCollectionBanners } from "./DualCollectionBanners";
+export { default as CollectionCarouselsSection } from "./CollectionCarouselsSection";
+export { default as CollectionCarouselRow } from "./CollectionCarouselRow";
+export { default as CategoryProductShowcase } from "./CategoryProductShowcase";

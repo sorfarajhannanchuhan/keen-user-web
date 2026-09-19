@@ -35,7 +35,7 @@ export default function CampaignPrivilegeBanner() {
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
           <div className="flex items-center gap-2">
             <Sparkles className="w-3.5 h-3.5 text-brand-gold shrink-0" />
-            <span className="font-jost text-xs sm:text-sm tracking-[0.14em] uppercase font-semibold text-stone-200">
+            <span className="font-brandon text-xs sm:text-sm tracking-[0.14em] uppercase font-semibold text-stone-200">
               {isBangla
                 ? "১০% আটেলিয়ার ওয়েলকাম প্রিভিলেজ সক্রিয় হয়েছে"
                 : "Atelier Welcome Privilege Activated"}

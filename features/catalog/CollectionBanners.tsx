@@ -49,10 +49,10 @@ export default function CollectionBanners() {
         {/* Section Header */}
         <ScrollReveal direction="up" distance={30} duration={700}>
           <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-            <span className="font-jost text-[11px] uppercase tracking-[0.3em] text-brand-gold font-semibold block mb-2">
+            <span className="font-brandon text-[11px] uppercase tracking-[0.3em] text-brand-gold font-semibold block mb-2">
               FABRIC WORLDS
             </span>
-            <h2 className="font-jost text-3xl sm:text-4xl text-brand-charcoal font-medium">
+            <h2 className="font-brandon text-3xl sm:text-4xl text-brand-charcoal font-medium">
               Curated by Tactile Sensation
             </h2>
             <div className="w-12 h-[1px] bg-brand-gold mx-auto mt-4 mb-4" />
@@ -93,11 +93,11 @@ export default function CollectionBanners() {
                   )}
 
                   <div className="absolute bottom-6 left-6 right-6 text-white space-y-1.5">
-                    <span className="font-jost text-[10px] uppercase tracking-[0.25em] text-brand-gold font-medium block">
+                    <span className="font-brandon text-[10px] uppercase tracking-[0.25em] text-brand-gold font-medium block">
                       {col.fabricNote}
                     </span>
                     <div className="flex items-center justify-between">
-                      <h3 className="font-jost text-2xl font-semibold group-hover:text-brand-gold transition-colors text-white">
+                      <h3 className="font-brandon text-2xl font-semibold group-hover:text-brand-gold transition-colors text-white">
                         {col.title}
                       </h3>
                       <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center transition-all group-hover:bg-brand-gold group-hover:text-[#0E1410]">
@@ -118,10 +118,10 @@ export default function CollectionBanners() {
         <ScrollReveal delay={200} distance={35} duration={800} direction="up">
           <div className="mt-12 p-8 bg-white/98 dark:bg-[#111713]/98 backdrop-blur-md border border-stone-200/90 dark:border-stone-800/90 shadow-luxury flex flex-col md:flex-row items-center justify-between gap-6 transition-colors">
             <div className="space-y-1.5 text-center md:text-left">
-              <span className="font-jost text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-brand-gold font-bold block">
+              <span className="font-brandon text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-brand-gold font-bold block">
                 COMING SOON TO THE KEEN CHIT ATELIER
               </span>
-              <h4 className="font-jost text-xl sm:text-2xl lg:text-[26px] text-stone-900 dark:text-stone-100 font-medium tracking-tight">
+              <h4 className="font-brandon text-xl sm:text-2xl lg:text-[26px] text-stone-900 dark:text-stone-100 font-medium tracking-tight">
                 Bespoke Curtains, Heritage Quilts, Nakshi Katha & Fine Cashmere Shawls
               </h4>
               <p className="font-sans text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-normal leading-relaxed">
@@ -130,7 +130,7 @@ export default function CollectionBanners() {
             </div>
             <a
               href="#newsletter"
-              className="font-jost whitespace-nowrap px-6 py-3 bg-brand-gold text-[#0E1410] text-xs uppercase tracking-[0.2em] font-bold hover:bg-brand-gold-hover transition-colors shadow-md cursor-pointer"
+              className="font-brandon whitespace-nowrap px-6 py-3 bg-brand-gold text-[#0E1410] text-xs uppercase tracking-[0.2em] font-bold hover:bg-brand-gold-hover transition-colors shadow-md cursor-pointer"
             >
               Get VIP Preview
             </a>

@@ -29,7 +29,7 @@ export default function CareGuidePage() {
           <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-bold block mb-2">
             ATELIER PRESERVATION
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl text-brand-charcoal font-normal">
+          <h1 className="font-brandon text-4xl sm:text-5xl text-brand-charcoal font-normal">
             Fabric & Laundering Guide
           </h1>
           <p className="text-xs sm:text-sm text-stone-400 mt-3 max-w-xl font-light leading-relaxed">
@@ -43,7 +43,7 @@ export default function CareGuidePage() {
           {/* Section 1: Belgian Flax Linen */}
           <div className="p-6 sm:p-8 bg-brand-linen-dark border border-brand-sand space-y-4">
             <div className="flex items-center justify-between border-b border-brand-sand pb-3">
-              <h2 className="font-serif text-2xl text-brand-charcoal font-normal">
+              <h2 className="font-brandon text-2xl text-brand-charcoal font-normal">
                 1. Organic Belgian Flax Linen
               </h2>
               <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 bg-[#1E1E24] border border-brand-sand text-brand-gold font-semibold">
@@ -91,7 +91,7 @@ export default function CareGuidePage() {
           {/* Section 2: Matte Italian Velvet */}
           <div className="p-6 sm:p-8 bg-brand-linen-dark border border-brand-sand space-y-4">
             <div className="flex items-center justify-between border-b border-brand-sand pb-3">
-              <h2 className="font-serif text-2xl text-brand-charcoal font-normal">
+              <h2 className="font-brandon text-2xl text-brand-charcoal font-normal">
                 2. Italian Matte Cotton Velvet
               </h2>
               <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 bg-[#1E1E24] border border-brand-sand text-brand-gold font-semibold">
@@ -113,7 +113,7 @@ export default function CareGuidePage() {
           {/* Section 3: Nakshi Needlework & Raw Silk */}
           <div className="p-6 sm:p-8 bg-brand-linen-dark border border-brand-sand space-y-4">
             <div className="flex items-center justify-between border-b border-brand-sand pb-3">
-              <h2 className="font-serif text-2xl text-brand-charcoal font-normal">
+              <h2 className="font-brandon text-2xl text-brand-charcoal font-normal">
                 3. Hand-Embroidered Nakshi & Silk Floss
               </h2>
               <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 bg-[#1E1E24] border border-brand-sand text-brand-gold font-semibold">
@@ -136,7 +136,7 @@ export default function CareGuidePage() {
           <div className="p-6 sm:p-8 bg-brand-linen-dark border border-brand-sand space-y-4">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-brand-gold" />
-              <h2 className="font-serif text-xl sm:text-2xl text-brand-charcoal font-normal">
+              <h2 className="font-brandon text-xl sm:text-2xl text-brand-charcoal font-normal">
                 How to Style & Fluff: The Designer &ldquo;Karate Chop&rdquo;
               </h2>
             </div>

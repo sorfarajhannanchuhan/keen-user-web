@@ -200,10 +200,10 @@ const TRANSLATIONS: Record<Language, Translations> = {
     cartCheckoutWhatsApp: "Order via WhatsApp Concierge",
     cartFreeShippingProgress: "away from Free White-Glove Delivery",
 
-    footerNewsletterTag: "THE PRIVATE ATELIER REGISTER",
+    footerNewsletterTag: "",
     footerNewsletterHeadline: "Receive Private Invitations to Limited Fabric Drops",
     footerNewsletterSubtext:
-      "Join our circle of connoisseurs. Enjoy a 10% bespoke privilege code on your first cushion order and early access to upcoming Curtains and Nakshi Katha releases.",
+      "Enjoy 10% courtesy on your first order and priority access to limited atelier releases.",
     footerPrivilegeCode: "KEEN10",
     footerWhatsAppLabel: "WhatsApp Atelier Concierge",
     footerStudioLabel: "Design Studio & Showroom",
@@ -300,10 +300,10 @@ const TRANSLATIONS: Record<Language, Translations> = {
     cartCheckoutWhatsApp: "হোয়াটসঅ্যাপে অর্ডার কনফার্ম করুন",
     cartFreeShippingProgress: "টাকার কেনাকাটা করলেই ফ্রি ডেলিভারি!",
 
-    footerNewsletterTag: "এক্সক্লুসিভ অ্যাটেলিয়ার সার্কেল",
+    footerNewsletterTag: "",
     footerNewsletterHeadline: "নতুন ফ্যাব্রিক রিলিজ ও বিশেষ অফারের আমন্ত্রণ পান",
     footerNewsletterSubtext:
-      "আমাদের সার্কেলে যুক্ত হোন। প্রথম কুশন অর্ডারে উপভোগ করুন ১০% ছাড় এবং আসন্ন পর্দা ও নকশী কাঁথার আগাম নোটিফিকেশন।",
+      "আপনার প্রথম অর্ডারে ১০% প্রিভিলেজ এবং লিমিটেড ড্রপসের আগাম আমন্ত্রণ পেতে যুক্ত থাকুন।",
     footerPrivilegeCode: "KEEN10",
     footerWhatsAppLabel: "হোয়াটসঅ্যাপে সরাসরি যোগাযোগ",
     footerStudioLabel: "ডিজাইন স্টুডিও ও শোরুম",

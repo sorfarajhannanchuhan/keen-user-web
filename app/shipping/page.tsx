@@ -29,7 +29,7 @@ export default function ShippingPage() {
           <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-bold block mb-2">
             CONCIERGE LOGISTICS
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl text-brand-charcoal font-normal">
+          <h1 className="font-brandon text-4xl sm:text-5xl text-brand-charcoal font-normal">
             Shipping, Packaging & Returns
           </h1>
           <p className="text-xs sm:text-sm text-stone-400 mt-3 max-w-xl font-light leading-relaxed">
@@ -42,7 +42,7 @@ export default function ShippingPage() {
           
           {/* Delivery Rates & Timelines */}
           <section className="space-y-4">
-            <h2 className="font-serif text-2xl text-brand-charcoal font-normal flex items-center gap-2">
+            <h2 className="font-brandon text-2xl text-brand-charcoal font-normal flex items-center gap-2">
               <Truck className="w-5 h-5 text-brand-gold" />
               <span>National Delivery Tariffs & Timelines</span>
             </h2>
@@ -52,7 +52,7 @@ export default function ShippingPage() {
                 <span className="text-[10px] uppercase tracking-wider text-brand-gold font-bold block">
                   INSIDE DHAKA METROPOLITAN
                 </span>
-                <h3 className="font-serif text-xl text-brand-charcoal font-medium">
+                <h3 className="font-brandon text-xl text-brand-charcoal font-medium">
                   ৳80 Standard • FREE above ৳3,000
                 </h3>
                 <p className="text-xs text-stone-400 font-light leading-relaxed">
@@ -64,7 +64,7 @@ export default function ShippingPage() {
                 <span className="text-[10px] uppercase tracking-wider text-brand-gold font-bold block">
                   ALL DISTRICTS ACROSS BANGLADESH
                 </span>
-                <h3 className="font-serif text-xl text-brand-charcoal font-medium">
+                <h3 className="font-brandon text-xl text-brand-charcoal font-medium">
                   ৳150 Standard • FREE above ৳3,000
                 </h3>
                 <p className="text-xs text-stone-400 font-light leading-relaxed">
@@ -78,7 +78,7 @@ export default function ShippingPage() {
           <section className="p-6 sm:p-8 bg-brand-linen-dark border border-brand-sand space-y-4">
             <div className="flex items-center gap-2">
               <PackageCheck className="w-5 h-5 text-brand-gold" />
-              <h2 className="font-serif text-2xl text-brand-charcoal font-normal">
+              <h2 className="font-brandon text-2xl text-brand-charcoal font-normal">
                 Zero-Plastic Bespoke Packaging
               </h2>
             </div>
@@ -98,7 +98,7 @@ export default function ShippingPage() {
           <section className="space-y-4">
             <div className="flex items-center gap-2">
               <RotateCcw className="w-5 h-5 text-brand-gold" />
-              <h2 className="font-serif text-2xl text-brand-charcoal font-normal">
+              <h2 className="font-brandon text-2xl text-brand-charcoal font-normal">
                 7-Day Hassle-Free Exchange Policy
               </h2>
             </div>

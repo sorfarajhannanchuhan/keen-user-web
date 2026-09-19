@@ -63,7 +63,7 @@ export default function CurtainsPage() {
             <span>THE DRAPERY ATELIER</span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-normal leading-tight">
+          <h1 className="font-brandon text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-normal leading-tight">
             Bespoke Curtains & Architectural Drapery.
           </h1>
 
@@ -88,7 +88,7 @@ export default function CurtainsPage() {
                   <span className="text-[10px] uppercase tracking-[0.2em] text-brand-gold font-bold block">
                     {style.weight}
                   </span>
-                  <h3 className="font-serif text-2xl font-normal text-white">
+                  <h3 className="font-brandon text-2xl font-normal text-white">
                     {style.name}
                   </h3>
                 </div>
@@ -105,7 +105,7 @@ export default function CurtainsPage() {
                 </div>
 
                 <div className="pt-4 border-t border-brand-sand flex items-center justify-between">
-                  <span className="font-serif text-sm font-semibold text-brand-gold">
+                  <span className="font-brandon text-sm font-semibold text-brand-gold">
                     {style.estimatedPrice}
                   </span>
                   <a
@@ -129,7 +129,7 @@ export default function CurtainsPage() {
             <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-bold block">
               COMPLIMENTARY RESIDENTIAL CONSULTATION
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-normal text-brand-charcoal">
+            <h2 className="font-brandon text-3xl sm:text-4xl font-normal text-brand-charcoal">
               Schedule In-Home Measurement & Fabric Swatch Viewing
             </h2>
             <p className="text-xs sm:text-sm text-stone-400 font-light max-w-xl leading-relaxed">

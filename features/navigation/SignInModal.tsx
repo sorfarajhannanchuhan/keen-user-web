@@ -47,7 +47,7 @@ export default function SignInModal({ isOpen, onClose }: SignInModalProps) {
               <User className="w-4 h-4 text-brand-gold" />
             </div>
             <div>
-              <h3 className="font-serif text-lg font-medium text-brand-charcoal">
+              <h3 className="font-brandon text-lg font-medium text-brand-charcoal">
                 Atelier Client Access
               </h3>
               <p className="text-[10px] text-brand-charcoal-muted uppercase tracking-wider">
@@ -69,7 +69,7 @@ export default function SignInModal({ isOpen, onClose }: SignInModalProps) {
           {isSuccess ? (
             <div className="py-10 text-center space-y-3">
               <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto animate-bounce" />
-              <h4 className="font-serif text-xl text-brand-charcoal font-normal">
+              <h4 className="font-brandon text-xl text-brand-charcoal font-normal">
                 Welcome back to KEEN CHIT
               </h4>
               <p className="text-xs text-brand-charcoal-muted">

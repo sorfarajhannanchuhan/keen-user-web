@@ -28,10 +28,10 @@ export default function AboutPage() {
 
         {/* Page Hero Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <span className="font-jost text-[10px] uppercase tracking-[0.3em] text-brand-gold font-bold block">
+          <span className="font-brandon text-[10px] uppercase tracking-[0.3em] text-brand-gold font-bold block">
             THE ATELIER PROVENANCE
           </span>
-          <h1 className="font-jost text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-medium leading-tight">
+          <h1 className="font-brandon text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-medium leading-tight">
             The Soul of Slow Living & Tactile Poetry.
           </h1>
           <div className="w-16 h-[1.5px] bg-brand-gold mx-auto my-4" />
@@ -56,10 +56,10 @@ export default function AboutPage() {
 
           <ScrollReveal direction="up" distance={35} duration={850} delay={150}>
             <div className="flex flex-col justify-center space-y-6">
-              <span className="font-jost text-[10px] uppercase tracking-[0.25em] text-brand-gold font-bold block">
+              <span className="font-brandon text-[10px] uppercase tracking-[0.25em] text-brand-gold font-bold block">
                 OUR GENESIS
               </span>
-              <h2 className="font-jost text-3xl sm:text-4xl text-brand-charcoal font-medium leading-snug">
+              <h2 className="font-brandon text-3xl sm:text-4xl text-brand-charcoal font-medium leading-snug">
                 Why We Refuse Bulk Mass Production
               </h2>
             <p className="font-sans text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-normal leading-relaxed">
@@ -76,7 +76,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           <div className="p-8 bg-brand-linen-dark border border-brand-sand space-y-3">
             <Leaf className="w-5 h-5 text-brand-gold" />
-            <h3 className="font-jost text-xl text-brand-charcoal font-semibold">100% Honest Fibers</h3>
+            <h3 className="font-brandon text-xl text-brand-charcoal font-semibold">100% Honest Fibers</h3>
             <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-normal leading-relaxed">
               No polyester blends or artificial coatings. Only certified organic flax, pure mulberry silk, and natural cotton that breathe and soften with age.
             </p>
@@ -84,7 +84,7 @@ export default function AboutPage() {
 
           <div className="p-8 bg-brand-linen-dark border border-brand-sand space-y-3">
             <HeartHandshake className="w-5 h-5 text-brand-gold" />
-            <h3 className="font-jost text-xl text-brand-charcoal font-semibold">Master Artisan Dignity</h3>
+            <h3 className="font-brandon text-xl text-brand-charcoal font-semibold">Master Artisan Dignity</h3>
             <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-normal leading-relaxed">
               Every embroidered Nakshi motif is hand-stitched by skilled craftswomen who receive fair living compensation and complete creative respect.
             </p>
@@ -92,7 +92,7 @@ export default function AboutPage() {
 
           <div className="p-8 bg-brand-linen-dark border border-brand-sand space-y-3">
             <ShieldCheck className="w-5 h-5 text-brand-gold" />
-            <h3 className="font-jost text-xl text-brand-charcoal font-semibold">Heirloom Durability</h3>
+            <h3 className="font-brandon text-xl text-brand-charcoal font-semibold">Heirloom Durability</h3>
             <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-normal leading-relaxed">
               French seams, reinforced piping, and dense upholstery weights ensure that every cushion withstands daily living and retains its poise.
             </p>
@@ -101,7 +101,7 @@ export default function AboutPage() {
 
         {/* Call to Action */}
         <div className="p-10 bg-brand-linen-dark border border-brand-sand text-center space-y-4 max-w-2xl mx-auto">
-          <h3 className="font-jost text-3xl text-brand-charcoal font-medium">
+          <h3 className="font-brandon text-3xl text-brand-charcoal font-medium">
             Experience the Atelier Collection
           </h3>
           <p className="font-sans text-xs sm:text-sm text-stone-500 dark:text-stone-400 max-w-md mx-auto font-normal">
@@ -110,7 +110,7 @@ export default function AboutPage() {
           <div className="pt-2">
             <Link
               href="/collections"
-              className="font-jost inline-flex items-center gap-2 bg-brand-gold hover:bg-brand-gold-hover text-[#0E1410] px-8 py-3.5 text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-luxury"
+              className="font-brandon inline-flex items-center gap-2 bg-brand-gold hover:bg-brand-gold-hover text-[#0E1410] px-8 py-3.5 text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-luxury"
             >
               <span>Explore Cushion Catalog</span>
               <ArrowRight className="w-4 h-4 text-[#0E1410]" />

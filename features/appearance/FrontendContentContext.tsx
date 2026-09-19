@@ -40,7 +40,10 @@ export function FrontendContentProvider({ children }: { children: React.ReactNod
             footer: { ...DEFAULT_FRONTEND_CONTENT.footer, ...(parsed.footer || {}) },
             brandColors: { ...DEFAULT_FRONTEND_CONTENT.brandColors, ...(parsed.brandColors || {}) },
             navigation: Array.isArray(parsed.navigation) ? parsed.navigation : DEFAULT_FRONTEND_CONTENT.navigation,
-            megaMenus: parsed.megaMenus || DEFAULT_FRONTEND_CONTENT.megaMenus,
+            megaMenus: {
+              ...DEFAULT_FRONTEND_CONTENT.megaMenus,
+              ...(parsed.megaMenus || {}),
+            },
             analytics: { ...(DEFAULT_FRONTEND_CONTENT.analytics || {}), ...(parsed.analytics || {}) },
           };
         }

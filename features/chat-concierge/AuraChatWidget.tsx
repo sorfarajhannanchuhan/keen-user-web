@@ -205,7 +205,7 @@ export default function AuraChatWidget({
               <ChatBoxMark size={36} className="transition-transform hover:scale-105" />
 
               <div>
-                <h3 className="font-jost text-base tracking-wider uppercase text-brand-charcoal font-semibold">
+                <h3 className="font-brandon text-base tracking-wider uppercase text-brand-charcoal font-semibold">
                   KEEN CHIT Atelier
                 </h3>
                 <span className="text-[10px] text-emerald-500 dark:text-emerald-400 font-medium flex items-center gap-1.5">

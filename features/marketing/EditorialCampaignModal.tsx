@@ -8,8 +8,8 @@ import { useCart } from "@/features/cart";
 import { useLanguage } from "@/features/navigation";
 import { ATELIER_CAMPAIGN_DATA } from "./campaign-data";
 
-const COOLDOWN_DAYS = 7;
-const COOLDOWN_MS = COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
+const COOLDOWN_MINUTES = 10;
+const COOLDOWN_MS = COOLDOWN_MINUTES * 60 * 1000;
 const STORAGE_KEY = "keen_campaign_poster_dismissed";
 
 export default function EditorialCampaignModal() {
@@ -29,33 +29,47 @@ export default function EditorialCampaignModal() {
       searchParams.get("campaign") === "preview" ||
       searchParams.get("popup") === "true";
 
+    if (searchParams.get("popup") === "false" || searchParams.get("campaign") === "false") {
+      return;
+    }
+
     if (isForcePreview) {
       const timer = setTimeout(() => setIsOpen(true), 400);
       return () => clearTimeout(timer);
     }
 
-    // Check if dismissed within the 7-day cooldown window
+    // Check if dismissed within the 10-minute cooldown window
     let isSuppressed = false;
+    let timeRemaining = 0;
     try {
       const lastDismissed = localStorage.getItem(STORAGE_KEY);
       if (lastDismissed) {
         const timePassed = Date.now() - parseInt(lastDismissed, 10);
         if (timePassed < COOLDOWN_MS) {
           isSuppressed = true;
+          timeRemaining = COOLDOWN_MS - timePassed;
+        } else {
+          // 10 minutes passed: clear dismissal so popup can show again
+          localStorage.removeItem(STORAGE_KEY);
         }
       }
     } catch (e) {}
 
     if (isSuppressed) {
-      // Do NOT interrupt the user with the large popup; show the discreet privilege pill instead
+      // Show the discreet privilege pill while cooling down
       setShowPill(true);
-      return;
+      // If user stays on the site for remaining cooldown duration, trigger popup
+      const cooldownTimer = setTimeout(() => {
+        setShowPill(false);
+        setIsOpen(true);
+      }, timeRemaining);
+      return () => clearTimeout(cooldownTimer);
     }
 
-    // Standard Luxury Pacing: 3.5s breathing delay after landing
+    // Smooth luxury entrance: 1.5s breathing delay after landing
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 3500);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, [searchParams]);
@@ -100,27 +114,7 @@ export default function EditorialCampaignModal() {
 
   return (
     <>
-      {/* 1. Subtle Persistent Floating Privilege Pill (When modal is closed & coupon not yet applied) */}
-      {!isOpen && showPill && !isCouponAlreadyApplied && (
-        <aside
-          aria-label="Atelier Privilege Offer"
-          className="fixed bottom-20 sm:bottom-6 left-4 sm:left-6 z-40 animate-in fade-in slide-in-from-bottom-3 duration-500 select-none"
-        >
-          <button
-            onClick={handlePillClick}
-            className="group flex items-center gap-2.5 px-3.5 py-2 sm:px-4 sm:py-2.5 bg-[#161F15]/95 hover:bg-[#1B2418] text-[#F7F5F0] hover:text-white border border-[#C5A059]/40 hover:border-[#C5A059] rounded-full shadow-[0_10px_30px_rgba(14,20,16,0.6)] backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-gold" />
-            </span>
-            <Sparkles className="w-3.5 h-3.5 text-brand-gold shrink-0 transition-transform duration-300 group-hover:rotate-12" />
-            <span className="font-jost text-[11px] sm:text-xs tracking-[0.18em] uppercase font-semibold text-brand-gold">
-              {isBangla ? "১০% বিশেষ প্রিভিলেজ" : "10% Welcome Courtesy"}
-            </span>
-          </button>
-        </aside>
-      )}
+      {/* 1. Floating Privilege Pill removed per user request */}
 
       {/* 2. Main Full-Bleed Editorial Campaign Poster Modal */}
       {isOpen && (
@@ -169,13 +163,13 @@ export default function EditorialCampaignModal() {
               className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 sm:p-10 pointer-events-auto"
             >
               {/* Subtle Atelier Eyebrow */}
-              <span className="font-jost text-[10px] sm:text-[11.5px] uppercase tracking-[0.32em] text-brand-gold font-semibold mb-2 sm:mb-3 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] flex items-center gap-1.5">
+              <span className="font-brandon text-[10px] sm:text-[11.5px] uppercase tracking-[0.32em] text-brand-gold font-semibold mb-2 sm:mb-3 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] flex items-center gap-1.5">
                 <Sparkles className="w-3 h-3 text-brand-gold animate-pulse" />
                 {isBangla ? ATELIER_CAMPAIGN_DATA.bengaliEyebrow : ATELIER_CAMPAIGN_DATA.eyebrow}
               </span>
 
               {/* Central High-Impact Artistic Campaign Typography */}
-              <h2 className="font-serif italic text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-normal leading-[1.08] tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] mb-2 sm:mb-3">
+              <h2 className="font-brandon text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-light sm:font-normal leading-[1.08] tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] mb-2 sm:mb-3">
                 {isBangla ? "স্পর্শের কবিতা" : ATELIER_CAMPAIGN_DATA.scriptTitle}
               </h2>
 
@@ -188,7 +182,7 @@ export default function EditorialCampaignModal() {
               <div className="inline-block">
                 <button
                   onClick={handleOpenCampaign}
-                  className="bg-[#F7F5F0] hover:bg-[#C5A059] text-[#161F15] hover:text-[#0E1410] font-jost text-xs sm:text-sm font-bold tracking-[0.24em] uppercase px-9 sm:px-12 py-3 sm:py-3.5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer border border-[#C5A059]/40"
+                  className="bg-[#F7F5F0] hover:bg-[#C5A059] text-[#161F15] hover:text-[#0E1410] font-brandon text-xs sm:text-sm font-bold tracking-[0.24em] uppercase px-9 sm:px-12 py-3 sm:py-3.5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer border border-[#C5A059]/40"
                 >
                   {isBangla ? "কালেকশন দেখুন" : "SHOP NOW"}
                 </button>

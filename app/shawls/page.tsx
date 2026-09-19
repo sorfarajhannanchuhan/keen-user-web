@@ -63,7 +63,7 @@ export default function ShawlsPage() {
             <span>THE WINTER ATELIER</span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-normal leading-tight">
+          <h1 className="font-brandon text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-normal leading-tight">
             Fine Cashmere Shawls & Royal Chador.
           </h1>
 
@@ -88,7 +88,7 @@ export default function ShawlsPage() {
                   {shawl.badge}
                 </div>
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="font-serif text-2xl font-normal text-white">
+                  <h3 className="font-brandon text-2xl font-normal text-white">
                     {shawl.name}
                   </h3>
                 </div>
@@ -105,7 +105,7 @@ export default function ShawlsPage() {
                 </div>
 
                 <div className="pt-4 border-t border-brand-sand flex items-center justify-between">
-                  <span className="font-serif text-base font-semibold text-brand-gold">
+                  <span className="font-brandon text-base font-semibold text-brand-gold">
                     {shawl.price}
                   </span>
                   <a
@@ -129,7 +129,7 @@ export default function ShawlsPage() {
             <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-bold block">
               HERITAGE PRESENTATION
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-normal text-brand-charcoal">
+            <h2 className="font-brandon text-3xl sm:text-4xl font-normal text-brand-charcoal">
               Arrives in Handcrafted Hardboard Keepsake Boxes
             </h2>
             <p className="text-xs sm:text-sm text-stone-400 font-light max-w-xl leading-relaxed">

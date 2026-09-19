@@ -9,7 +9,7 @@ import {
   MobileBottomNav,
   MoreDrawer,
 } from "@/features/navigation";
-import { CartProvider, CartDrawer } from "@/features/cart";
+import { CartProvider, CartDrawer, AddedToBagModal, RemoveItemModal } from "@/features/cart";
 import { WishlistProvider, WishlistDrawer } from "@/features/wishlist";
 import { ProductQuickView } from "@/features/catalog";
 import { EditorialCampaignModal } from "@/features/marketing";
@@ -83,6 +83,8 @@ export default function RootLayout({
                       </AppCanvas>
                       <MoreDrawer />
                       <CartDrawer />
+                      <AddedToBagModal />
+                      <RemoveItemModal />
                       <WishlistDrawer />
                       <ProductQuickView />
                       <EditorialCampaignModal />

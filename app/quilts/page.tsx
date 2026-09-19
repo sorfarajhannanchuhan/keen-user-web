@@ -63,7 +63,7 @@ export default function QuiltsPage() {
             <span>THE BEDDING & KANTHA ARCHIVE</span>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-normal leading-tight">
+          <h1 className="font-brandon text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-normal leading-tight">
             Heirloom Quilts & Nakshi Kantha.
           </h1>
 
@@ -88,7 +88,7 @@ export default function QuiltsPage() {
                   <span className="text-[10px] uppercase tracking-[0.2em] text-brand-gold font-bold block">
                     {quilt.craftTime}
                   </span>
-                  <h3 className="font-serif text-2xl font-normal text-white">
+                  <h3 className="font-brandon text-2xl font-normal text-white">
                     {quilt.name}
                   </h3>
                 </div>
@@ -105,7 +105,7 @@ export default function QuiltsPage() {
                 </div>
 
                 <div className="pt-4 border-t border-brand-sand flex items-center justify-between">
-                  <span className="font-serif text-base font-semibold text-brand-gold">
+                  <span className="font-brandon text-base font-semibold text-brand-gold">
                     {quilt.price}
                   </span>
                   <a
@@ -129,7 +129,7 @@ export default function QuiltsPage() {
             <span className="text-[10px] uppercase tracking-[0.25em] text-brand-gold font-bold block">
               THE ARTISAN GUILD
             </span>
-            <h2 className="font-serif text-3xl text-brand-charcoal font-normal">
+            <h2 className="font-brandon text-3xl text-brand-charcoal font-normal">
               Every Stitch Tells an Unhurried Story
             </h2>
             <p className="text-xs sm:text-sm text-stone-400 font-light leading-relaxed">

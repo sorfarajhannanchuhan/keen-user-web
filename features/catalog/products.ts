@@ -28,6 +28,7 @@ export interface Product {
   careInstructions: string[];                           // Care instructions
   dimensions: string;                                   // Dimensions
   inStock: boolean;                                     // In stock flag
+  stock?: number;                                       // Available inventory count
   featured?: boolean;                                   // Featured collection flag
   isBestSeller?: boolean;                               // Best seller badge flag
   badge?: string;                                       // Special badge
@@ -37,6 +38,51 @@ export interface CategoryItem {
   id: string;
   name: string;
   count: number;
+}
+
+/** Standard cushion size options requested by user */
+export const STANDARD_SIZES = ['16" × 16"', '18" × 18"', '20" × 20"'];
+
+/**
+ * Calculates dynamic price scaling according to selected size:
+ * - 16" × 16": Base price - ৳200 (compact format)
+ * - 18" × 18": Standard base price
+ * - 20" × 20": Base price + ৳300 (generous format)
+ */
+export function getPriceForSize(basePrice: number, size?: string): number {
+  if (!size) return basePrice;
+  if (size.includes("16")) {
+    return Math.max(500, basePrice - 200);
+  }
+  if (size.includes("20")) {
+    return basePrice + 300;
+  }
+  return basePrice;
+}
+
+export function getOriginalPriceForSize(originalPrice: number | undefined, size?: string): number | undefined {
+  if (!originalPrice) return undefined;
+  if (!size) return originalPrice;
+  if (size.includes("16")) {
+    return Math.max(600, originalPrice - 200);
+  }
+  if (size.includes("20")) {
+    return originalPrice + 300;
+  }
+  return originalPrice;
+}
+
+/**
+ * Generates dynamic SKU based on product code and selected size:
+ * - 16" × 16": KC-2026-N-01-16
+ * - 18" × 18": KC-2026-N-01-18
+ * - 20" × 20": KC-2026-N-01-20
+ */
+export function getSkuForProduct(product: Product, size?: string): string {
+  const numMatch = product.id.match(/\d+$/);
+  const cleanId = numMatch ? numMatch[0].padStart(2, "0") : product.id.slice(-4).toUpperCase();
+  const sizeTag = size?.includes("16") ? "16" : size?.includes("20") ? "20" : "18";
+  return `KC-2026-N-${cleanId}-${sizeTag}`;
 }
 
 export const PRODUCTS: Product[] = [
@@ -51,7 +97,7 @@ export const PRODUCTS: Product[] = [
     threadCount: "240 GSM heavy-weight weave",
     closure: "Concealed Japanese YKK Brass Zipper",
     fillOption: "Microfiber Plush or Duck Down Insert",
-    sizes: ["18\" × 18\"", "20\" × 20\"", "14\" × 24\" (Lumbar)"],
+    sizes: STANDARD_SIZES,
     colors: [
       { name: "Oatmeal Beige", hex: "#E3DAC9" },
       { name: "Warm Terracotta", hex: "#B86B52" },
@@ -67,6 +113,7 @@ export const PRODUCTS: Product[] = [
     ],
     dimensions: "Available in Square and Lumbar formats",
     inStock: true,
+    stock: 2,
     featured: true,
     isBestSeller: true,
     badge: "🔥 Best Selling",
@@ -268,15 +315,315 @@ export const PRODUCTS: Product[] = [
     isBestSeller: true,
     badge: "🔥 Best Selling Combo",
   },
+  {
+    id: "kc-cushion-ss5-sage",
+    name: "Sage Green Printed Pure Flax Cushion",
+    tagline: "Stone-washed Belgian flax with artisanal botanical block print",
+    price: 2750,
+    originalPrice: 3200,
+    category: "linen",
+    fabric: "100% Organic European Flax Linen",
+    threadCount: "260 GSM heavy stone-wash",
+    closure: "Concealed Antique Brass YKK Zipper",
+    fillOption: "Microfiber Plush or Duck Down Insert",
+    sizes: ["18\" × 18\"", "20\" × 20\"", "14\" × 24\" (Lumbar)"],
+    colors: [
+      { name: "Sage Botanical Green", hex: "#7E846B" },
+      { name: "Oatmeal Beige", hex: "#E3DAC9" },
+    ],
+    primaryImage: "https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000&auto=format&fit=crop",
+    description: "As featured in our SS editorial edit. Woven from certified European organic flax and stone-washed to achieve an irresistibly soft, lived-in feel with delicate botanical sage motifs.",
+    careInstructions: ["Gentle cold machine wash", "Line dry in shade", "Warm steam iron"],
+    dimensions: "18\" × 18\" (45cm × 45cm)",
+    inStock: true,
+    featured: true,
+    badge: "NEW ARRIVAL",
+  },
+  {
+    id: "kc-cushion-09",
+    name: "Cascading Belgian Drape Cushion",
+    tagline: "Double-flanged pure organic flax in French Lavender",
+    price: 2850,
+    originalPrice: 3300,
+    category: "linen",
+    fabric: "European Long-Staple Flax Linen",
+    closure: "Concealed YKK zipper",
+    fillOption: "Dense Hypoallergenic Microfiber Pad",
+    sizes: ["20\" × 20\""],
+    colors: [{ name: "French Lavender Grey", hex: "#9E99A3" }],
+    primaryImage: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=1000&auto=format&fit=crop",
+    description: "Elegantly tailored with a 1.5-inch raw-edge tailored flange. The French Lavender hue imparts tranquility to master bedroom suites.",
+    careInstructions: ["Machine wash cold gentle", "Air dry flat"],
+    dimensions: "20\" × 20\" (50cm × 50cm)",
+    inStock: true,
+    featured: true,
+    badge: "NEW ARRIVAL",
+  },
+  {
+    id: "kc-cushion-10",
+    name: "Nordic Loom Textured Bouclé",
+    tagline: "Sculptural heavy bouclé yarn with organic slub texture",
+    price: 3200,
+    originalPrice: 3750,
+    category: "boucle",
+    fabric: "Heavy Textured Wool & Cotton Bouclé",
+    closure: "Concealed bottom zipper",
+    fillOption: "High-Loft Feather Blend Insert Included",
+    sizes: ["18\" × 18\"", "22\" × 22\""],
+    colors: [{ name: "Alabaster Ecru", hex: "#EAE6DF" }],
+    primaryImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1000&auto=format&fit=crop",
+    description: "Tactile depth with an architectural, cloud-like texture. Woven from chunky bouclé loops that bring Scandinavian hygge warmth to leather armchairs.",
+    careInstructions: ["Spot clean only with damp cloth", "Professional dry cleaning"],
+    dimensions: "18\" × 18\" (45cm × 45cm)",
+    inStock: true,
+    featured: true,
+    badge: "NEW ARRIVAL",
+  },
+  {
+    id: "kc-cushion-11",
+    name: "Jaipur Block-Printed Botanical Cushion",
+    tagline: "Hand-carved teakwood block print with mineral vegetable dyes",
+    price: 3100,
+    originalPrice: 3600,
+    category: "embroidered",
+    fabric: "100% Handloom Cotton Cambric",
+    closure: "Mother-of-pearl buttons",
+    fillOption: "Microfiber Pad Included",
+    sizes: ["18\" × 18\""],
+    colors: [{ name: "Indigo & Ochre", hex: "#2B3A42" }],
+    primaryImage: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=1000&auto=format&fit=crop",
+    description: "A beloved heritage favorite restored after being sold out for 4 months. Printed by fourth-generation block printing artisans using natural indigo vat dyes.",
+    careInstructions: ["Dry clean or hand wash cold with mild detergent"],
+    dimensions: "18\" × 18\" (45cm × 45cm)",
+    inStock: true,
+    featured: false,
+    badge: "RESTOCKED",
+  },
+  {
+    id: "kc-cushion-12",
+    name: "Monochrome One-Line Art Cushion",
+    tagline: "Minimalist continuous contour line embroidery on flax",
+    price: 2900,
+    originalPrice: 3400,
+    category: "embroidered",
+    fabric: "Dense European Flax Linen with Black Silk Embroidery",
+    closure: "Concealed bottom zip",
+    fillOption: "Plush Feather Blend Insert",
+    sizes: ["18\" × 18\"", "20\" × 20\""],
+    colors: [{ name: "Bone & Charcoal", hex: "#EBE6DD" }],
+    primaryImage: "https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=1000&auto=format&fit=crop",
+    description: "Contemporary one-line contour portrait hand-stitched with silk thread. An architectural statement piece for gallery-inspired living areas.",
+    careInstructions: ["Gentle dry clean only"],
+    dimensions: "18\" × 18\" (45cm × 45cm)",
+    inStock: true,
+    featured: true,
+    badge: "ONE LINE ART",
+  },
+  {
+    id: "kc-cushion-13",
+    name: "Ochre Yellow Velvet Sanctuary Pillow",
+    tagline: "Luminous golden-amber Italian velvet accent piece",
+    price: 3300,
+    originalPrice: 3800,
+    category: "velvet",
+    fabric: "100% Como Woven Cotton Velvet Pile",
+    closure: "Concealed brass zip",
+    fillOption: "Plush Feather Down Insert Included",
+    sizes: ["18\" × 18\"", "22\" × 22\""],
+    colors: [{ name: "Warm Amber Ochre", hex: "#D49B24" }],
+    primaryImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=1000&auto=format&fit=crop",
+    description: "Bathed in sunlight, this rich ochre velvet pillow captures warm light and reflects subtle golden tones. As seen in our modern atelier living room edit.",
+    careInstructions: ["Professional velvet dry clean"],
+    dimensions: "18\" × 18\" (45cm × 45cm)",
+    inStock: true,
+    featured: true,
+    badge: "🔥 Best Selling",
+  },
+  {
+    id: "kc-cushion-14",
+    name: "Hypoallergenic Cloud Loft Bedding Pillow",
+    tagline: "Ultra-breathable micro-denier down alternative pillow",
+    price: 2200,
+    originalPrice: 2600,
+    category: "pillow",
+    fabric: "300 Thread Count Organic Cotton Percale Shell",
+    closure: "Double-needle piped edge",
+    fillOption: "Air-Blown Gel Microfiber Core",
+    sizes: ["Standard (20\" × 26\")", "King (20\" × 36\")"],
+    colors: [{ name: "Pure Cloud White", hex: "#FAF9F6" }],
+    primaryImage: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=1000&auto=format&fit=crop",
+    description: "Engineered for pure restorative slumber. Silky soft down-alternative gel clusters contour gently to cervical curvature without retaining excess heat.",
+    careInstructions: ["Machine wash warm", "Tumble dry low with dryer balls"],
+    dimensions: "Standard & King Sizes Available",
+    inStock: true,
+    featured: false,
+    badge: "BEDDING ESSENTIAL",
+  },
+  {
+    id: "kc-cushion-15",
+    name: "Mid-Century Teak & Rattan Accent Cushion",
+    tagline: "Geometric textural weave tailored for cane lounge chairs",
+    price: 2950,
+    category: "linen",
+    fabric: "Heavy Flax and Jute Textured Weave",
+    closure: "Concealed YKK Zipper",
+    fillOption: "Firm High-Density Foam & Poly Core",
+    sizes: ["20\" × 20\""],
+    colors: [{ name: "Natural Flax & Charcoal", hex: "#C8BEAE" }],
+    primaryImage: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1000&auto=format&fit=crop",
+    description: "Designed specifically to complement mid-century rattan furniture, media credenzas, and natural wool carpets. Earthy, robust, and timeless.",
+    careInstructions: ["Spot clean with mild soapy water", "Air dry"],
+    dimensions: "20\" × 20\" (50cm × 50cm)",
+    inStock: true,
+    featured: true,
+    badge: "NEW ARRIVAL",
+  },
+  {
+    id: "kc-upcoming-01",
+    name: "Cascading Flax Linen Curtain Panels",
+    tagline: "Bespoke ceiling-to-floor drape collection with brass rings",
+    price: 5200,
+    originalPrice: 6200,
+    category: "curtains",
+    fabric: "Pure Heavy European Flax Linen 320 GSM",
+    closure: "Hand-pleated header with solid brass grommets",
+    fillOption: "Unlined semi-sheer daylight drape",
+    sizes: ["50\" × 96\"", "50\" × 108\" (Ceiling-to-Floor)"],
+    colors: [
+      { name: "Raw Ecru Flax", hex: "#D9D0C1" },
+      { name: "Smoked Sage", hex: "#8A9483" },
+    ],
+    primaryImage: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000&auto=format&fit=crop",
+    description: "Coming Autumn 2026. Made to measure floor-skimming drapes that filter natural daylight with soft warmth, bringing architectural scale to sanctuaries.",
+    careInstructions: ["Professional dry cleaning recommended"],
+    dimensions: "Custom lengths available on request",
+    inStock: true,
+    featured: true,
+    badge: "PREVIEW",
+  },
+  {
+    id: "kc-upcoming-02",
+    name: "Heirloom Kantha Silk Bed Quilt",
+    tagline: "Hand-stitched vintage Mulberry silk with organic cotton core",
+    price: 8500,
+    originalPrice: 9800,
+    category: "quilts",
+    fabric: "100% Pure Rajshahi Mulberry Silk & Khadi Cotton",
+    closure: "Bound silk selvedge",
+    fillOption: "Fluffy pure cotton batt",
+    sizes: ["Queen (90\" × 100\")", "King (108\" × 100\")"],
+    colors: [{ name: "Vintage Rose & Pearl", hex: "#C48A80" }],
+    primaryImage: "https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?q=80&w=1000&auto=format&fit=crop",
+    description: "Over 90 hours of hand needlework. Each quilt tells a generational craft story, combining antique silk remnants with micro-running kantha stitches.",
+    careInstructions: ["Specialist dry clean only"],
+    dimensions: "Queen / King sizes",
+    inStock: true,
+    featured: true,
+    badge: "PREVIEW",
+  },
+  {
+    id: "kc-upcoming-03",
+    name: "The Royal Jamdani Loom Cushion",
+    tagline: "Fine muslin weave with genuine gold and silver zari motifs",
+    price: 4600,
+    originalPrice: 5200,
+    category: "embroidered",
+    fabric: "Fine Handloom Muslin with Metallic Zari",
+    closure: "Concealed silk zipper",
+    fillOption: "Down Insert Included",
+    sizes: ["18\" × 18\""],
+    colors: [{ name: "Ivory & Fine Gold", hex: "#E8DEC8" }],
+    primaryImage: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1000&auto=format&fit=crop",
+    description: "UNESCO Intangible Cultural Heritage. Jamdani motifs woven by hand directly on the loom using supplementary weft technique.",
+    careInstructions: ["Museum-grade dry clean only"],
+    dimensions: "18\" × 18\" (45cm × 45cm)",
+    inStock: true,
+    featured: true,
+    badge: "PREVIEW",
+  },
+  {
+    id: "kc-upcoming-04",
+    name: "Woven Jute & Recycled Linen Tapestry",
+    tagline: "Architectural wall tapestry hand-loomed in Jessore",
+    price: 6800,
+    category: "patchwork",
+    fabric: "Golden Bengal Jute Fiber & Belgian Linen",
+    closure: "Handmade Teakwood hanging rod included",
+    fillOption: "Wall hanging tapestry (no insert required)",
+    sizes: ["36\" × 54\" (Wall Hanging)"],
+    colors: [{ name: "Raw Golden Jute & Bleached Flax", hex: "#BFA980" }],
+    primaryImage: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1200&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1000&auto=format&fit=crop",
+    description: "A monumental fiber art piece bringing warmth, acoustic dampening, and artisanal presence to living room statement walls.",
+    careInstructions: ["Dust gently with soft brush or vacuum with low-suction nozzle"],
+    dimensions: "36\" Width × 54\" Drop (90cm × 137cm)",
+    inStock: true,
+    featured: false,
+    badge: "WALL HANGING",
+  },
+  {
+    id: "kc-limited-01",
+    name: "Imperial Velvet Gold Zari Bolster",
+    tagline: "Loomed Italian double-pile velvet with hand-twisted metallic cord",
+    price: 4950,
+    category: "velvet",
+    fabric: "Italian Matte Velvet & Zari Cord Trim",
+    closure: "Concealed end zip",
+    fillOption: "Cylindrical Foam & Down Core",
+    sizes: ["8\" × 26\""],
+    colors: [{ name: "Deep Emerald & Gold", hex: "#17382B" }],
+    primaryImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1000&auto=format&fit=crop",
+    description: "Numbered Atelier Release of 25 cushions only. Crafted with double-pile Como velvet and gilded hand-braided zari rope piping.",
+    careInstructions: ["Specialist dry clean only"],
+    dimensions: "8\" × 26\" (20cm × 66cm)",
+    inStock: true,
+    featured: true,
+    badge: "LIMITED RUN (25)",
+  },
+  {
+    id: "kc-limited-02",
+    name: "Heritage Handspun Indigo Khadi Pillow",
+    tagline: "Naturally fermented wild indigo dye on hand-carded khadi cotton",
+    price: 3800,
+    category: "patchwork",
+    fabric: "100% Handspun Indigo Khadi",
+    closure: "Hand-turned bone buttons",
+    fillOption: "Hypoallergenic Microfiber Included",
+    sizes: ["20\" × 20\""],
+    colors: [{ name: "Fermented Indigo", hex: "#233342" }],
+    primaryImage: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=1000&auto=format&fit=crop",
+    secondaryImage: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=1000&auto=format&fit=crop",
+    description: "Naturally dyed in small earthen vats; no synthetic chemicals used. Woven on traditional pit-looms in rural Kushtia.",
+    careInstructions: ["Cold gentle hand wash with mild soap"],
+    dimensions: "20\" × 20\" (50cm × 50cm)",
+    inStock: true,
+    featured: true,
+    badge: "LIMITED RUN (15)",
+  },
 ];
 
 export const CATEGORIES: CategoryItem[] = [
-  { id: "all", name: "All Cushions", count: 8 },
-  { id: "best-seller", name: "🔥 Best Selling", count: 4 },
-  { id: "patchwork", name: "Patchwork Cushions", count: 1 },
-  { id: "combo", name: "Bespoke Combos", count: 1 },
-  { id: "linen", name: "Belgian Linen", count: 2 },
-  { id: "embroidered", name: "Nakshi & Embroidered", count: 3 },
-  { id: "velvet", name: "Italian Velvet", count: 2 },
-  { id: "silk", name: "Raw Mulberry Silk", count: 1 },
+  { id: "all", name: "All Cushions", count: 22 },
+  { id: "best-seller", name: "🔥 Best Selling", count: 6 },
+  { id: "linen", name: "Belgian Linen", count: 6 },
+  { id: "embroidered", name: "Nakshi & Embroidered", count: 5 },
+  { id: "velvet", name: "Italian Velvet", count: 4 },
+  { id: "sashiko", name: "Sashiko & Geometric", count: 3 },
+  { id: "patchwork", name: "Patchwork & Boro", count: 4 },
+  { id: "silk", name: "Raw Mulberry Silk", count: 2 },
+  { id: "curtains", name: "Bespoke Curtains", count: 2 },
+  { id: "quilts", name: "Heirloom Quilts", count: 2 },
+  { id: "combo", name: "Curated Sets", count: 1 },
 ];
