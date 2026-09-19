@@ -4,10 +4,8 @@ import React, { useState, useMemo, useEffect } from "react";
 import { PRODUCTS, CATEGORIES } from "./products";
 import ProductCard from "./ProductCard";
 import { SlidersHorizontal, Sparkles, X, ChevronDown, Check } from "lucide-react";
-import { useLanguage } from "@/features/navigation";
 
 export default function ProductCatalog() {
-  const { t, isBangla } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedColor, setSelectedColor] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
@@ -177,82 +175,62 @@ export default function ProductCatalog() {
   const { pageTitle, pageSubtitle } = useMemo(() => {
     if (urlFilter === "new-arrivals") {
       return {
-        pageTitle: isBangla ? "নতুন আগমনী সম্ভার" : "NEW ARRIVALS",
-        pageSubtitle: isBangla
-          ? "টেকসই ফ্লাক্স লিনেন। প্রিমিয়াম ইতালীয় ভেলভেট। নকশী সুই-সুতার কাজ। আধুনিক আবাসের জন্য কিউরেট করা নতুন কালেকশন।"
-          : "Fresh seasonal drops. Pure stone-washed Belgian linen, lustrous silk, and intricate artisanal needlework handcrafted for mindful living.",
+        pageTitle: "NEW ARRIVALS",
+        pageSubtitle: "Fresh seasonal drops. Pure stone-washed Belgian linen, lustrous silk, and intricate artisanal needlework handcrafted for mindful living.",
       };
     }
     if (urlFilter === "back-in-stock") {
       return {
-        pageTitle: isBangla ? "পুনরায় স্টকে এসেছে" : "BACK IN STOCK",
-        pageSubtitle: isBangla
-          ? "অ্যাটেলিয়ারের সর্বাধিক প্রশংসিত ও প্রতিক্ষিত কালজয়ী নকশাগুলো সীমিত সংখ্যায় পুনরায় ফিরে এসেছে।"
-          : "Our most-coveted heirloom editions, restocked in strictly limited artisan quantities.",
+        pageTitle: "BACK IN STOCK",
+        pageSubtitle: "Our most-coveted heirloom editions, restocked in strictly limited artisan quantities.",
       };
     }
     if (activeCategory === "best-seller") {
       return {
-        pageTitle: isBangla ? "সেরা বিক্রিত সম্ভার" : "BEST SELLERS",
-        pageSubtitle: isBangla
-          ? "আর্কিটেকচারাল আরাম ও আভিজাত্যের প্রতীক, যা রুচিশীল ইন্টেরিয়র ডিজাইনারদের প্রথম পছন্দ।"
-          : "Architectural comfort statements and enduring favorites cherished by sanctuaries and interior designers worldwide.",
+        pageTitle: "BEST SELLERS",
+        pageSubtitle: "Architectural comfort statements and enduring favorites cherished by sanctuaries and interior designers worldwide.",
       };
     }
     if (activeCategory === "sashiko") {
       return {
-        pageTitle: isBangla ? "শাশিকো স্টিচ কালেকশন" : "SASHIKO ARCHIVE",
-        pageSubtitle: isBangla
-          ? "ঐতিহ্যবাহী জ্যামিতিক নকশা ও টেকসই সুতার রানিং-স্টিচে তৈরি আর্টপিস।"
-          : "Geometric running-stitch patterns rooted in heritage discipline, handcrafted for subtle modern living.",
+        pageTitle: "SASHIKO ARCHIVE",
+        pageSubtitle: "Geometric running-stitch patterns rooted in heritage discipline, handcrafted for subtle modern living.",
       };
     }
     if (activeCategory === "patchwork") {
       return {
-        pageTitle: isBangla ? "প্যাচওয়ার্ক অ্যাটেলিয়ার" : "PATCHWORK ARCHIVE",
-        pageSubtitle: isBangla
-          ? "হাতে বোনা বিভিন্ন টেক্সটাইলের অনন্য কোলাজ ও ওয়াবি-সাবি শৈলী।"
-          : "Hand-pieced vintage linen and indigo-dyed remnant swatches celebrating textural harmony and wabi-sabi elegance.",
+        pageTitle: "PATCHWORK ARCHIVE",
+        pageSubtitle: "Hand-pieced vintage linen and indigo-dyed remnant swatches celebrating textural harmony and wabi-sabi elegance.",
       };
     }
     if (activeCategory === "one-line-art") {
       return {
-        pageTitle: isBangla ? "ওয়ান লাইন আর্ট" : "ONE LINE ART ARCHIVE",
-        pageSubtitle: isBangla
-          ? "মডার্ন কনট্যুর লাইন ও মিনিমালিস্ট হস্তশিল্পের মেলবন্ধন।"
-          : "Continuous contour line embroidery merging contemporary art with traditional needlework.",
+        pageTitle: "ONE LINE ART ARCHIVE",
+        pageSubtitle: "Continuous contour line embroidery merging contemporary art with traditional needlework.",
       };
     }
     if (activeCategory === "solid-pattern") {
       return {
-        pageTitle: isBangla ? "সলিড টেক্সচার্ড লিনেন" : "SOLID PATTERN ARCHIVE",
-        pageSubtitle: isBangla
-          ? "স্টোন-ওয়াশড পিওর বেলজিয়ান ফ্লাক্স লিনেনের শান্ত, প্রাকৃতিক আভিজাত্য।"
-          : "Pure stone-washed Belgian flax linen and tactile textures in calming earthy mineral tones.",
+        pageTitle: "SOLID PATTERN ARCHIVE",
+        pageSubtitle: "Pure stone-washed Belgian flax linen and tactile textures in calming earthy mineral tones.",
       };
     }
     if (activeCategory === "wall-hanging") {
       return {
-        pageTitle: isBangla ? "ওয়াল হ্যাঙ্গিং কালেকশন" : "WALL HANGING ARCHIVE",
-        pageSubtitle: isBangla
-          ? "হাতে বোনা টেক্সটাইল ফাইবার ট্যাপেস্ট্রি।"
-          : "Architectural fiber art tapestries bringing warmth, acoustic depth, and artisanal presence to statement walls.",
+        pageTitle: "WALL HANGING ARCHIVE",
+        pageSubtitle: "Architectural fiber art tapestries bringing warmth, acoustic depth, and artisanal presence to statement walls.",
       };
     }
     if (activeCategory === "curtains") {
       return {
-        pageTitle: isBangla ? "কার্টেনস কালেকশন" : "BESPOKE DRAPERY COLLECTION",
-        pageSubtitle: isBangla
-          ? "শিয়া লিনেন ও ইতালীয় ভেলভেট পর্দা।"
-          : "Ceiling-to-floor Belgian flax drapes filtering natural daylight with quiet warmth.",
+        pageTitle: "BESPOKE DRAPERY COLLECTION",
+        pageSubtitle: "Ceiling-to-floor Belgian flax drapes filtering natural daylight with quiet warmth.",
       };
     }
     if (activeCategory === "quilts") {
       return {
-        pageTitle: isBangla ? "কাঁথা কুইল্টস" : "HEIRLOOM KANTHA QUILTS",
-        pageSubtitle: isBangla
-          ? "ঐতিহ্যবাহী নকশী কাঁথা ও রেশম লেপ।"
-          : "Generational master needlework stitched onto pure Mulberry silk and unbleached cotton.",
+        pageTitle: "HEIRLOOM KANTHA QUILTS",
+        pageSubtitle: "Generational master needlework stitched onto pure Mulberry silk and unbleached cotton.",
       };
     }
     if (activeCategory !== "all") {
@@ -266,12 +244,10 @@ export default function ProductCatalog() {
 
     // Authentic Atelier Default for KEEN CHIT (No more "Baskets & Accents" placeholder)
     return {
-      pageTitle: isBangla ? "হস্তনির্মিত কুশন ও টেক্সটাইল কালেকশন" : "ARTISANAL LIVING & TEXTILES",
-      pageSubtitle: isBangla
-        ? "স্টোন-ওয়াশড বেলজিয়ান ফ্লাক্স লিনেন, ইতালীয় ভেলভেট ও প্রাচীন নকশী সূচিকর্ম।"
-        : "Stone-washed Belgian flax, dense Italian velvet, and ancient Nakshi needlework handcrafted for mindful sanctuaries.",
+      pageTitle: "ARTISANAL LIVING & TEXTILES",
+      pageSubtitle: "Stone-washed Belgian flax, dense Italian velvet, and ancient Nakshi needlework handcrafted for mindful sanctuaries.",
     };
-  }, [urlFilter, activeCategory, isBangla]);
+  }, [urlFilter, activeCategory]);
 
   const clearAllFilters = () => {
     setActiveCategory("all");
@@ -309,7 +285,7 @@ export default function ProductCatalog() {
             
             {/* Filters Label (Clean crisp text matching SS 2) */}
             <span className="text-[13px] font-medium text-stone-700 dark:text-stone-300 mr-1">
-              {isBangla ? "ফিল্টার:" : "Filters"}
+              Filters
             </span>
 
             {/* Pill 1: Color Dropdown (Matching SS 2) */}
@@ -330,7 +306,7 @@ export default function ProductCatalog() {
                 }`}
               >
                 <span>
-                  {selectedColor === "all" ? (isBangla ? "রং" : "Color") : selectedColor}
+                  {selectedColor === "all" ? "Color" : selectedColor}
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 text-stone-500 transition-transform duration-200 ${isColorDropdownOpen ? "rotate-180" : ""}`} />
               </button>
@@ -338,7 +314,7 @@ export default function ProductCatalog() {
               {isColorDropdownOpen && (
                 <div className="absolute left-0 mt-1.5 w-48 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 shadow-2xl z-40 py-1.5 animate-in fade-in zoom-in-95 duration-150">
                   {[
-                    { id: "all", label: isBangla ? "সকল রং" : "All Colors" },
+                    { id: "all", label: "All Colors" },
                     { id: "Oatmeal", label: "Oatmeal Beige" },
                     { id: "Terracotta", label: "Warm Terracotta" },
                     { id: "Olive", label: "Muted Olive / Sage" },
@@ -385,7 +361,7 @@ export default function ProductCatalog() {
                 }`}
               >
                 <span>
-                  {selectedType === "all" ? (isBangla ? "টাইপ" : "Type") : selectedType.toUpperCase()}
+                  {selectedType === "all" ? "Type" : selectedType.toUpperCase()}
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 text-stone-500 transition-transform duration-200 ${isTypeDropdownOpen ? "rotate-180" : ""}`} />
               </button>
@@ -393,7 +369,7 @@ export default function ProductCatalog() {
               {isTypeDropdownOpen && (
                 <div className="absolute left-0 mt-1.5 w-48 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 shadow-2xl z-40 py-1.5 animate-in fade-in zoom-in-95 duration-150">
                   {[
-                    { id: "all", label: isBangla ? "সকল ধরন" : "All Types" },
+                    { id: "all", label: "All Types" },
                     { id: "linen", label: "Belgian Linen Cushions" },
                     { id: "velvet", label: "Italian Velvet Cushions" },
                     { id: "embroidered", label: "Hand-Embroidered Nakshi" },
@@ -439,7 +415,7 @@ export default function ProductCatalog() {
                 }`}
               >
                 <span>
-                  {selectedMaterial === "all" ? (isBangla ? "ম্যাটেরিয়াল" : "Material") : selectedMaterial}
+                  {selectedMaterial === "all" ? "Material" : selectedMaterial}
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 text-stone-500 transition-transform duration-200 ${isMaterialDropdownOpen ? "rotate-180" : ""}`} />
               </button>
@@ -447,7 +423,7 @@ export default function ProductCatalog() {
               {isMaterialDropdownOpen && (
                 <div className="absolute left-0 mt-1.5 w-56 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 shadow-2xl z-40 py-1.5 animate-in fade-in zoom-in-95 duration-150">
                   {[
-                    { id: "all", label: isBangla ? "সকল ফেব্রিক" : "All Materials" },
+                    { id: "all", label: "All Materials" },
                     { id: "Linen", label: "100% European Flax Linen" },
                     { id: "Velvet", label: "Como Double-Pile Velvet" },
                     { id: "Khadi", label: "Handspun Khadi Cotton" },
@@ -492,7 +468,7 @@ export default function ProductCatalog() {
                 }`}
               >
                 <span>
-                  {selectedSize === "all" ? (isBangla ? "সাইজ" : "Size") : selectedSize}
+                  {selectedSize === "all" ? "Size" : selectedSize}
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 text-stone-500 transition-transform duration-200 ${isSizeDropdownOpen ? "rotate-180" : ""}`} />
               </button>
@@ -500,7 +476,7 @@ export default function ProductCatalog() {
               {isSizeDropdownOpen && (
                 <div className="absolute left-0 mt-1.5 w-48 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 shadow-2xl z-40 py-1.5 animate-in fade-in zoom-in-95 duration-150">
                   {[
-                    { id: "all", label: isBangla ? "সকল সাইজ" : "All Sizes" },
+                    { id: "all", label: "All Sizes" },
                     { id: "18", label: "18\" × 18\" (45cm)" },
                     { id: "20", label: "20\" × 20\" (50cm)" },
                     { id: "22", label: "22\" × 22\" (55cm)" },
@@ -533,13 +509,13 @@ export default function ProductCatalog() {
                 onClick={clearAllFilters}
                 className="text-[11px] font-semibold text-red-700 dark:text-red-400 hover:underline cursor-pointer uppercase tracking-wider ml-1"
               >
-                {isBangla ? "রিসেট ✕" : "Reset ✕"}
+                Reset ✕
               </button>
             )}
 
             {/* Dynamic Product Count (Matching SS 2: e.g. "45 Products") */}
             <span className="text-stone-500 dark:text-stone-400 text-xs sm:text-[13px] font-normal tracking-wide ml-1 sm:ml-2">
-              {filteredProducts.length} {isBangla ? "টি প্রোডাক্ট" : "Products"}
+              {filteredProducts.length} Products
             </span>
           </div>
 
@@ -557,17 +533,17 @@ export default function ProductCatalog() {
               }}
               className="inline-flex items-center gap-1.5 text-stone-800 dark:text-stone-200 hover:text-brand-gold dark:hover:text-brand-gold text-xs sm:text-[13px] font-medium transition-colors cursor-pointer select-none tracking-wide"
             >
-              <span>{isBangla ? "বাছাই করুন" : "Sort By"}</span>
+              <span>Sort By</span>
               <ChevronDown className={`w-3.5 h-3.5 text-stone-500 transition-transform duration-200 ${isSortDropdownOpen ? "rotate-180 text-brand-gold" : ""}`} />
             </button>
 
             {isSortDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 sm:w-52 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700 shadow-2xl z-40 py-1.5 animate-in fade-in zoom-in-95 duration-150">
                 {[
-                  { id: "featured", label: isBangla ? "অ্যাটেলিয়ার কিউরেটেড" : "Atelier Curated" },
-                  { id: "bestseller", label: isBangla ? "সেরা বিক্রিত" : "Best Selling" },
-                  { id: "lowToHigh", label: isBangla ? "মূল্য: কম থেকে বেশি" : "Price: Low to High" },
-                  { id: "highToLow", label: isBangla ? "মূল্য: বেশি থেকে কম" : "Price: High to Low" },
+                  { id: "featured", label: "Atelier Curated" },
+                  { id: "bestseller", label: "Best Selling" },
+                  { id: "lowToHigh", label: "Price: Low to High" },
+                  { id: "highToLow", label: "Price: High to Low" },
                 ].map((s) => (
                   <button
                     key={s.id}
@@ -596,7 +572,7 @@ export default function ProductCatalog() {
           <div className="mb-8 p-5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-md animate-in fade-in slide-in-from-top-2">
             <div className="flex items-center justify-between mb-4 pb-2 border-b border-stone-100 dark:border-stone-800">
               <span className="text-xs font-semibold uppercase tracking-[0.16em] text-stone-900 dark:text-stone-100">
-                {isBangla ? "ক্যাটাগরি নির্বাচন করুন" : "Select Category"}
+                Select Category
               </span>
               <button
                 onClick={() => setIsFilterPanelOpen(false)}
@@ -608,17 +584,17 @@ export default function ProductCatalog() {
 
             <div className="flex flex-wrap gap-2">
               {[
-                { id: "all", name: isBangla ? "সব কালেকশন" : "All Collections" },
+                { id: "all", name: "All Collections" },
                 { id: "sashiko", name: "Sashiko" },
                 { id: "patchwork", name: "Patchwork" },
                 { id: "one-line-art", name: "One Line Art" },
                 { id: "solid-pattern", name: "Solid Pattern" },
-                { id: "best-seller", name: isBangla ? "সেরা বিক্রিত" : "Best Sellers" },
-                { id: "linen", name: isBangla ? "বেলজিয়ান লিনেন" : "Belgian Linen" },
-                { id: "velvet", name: isBangla ? "ইতালীয় ভেলভেট" : "Italian Velvet" },
-                { id: "embroidered", name: isBangla ? "নকশী সুই-সুতা" : "Bengal Nakshi" },
-                { id: "silk", name: isBangla ? "তুত সিল্ক" : "Matka Silk" },
-                { id: "combo", name: isBangla ? "কম্বো সেট" : "Artisan Combos" },
+                { id: "best-seller", name: "Best Sellers" },
+                { id: "linen", name: "Belgian Linen" },
+                { id: "velvet", name: "Italian Velvet" },
+                { id: "embroidered", name: "Bengal Nakshi" },
+                { id: "silk", name: "Matka Silk" },
+                { id: "combo", name: "Artisan Combos" },
               ].map((cat) => (
                 <button
                   key={cat.id}
@@ -712,13 +688,13 @@ export default function ProductCatalog() {
         {filteredProducts.length === 0 ? (
           <div className="py-20 text-center space-y-4 bg-white dark:bg-[#121A15] border border-stone-200 dark:border-stone-800 p-8 shadow-xs">
             <p className="font-brandon text-lg text-stone-800 dark:text-stone-200">
-              {isBangla ? "এই ফিল্টারে কোনো কুশন পাওয়া যায়নি।" : "No handcrafted pieces matched your criteria."}
+              No handcrafted pieces matched your criteria.
             </p>
             <button
               onClick={clearAllFilters}
               className="px-5 py-2.5 text-xs uppercase tracking-widest bg-stone-900 dark:bg-brand-gold text-white dark:text-[#0E1410] font-bold shadow-md hover:opacity-90 transition-opacity cursor-pointer"
             >
-              {isBangla ? "সকল কালেকশন দেখুন" : "View All Cushions"}
+              View All Cushions
             </button>
           </div>
         ) : (
@@ -744,14 +720,12 @@ export default function ProductCatalog() {
 
             {/* Elegant Heading */}
             <h4 className="font-brandon text-xl sm:text-2xl text-stone-900 dark:text-stone-100 font-medium tracking-wide">
-              {isBangla ? "কাস্টম সাইজিং ও ইন্টেরিয়র ট্রেড কমিশন" : "Architectural Dimensions & Bespoke Commissions"}
+              Architectural Dimensions & Bespoke Commissions
             </h4>
 
             {/* Editorial Subtext */}
             <p className="font-sans text-[12px] sm:text-[12.5px] text-stone-600 dark:text-stone-400 max-w-xl mx-auto font-normal leading-relaxed">
-              {isBangla
-                ? "আমাদের অ্যাটেলিয়ার আপনার নিজস্ব স্থাপত্য পরিকল্পনা অনুযায়ী ২৪\"×২৪\" সাইজ, ফ্রেঞ্চ ম্যাট্রেস ডে-বেড কুশন এবং কাস্টম বোলস্টার মাস্টার টেইলার্স দিয়ে তৈরি করে দেয়।"
-                : "From 24\"×24\" European scale to hand-tufted French daybed cushions and custom bolster rolls, our master tailors craft to your exact architectural specifications."}
+              From 24&quot;×24&quot; European scale to hand-tufted French daybed cushions and custom bolster rolls, our master tailors craft to your exact architectural specifications.
             </p>
 
             {/* Concierge Action Link */}
@@ -762,7 +736,7 @@ export default function ProductCatalog() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.24em] font-bold text-stone-900 dark:text-stone-100 hover:text-brand-gold pb-1 border-b border-brand-gold/60 hover:border-brand-gold transition-all duration-300 group cursor-pointer"
               >
-                <span>{isBangla ? "অ্যাটেলিয়ার কনসিয়ার্জের সাথে পরামর্শ করুন" : "Consult with our Atelier Concierge"}</span>
+                <span>Consult with our Atelier Concierge</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </a>
             </div>

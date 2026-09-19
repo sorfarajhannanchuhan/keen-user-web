@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { ProductCatalog, CollectionBanners } from "@/features/catalog";
+import { ProductCatalog } from "@/features/catalog";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 

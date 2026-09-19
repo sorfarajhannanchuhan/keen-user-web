@@ -9,7 +9,6 @@ import { Product } from "./products";
 import { useCart } from "@/features/cart";
 import { useWishlist } from "@/features/wishlist";
 import { useFrontendContent } from "@/features/appearance";
-import { useLanguage } from "@/features/navigation";
 
 interface ProductCardProps {
   product: Product;
@@ -20,7 +19,6 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart, setQuickViewProduct } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { content } = useFrontendContent();
-  const { t, isBangla } = useLanguage();
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
   const [isHovered, setIsHovered] = useState(false);
@@ -71,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {product.isBestSeller && (
           <div className="absolute top-3 left-3 z-10 pointer-events-none">
             <span className="bg-[#111111] text-[#D4AF37] border border-[#D4AF37]/30 text-[10px] sm:text-[10.5px] font-bold tracking-widest px-2.5 py-1 uppercase shadow-md inline-block">
-              {isBangla ? "বেস্ট সেলার" : "BEST SELLER"}
+              BEST SELLER
             </span>
           </div>
         )}
@@ -111,7 +109,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             aria-label={`Quick view ${product.name}`}
           >
             <Eye className="w-3.5 h-3.5 text-[#D4AF37] group-hover/qv:text-[#0E1410] transition-colors" />
-            <span>{isBangla ? t("quickView") : "QUICK VIEW"}</span>
+            <span>QUICK VIEW</span>
           </button>
 
           {/* Add to Bag Button (Right - Square Button) */}
@@ -152,7 +150,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           {/* Pricing Line: Direct after title & tagline with refined vertical spacing */}
           <div className="flex items-baseline gap-1.5 mt-2 font-sans">
             <span className="text-xs sm:text-[13px] text-stone-500 dark:text-stone-400 font-normal">
-              {content?.products?.pricePrefix || (isBangla ? "শুরু" : "From")}
+              {content?.products?.pricePrefix || "From"}
             </span>
             {product.originalPrice && product.originalPrice > product.price && (
               <span className="text-xs sm:text-[13px] text-stone-400 dark:text-stone-500 line-through font-normal mr-1">

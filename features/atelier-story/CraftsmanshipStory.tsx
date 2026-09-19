@@ -6,11 +6,9 @@ import Link from "next/link";
 import { Feather, ShieldCheck, HeartHandshake, Leaf, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/features/utilities/ScrollReveal";
 import { useFrontendContent } from "@/features/appearance";
-import { useLanguage } from "@/features/navigation";
 
 export default function CraftsmanshipStory() {
   const { content } = useFrontendContent();
-  const { t, isBangla } = useLanguage();
   const story = content?.craftsmanshipStory || content?.story;
 
   return (
@@ -41,13 +39,13 @@ export default function CraftsmanshipStory() {
             <ScrollReveal direction="up" distance={30} duration={850} delay={220} className="absolute -bottom-8 -right-4 sm:-right-8 z-10">
               <div className="bg-[#0E1410]/95 backdrop-blur-md p-6 max-w-xs shadow-2xl border border-brand-gold/40 text-[#F8F6F0] transition-colors">
                 <span className="font-brandon text-[10px] uppercase tracking-[0.25em] text-[#DFCA74] font-bold block mb-1">
-                  {isBangla ? t("promiseBadge") : (story?.promiseBadge || t("promiseBadge"))}
+                  {story?.promiseBadge || "AN ARTISANAL PROMISE"}
                 </span>
                 <p className="font-sans text-base sm:text-lg text-white italic font-normal leading-relaxed">
-                  {isBangla ? t("promiseQuote") : (story?.promiseQuote || t("promiseQuote"))}
+                  {story?.promiseQuote || "\"A single piece can take over forty hours of needlework. We refuse to compromise.\""}
                 </p>
                 <span className="font-sans text-[11px] text-[#CFC7BA] block mt-2">
-                  {isBangla ? t("promiseAuthor") : (story?.promiseAuthor || t("promiseAuthor"))}
+                  {story?.promiseAuthor || "Master Needlework Artisan, Bengal"}
                 </span>
               </div>
             </ScrollReveal>
@@ -57,14 +55,14 @@ export default function CraftsmanshipStory() {
           <ScrollReveal direction="up" distance={35} duration={800} delay={150} className="lg:col-span-6 space-y-8">
             <div className="space-y-3">
               <span className="font-brandon text-[11px] uppercase tracking-[0.3em] text-[#DFCA74] font-semibold block">
-                {isBangla ? t("philosophyTag") : (story?.philosophyTag || t("philosophyTag"))}
+                {story?.philosophyTag || "THE ART OF MINDFUL LIVING"}
               </span>
               <h2 className="font-brandon text-3xl sm:text-4xl lg:text-5xl text-white font-medium leading-tight whitespace-pre-line">
-                {isBangla ? t("storyHeadline") : (story?.headline || t("storyHeadline"))}
+                {story?.headline || "Slow Textiles.\nQuiet Architecture."}
               </h2>
               <div className="w-16 h-[1.5px] bg-brand-gold/70 my-4" />
               <p className="font-sans text-sm text-[#DDD7CE] font-normal leading-relaxed">
-                {isBangla ? t("storySubtext") : (story?.subtext || t("storySubtext"))}
+                {story?.subtext || "At KEEN CHIT, our atelier rejects the urgency of disposable home decor. Every cushion is an architectural composition—woven from pure Belgian flax, balanced with double-pile velvet, and finished with heritage Nakshi needlework."}
               </p>
             </div>
 
@@ -74,11 +72,11 @@ export default function CraftsmanshipStory() {
                 <div className="flex items-center gap-2">
                   <Leaf className="w-4 h-4 text-brand-gold" />
                   <h4 className="font-brandon text-base text-white font-semibold">
-                    {t("pillar1Title")}
+                    Pure Organic Flax
                   </h4>
                 </div>
                 <p className="font-sans text-xs text-[#D5CEC2] font-normal leading-relaxed">
-                  {t("pillar1Desc")}
+                  Sourced directly from generational mills in Flanders, stone-washed for authentic drape.
                 </p>
               </div>
 
@@ -86,11 +84,11 @@ export default function CraftsmanshipStory() {
                 <div className="flex items-center gap-2">
                   <HeartHandshake className="w-4 h-4 text-brand-gold" />
                   <h4 className="font-brandon text-base text-white font-semibold">
-                    {t("pillar2Title")}
+                    Fair Trade Artisans
                   </h4>
                 </div>
                 <p className="font-sans text-xs text-[#D5CEC2] font-normal leading-relaxed">
-                  {t("pillar2Desc")}
+                  Ensuring living wages, artistic autonomy, and generational dignity for craftswomen.
                 </p>
               </div>
 
@@ -98,11 +96,11 @@ export default function CraftsmanshipStory() {
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-brand-gold" />
                   <h4 className="font-brandon text-base text-white font-semibold">
-                    {t("pillar3Title")}
+                    Tailored Durability
                   </h4>
                 </div>
                 <p className="font-sans text-xs text-[#D5CEC2] font-normal leading-relaxed">
-                  {t("pillar3Desc")}
+                  Reinforced double seams, concealed YKK brass closures, and bespoke sizing resilience.
                 </p>
               </div>
 
@@ -110,11 +108,11 @@ export default function CraftsmanshipStory() {
                 <div className="flex items-center gap-2">
                   <Feather className="w-4 h-4 text-brand-gold" />
                   <h4 className="font-brandon text-base text-white font-semibold">
-                    {t("pillar4Title")}
+                    Sensory Luxury
                   </h4>
                 </div>
                 <p className="font-sans text-xs text-[#D5CEC2] font-normal leading-relaxed">
-                  {t("pillar4Desc")}
+                  Hypoallergenic feather-touch down-alternative inners designed for restorative lounging.
                 </p>
               </div>
             </div>
@@ -124,7 +122,7 @@ export default function CraftsmanshipStory() {
                 href="/about"
                 className="font-brandon inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-brand-gold hover:text-white border-b border-brand-gold pb-1 transition-colors"
               >
-                <span>{t("readAtelierStory")}</span>
+                <span>Explore Our Atelier Heritage</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>

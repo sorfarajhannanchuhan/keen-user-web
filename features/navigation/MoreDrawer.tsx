@@ -11,15 +11,12 @@ import {
 } from "lucide-react";
 import { useMoreDrawer } from "./MoreDrawerContext";
 import { useWishlist } from "@/features/wishlist";
-import { useLanguage } from "./LanguageContext";
 import ThemeToggle from "./ThemeToggle";
 import SignInModal from "./SignInModal";
 
 export default function MoreDrawer() {
   const { isMoreDrawerOpen, setIsMoreDrawerOpen } = useMoreDrawer();
   const { wishlistCount, setIsWishlistOpen } = useWishlist();
-  const { language } = useLanguage();
-  const isBangla = language === "bn";
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   // Close drawer on Escape key
@@ -61,37 +58,24 @@ export default function MoreDrawer() {
           aria-hidden="true"
         />
 
-        {/* Drawer Panel: Butter-Smooth Right-to-Left Slide */}
+        {/* Drawer Panel */}
         <aside
-          className={`absolute right-0 top-0 bottom-0 w-[88vw] sm:w-[380px] md:w-[420px] max-w-[460px] bg-white dark:bg-[#0C120E] border-l border-stone-200/90 dark:border-stone-800/90 h-full shadow-[-25px_0_60px_rgba(0,0,0,0.28)] flex flex-col justify-between overflow-y-auto overscroll-contain transition-transform transform-gpu will-change-transform z-[95] ${
-            isMoreDrawerOpen
-              ? "translate-x-0 duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-              : "translate-x-full duration-[320ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+          className={`absolute top-0 right-0 h-full w-full max-w-sm bg-white dark:bg-[#0E1410] border-l border-stone-200 dark:border-stone-800 shadow-2xl z-10 overflow-y-auto transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            isMoreDrawerOpen ? "translate-x-0" : "translate-x-full"
           }`}
-          style={{
-            WebkitBackfaceVisibility: "hidden",
-            backfaceVisibility: "hidden",
-          }}
         >
-          {/* Top Section & Content */}
-          <div>
-            {/* Minimalist Drawer Header */}
-            <div className="p-5 sm:p-6 bg-stone-50/90 dark:bg-[#101712]/90 backdrop-blur-sm border-b border-stone-200 dark:border-stone-800 flex items-center justify-between sticky top-0 z-10">
-              <div className="flex items-center gap-2.5">
-                <div className="w-2 h-2 rounded-full bg-brand-gold shadow-[0_0_8px_rgba(212,175,55,0.7)] animate-pulse" />
-                <span className="font-brandon text-base sm:text-lg font-medium text-stone-900 dark:text-stone-100 tracking-[0.16em] uppercase">
-                  KEEN CHIT
-                </span>
+          <div className="flex flex-col min-h-full justify-between">
+            {/* Drawer Header */}
+            <div className="p-5 sm:p-6 border-b border-stone-200/80 dark:border-stone-800/80 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <ThemeToggle />
               </div>
-
-              {/* Close Button */}
               <button
                 onClick={() => setIsMoreDrawerOpen(false)}
-                className="p-2 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors cursor-pointer"
-                aria-label="Close Drawer"
-                title="Close (Esc)"
+                className="w-9 h-9 rounded-full flex items-center justify-center text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer"
+                aria-label="Close drawer"
               >
-                <X className="w-5 h-5 stroke-[1.75]" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
@@ -101,7 +85,7 @@ export default function MoreDrawer() {
               {/* 1. SIGNATURE COLLECTIONS */}
               <div>
                 <span className="text-[10.5px] uppercase tracking-[0.28em] text-brand-gold font-bold block pb-2 mb-3 border-b border-stone-200/80 dark:border-stone-800/80">
-                  {isBangla ? "আর্টিসানাল কালেকশন" : "COLLECTIONS"}
+                  COLLECTIONS
                 </span>
 
                 <div className="flex flex-col space-y-0.5">
@@ -110,7 +94,7 @@ export default function MoreDrawer() {
                     onClick={() => setIsMoreDrawerOpen(false)}
                     className="py-2.5 px-1.5 text-stone-850 dark:text-stone-150 hover:text-brand-gold dark:hover:text-brand-gold transition-colors font-brandon text-[14px] sm:text-[14.5px] font-medium tracking-[0.1em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "শাশিকো এমব্রয়ডারি" : "Sashiko Embroidery"}</span>
+                    <span>Sashiko Embroidery</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                   </Link>
 
@@ -119,7 +103,7 @@ export default function MoreDrawer() {
                     onClick={() => setIsMoreDrawerOpen(false)}
                     className="py-2.5 px-1.5 text-stone-850 dark:text-stone-150 hover:text-brand-gold dark:hover:text-brand-gold transition-colors font-brandon text-[14px] sm:text-[14.5px] font-medium tracking-[0.1em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "আর্টিসানাল প্যাচওয়ার্ক" : "Artisanal Patchwork"}</span>
+                    <span>Artisanal Patchwork</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                   </Link>
 
@@ -128,7 +112,7 @@ export default function MoreDrawer() {
                     onClick={() => setIsMoreDrawerOpen(false)}
                     className="py-2.5 px-1.5 text-stone-850 dark:text-stone-150 hover:text-brand-gold dark:hover:text-brand-gold transition-colors font-brandon text-[14px] sm:text-[14.5px] font-medium tracking-[0.1em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "ওয়ান লাইন আর্ট" : "One Line Silhouette Art"}</span>
+                    <span>One Line Silhouette Art</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                   </Link>
 
@@ -137,7 +121,7 @@ export default function MoreDrawer() {
                     onClick={() => setIsMoreDrawerOpen(false)}
                     className="py-2.5 px-1.5 text-stone-850 dark:text-stone-150 hover:text-brand-gold dark:hover:text-brand-gold transition-colors font-brandon text-[14px] sm:text-[14.5px] font-medium tracking-[0.1em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "সলিড বেলজিয়ান লিনেন" : "Solid Belgian Linen"}</span>
+                    <span>Solid Belgian Linen</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                   </Link>
 
@@ -146,7 +130,7 @@ export default function MoreDrawer() {
                     onClick={() => setIsMoreDrawerOpen(false)}
                     className="py-2.5 px-1.5 text-stone-850 dark:text-stone-150 hover:text-brand-gold dark:hover:text-brand-gold transition-colors font-brandon text-[14px] sm:text-[14.5px] font-medium tracking-[0.1em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "ওয়াল হ্যাঙ্গিংস" : "Wall Hangings"}</span>
+                    <span>Wall Hangings</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                   </Link>
 
@@ -155,7 +139,7 @@ export default function MoreDrawer() {
                     onClick={() => setIsMoreDrawerOpen(false)}
                     className="py-2.5 px-1.5 text-stone-850 dark:text-stone-150 hover:text-brand-gold dark:hover:text-brand-gold transition-colors font-brandon text-[14px] sm:text-[14.5px] font-medium tracking-[0.1em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "কার্টেনস" : "Bespoke Curtains"}</span>
+                    <span>Bespoke Curtains</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                   </Link>
 
@@ -164,7 +148,7 @@ export default function MoreDrawer() {
                     onClick={() => setIsMoreDrawerOpen(false)}
                     className="py-2.5 px-1.5 text-stone-850 dark:text-stone-150 hover:text-brand-gold dark:hover:text-brand-gold transition-colors font-brandon text-[14px] sm:text-[14.5px] font-medium tracking-[0.1em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "বেঙ্গল কাঁথা কুইল্টস" : "Bengal Kantha Quilts"}</span>
+                    <span>Bengal Kantha Quilts</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                   </Link>
 
@@ -174,7 +158,7 @@ export default function MoreDrawer() {
                     className="py-2.5 px-1.5 text-stone-850 dark:text-stone-150 hover:text-brand-gold dark:hover:text-brand-gold transition-colors font-brandon text-[14px] sm:text-[14.5px] font-medium tracking-[0.1em] uppercase flex items-center justify-between group"
                   >
                     <div className="flex items-center gap-2">
-                      <span>{isBangla ? "নতুন আগমন" : "New Arrivals"}</span>
+                      <span>New Arrivals</span>
                       <span className="text-[8.5px] uppercase font-bold tracking-widest px-1.5 py-0.5 bg-brand-gold/20 text-brand-gold border border-brand-gold/30 rounded-xs">
                         NEW
                       </span>
@@ -187,7 +171,7 @@ export default function MoreDrawer() {
               {/* 2. ATELIER SERVICES & DISCOVERY */}
               <div className="pt-3 border-t border-stone-200/80 dark:border-stone-800/80 space-y-1">
                 <span className="text-[10px] uppercase tracking-[0.28em] text-brand-gold font-bold block pb-2 mb-2">
-                  {isBangla ? "বিশেষায়িত সেবা" : "ATELIER SERVICES"}
+                  ATELIER SERVICES
                 </span>
 
                 <div className="flex flex-col space-y-1">
@@ -197,7 +181,7 @@ export default function MoreDrawer() {
                     rel="noopener noreferrer"
                     className="py-2 px-1 text-stone-650 dark:text-stone-350 hover:text-brand-gold transition-colors font-brandon text-[13.5px] font-medium tracking-[0.08em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "কার্টেন সাইজিং কনসালটেশন" : "Curtain Sizing Consultation"}</span>
+                    <span>Curtain Sizing Consultation</span>
                     <span className="text-[8.5px] uppercase tracking-wider font-semibold text-brand-gold bg-brand-gold/15 border border-brand-gold/30 px-2 py-0.5 rounded-xs">
                       VIP
                     </span>
@@ -208,7 +192,7 @@ export default function MoreDrawer() {
                     onClick={() => setIsMoreDrawerOpen(false)}
                     className="py-2 px-1 text-stone-650 dark:text-stone-350 hover:text-brand-gold transition-colors font-brandon text-[13.5px] font-medium tracking-[0.08em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "ফেব্রিক কেয়ার ও সংরক্ষণ" : "Fabric Care Guide"}</span>
+                    <span>Fabric Care Guide</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                   </Link>
 
@@ -217,7 +201,7 @@ export default function MoreDrawer() {
                     onClick={() => setIsMoreDrawerOpen(false)}
                     className="py-2 px-1 text-stone-650 dark:text-stone-350 hover:text-brand-gold transition-colors font-brandon text-[13.5px] font-medium tracking-[0.08em] uppercase flex items-center justify-between group"
                   >
-                    <span>{isBangla ? "আমাদের কারিগর গল্প" : "Artisan Heritage Story"}</span>
+                    <span>Artisan Heritage Story</span>
                     <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                   </Link>
                 </div>
@@ -234,7 +218,7 @@ export default function MoreDrawer() {
                 >
                   <span className="flex items-center gap-2.5">
                     <Heart className="w-4 h-4 text-rose-500/80 group-hover:text-rose-500 transition-colors" />
-                    <span>{isBangla ? "সংরক্ষিত উইশলিস্ট" : "Saved Wishlist"}</span>
+                    <span>Saved Wishlist</span>
                   </span>
                   <span className="text-[11px] font-mono font-bold px-2 py-0.5 bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 rounded-full">
                     {wishlistCount}
@@ -250,7 +234,7 @@ export default function MoreDrawer() {
                 >
                   <span className="flex items-center gap-2.5">
                     <User className="w-4 h-4 text-brand-gold/80 group-hover:text-brand-gold transition-colors" />
-                    <span>{isBangla ? "ক্লায়েন্ট সাইন ইন" : "Client Account / Sign In"}</span>
+                    <span>Client Account / Sign In</span>
                   </span>
                   <ChevronRight className="w-3.5 h-3.5 text-stone-350 dark:text-stone-600 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
                 </button>

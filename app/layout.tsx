@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import {
-  LanguageProvider,
   ThemeProvider,
   MoreDrawerProvider,
   Navbar,
@@ -68,36 +67,34 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased bg-brand-linen text-brand-charcoal selection:bg-brand-gold selection:text-[#0E1410] min-h-screen flex flex-col">
-        <LanguageProvider>
-          <ThemeProvider>
-            <AppearanceProvider>
-              <FrontendContentProvider>
-                <GoogleAnalytics />
-                <CartProvider>
-                  <WishlistProvider>
-                    <MoreDrawerProvider>
-                      <AppCanvas>
-                        <Navbar />
-                        <main className="flex-1">{children}</main>
-                        <Footer />
-                      </AppCanvas>
-                      <MoreDrawer />
-                      <CartDrawer />
-                      <AddedToBagModal />
-                      <RemoveItemModal />
-                      <WishlistDrawer />
-                      <ProductQuickView />
-                      <EditorialCampaignModal />
-                      <ScrollToTop />
-                      <AuraChatWidget position="bottom-right" />
-                      <MobileBottomNav />
-                    </MoreDrawerProvider>
-                  </WishlistProvider>
-                </CartProvider>
-              </FrontendContentProvider>
-            </AppearanceProvider>
-          </ThemeProvider>
-        </LanguageProvider>
+        <ThemeProvider>
+          <AppearanceProvider>
+            <FrontendContentProvider>
+              <GoogleAnalytics />
+              <CartProvider>
+                <WishlistProvider>
+                  <MoreDrawerProvider>
+                    <AppCanvas>
+                      <Navbar />
+                      <main className="flex-1">{children}</main>
+                      <Footer />
+                    </AppCanvas>
+                    <MoreDrawer />
+                    <CartDrawer />
+                    <AddedToBagModal />
+                    <RemoveItemModal />
+                    <WishlistDrawer />
+                    <ProductQuickView />
+                    <EditorialCampaignModal />
+                    <ScrollToTop />
+                    <AuraChatWidget position="bottom-right" />
+                    <MobileBottomNav />
+                  </MoreDrawerProvider>
+                </WishlistProvider>
+              </CartProvider>
+            </FrontendContentProvider>
+          </AppearanceProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

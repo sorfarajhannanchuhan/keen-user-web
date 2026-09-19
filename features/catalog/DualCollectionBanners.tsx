@@ -3,11 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useLanguage } from "@/features/navigation";
 
 export default function DualCollectionBanners() {
-  const { isBangla } = useLanguage();
-
   return (
     <section className="py-6 sm:py-8 bg-[#FBF9F5] dark:bg-[#0E1410] transition-colors duration-300 select-none">
       <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +30,7 @@ export default function DualCollectionBanners() {
             {/* Centered White Rectangular Button at Bottom (Matching SS 2 & SS 4) */}
             <div className="absolute inset-x-0 bottom-4 sm:bottom-6 flex justify-center z-10 pointer-events-none">
               <span className="bg-white text-stone-900 text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase px-6 sm:px-8 py-2.5 sm:py-3 shadow-md group-hover:bg-brand-gold group-hover:text-[#0E1410] transition-all duration-300 pointer-events-auto">
-                {isBangla ? "কিউরেটেড রুম কম্বো: ২০% পর্যন্ত ছাড়" : "THE LIVING COMBO CURATION: SAVE UP TO 20%"}
+                THE LIVING COMBO CURATION: SAVE UP TO 20%
               </span>
             </div>
           </Link>
@@ -58,7 +55,7 @@ export default function DualCollectionBanners() {
             {/* Centered White Rectangular Button at Bottom (Matching SS 2 & SS 4) */}
             <div className="absolute inset-x-0 bottom-4 sm:bottom-6 flex justify-center z-10 pointer-events-none">
               <span className="bg-white text-stone-900 text-xs sm:text-[13px] font-bold tracking-[0.2em] uppercase px-6 sm:px-8 py-2.5 sm:py-3 shadow-md group-hover:bg-brand-gold group-hover:text-[#0E1410] transition-all duration-300 pointer-events-auto">
-                {isBangla ? "আর্কাইভ রিলিজ: ৫০% পর্যন্ত ছাড়" : "THE ARCHIVE RELEASE: UP TO 50% OFF"}
+                THE ARCHIVE SALE: LIMITED PIECES
               </span>
             </div>
           </Link>

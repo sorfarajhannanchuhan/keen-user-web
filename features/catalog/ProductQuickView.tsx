@@ -6,7 +6,6 @@ import Link from "next/link";
 import { X, Check, Heart, ArrowRight, Minus, Plus, Clock } from "lucide-react";
 import { useCart } from "@/features/cart";
 import { useWishlist } from "@/features/wishlist";
-import { useLanguage } from "@/features/navigation";
 import {
   ProductColor,
   getPriceForSize,
@@ -17,7 +16,6 @@ import {
 export default function ProductQuickView() {
   const { quickViewProduct, setQuickViewProduct, addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
-  const { isBangla } = useLanguage();
   const product = quickViewProduct;
 
   const [selectedImage, setSelectedImage] = useState<string>("");
@@ -122,11 +120,7 @@ export default function ProductQuickView() {
                   className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-white/90 dark:bg-black/70 backdrop-blur-md border border-[#E2DDD5] dark:border-stone-700/80 flex items-center justify-center transition-all duration-200 shadow-sm hover:scale-110 active:scale-95 group cursor-pointer"
                   title={
                     isInWishlist(product.id)
-                      ? isBangla
-                        ? "উইশলিস্ট থেকে সরান"
-                        : "Remove from wishlist"
-                      : isBangla
-                      ? "উইশলিস্টে যোগ করুন"
+                      ? "Remove from wishlist"
                       : "Add to wishlist"
                   }
                   aria-label="Toggle Wishlist"
@@ -188,7 +182,7 @@ export default function ProductQuickView() {
                 {isLowStock && (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#FAF6EE] dark:bg-[#1E251C] border border-[#E6DEC8] dark:border-[#384632] text-[#B38A38] dark:text-[#D4AF37] text-[10.5px] font-semibold tracking-wide normal-case shadow-xs">
                     <Clock className="w-2.5 h-2.5 stroke-[2]" />
-                    <span>{isBangla ? `স্টকে মাত্র ${product.stock} টি আছে` : `${product.stock} in stock`}</span>
+                    <span>{product.stock} in stock</span>
                   </span>
                 )}
               </div>
@@ -227,7 +221,7 @@ export default function ProductQuickView() {
                 <div className="pt-1">
                   <div className="flex items-center justify-between text-xs mb-2.5">
                     <span className="text-stone-500 dark:text-stone-400 font-medium">
-                      {isBangla ? "রঙ" : "Color"}:
+                      Color:
                     </span>
                     <span className="font-medium text-stone-900 dark:text-stone-200">
                       {selectedColor.name}
@@ -264,7 +258,7 @@ export default function ProductQuickView() {
               <div className="pt-1">
                 <div className="flex items-center justify-between text-xs mb-2.5">
                   <span className="text-stone-500 dark:text-stone-400 font-medium">
-                    {isBangla ? "সাইজ নির্বাচন করুন" : "Select Dimension"}:
+                    Select Dimension:
                   </span>
                   <span className="font-mono text-[10px] text-[#C5A059] dark:text-[#D4AF37] font-semibold">
                     {selectedSize}
@@ -327,14 +321,14 @@ export default function ProductQuickView() {
                   }`}
                 >
                   {isOutOfStock ? (
-                    <span>{isBangla ? "স্টক শেষ" : "OUT OF STOCK"}</span>
+                    <span>OUT OF STOCK</span>
                   ) : addedSuccess ? (
                     <>
                       <Check className="w-4 h-4 text-emerald-400 dark:text-emerald-950 font-bold" />
-                      <span>{isBangla ? "ব্যাগে যোগ হয়েছে" : "Added to Bag"}</span>
+                      <span>Added to Bag</span>
                     </>
                   ) : (
-                    <span>{isBangla ? "ব্যাগে যোগ করুন" : "Add to Bag"}</span>
+                    <span>Add to Bag</span>
                   )}
                 </button>
               </div>
@@ -345,7 +339,7 @@ export default function ProductQuickView() {
                 onClick={() => setQuickViewProduct(null)}
                 className="w-full border border-stone-300 dark:border-stone-700 hover:border-[#D4AF37] dark:hover:border-[#D4AF37] text-stone-800 dark:text-stone-200 hover:text-[#0E1410] dark:hover:text-[#0E1410] hover:bg-[#D4AF37]/15 dark:hover:bg-[#D4AF37]/20 h-10 px-4 text-[11px] uppercase tracking-[0.18em] font-medium transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center gap-2 group cursor-pointer"
               >
-                <span>{isBangla ? "বিস্তারিত দেখুন" : "View Details"}</span>
+                <span>View Details</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>

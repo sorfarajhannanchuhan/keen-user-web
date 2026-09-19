@@ -1,22 +1,20 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { X, Sparkles } from "lucide-react";
 import { useCart } from "@/features/cart";
-import { useLanguage } from "@/features/navigation";
 import { ATELIER_CAMPAIGN_DATA } from "./campaign-data";
 
 const COOLDOWN_MINUTES = 10;
 const COOLDOWN_MS = COOLDOWN_MINUTES * 60 * 1000;
 const STORAGE_KEY = "keen_campaign_poster_dismissed";
 
-export default function EditorialCampaignModal() {
+function EditorialCampaignModalContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { applyCoupon, appliedCoupon } = useCart();
-  const { isBangla } = useLanguage();
 
   const [isOpen, setIsOpen] = useState(false);
   const [showPill, setShowPill] = useState(false);
@@ -165,17 +163,17 @@ export default function EditorialCampaignModal() {
               {/* Subtle Atelier Eyebrow */}
               <span className="font-brandon text-[10px] sm:text-[11.5px] uppercase tracking-[0.32em] text-brand-gold font-semibold mb-2 sm:mb-3 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] flex items-center gap-1.5">
                 <Sparkles className="w-3 h-3 text-brand-gold animate-pulse" />
-                {isBangla ? ATELIER_CAMPAIGN_DATA.bengaliEyebrow : ATELIER_CAMPAIGN_DATA.eyebrow}
+                {ATELIER_CAMPAIGN_DATA.eyebrow}
               </span>
 
               {/* Central High-Impact Artistic Campaign Typography */}
               <h2 className="font-brandon text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-light sm:font-normal leading-[1.08] tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] mb-2 sm:mb-3">
-                {isBangla ? "স্পর্শের কবিতা" : ATELIER_CAMPAIGN_DATA.scriptTitle}
+                {ATELIER_CAMPAIGN_DATA.scriptTitle}
               </h2>
 
               {/* Minimal 3-Word Tactile Note */}
               <p className="font-sans text-xs sm:text-sm text-stone-200 font-light tracking-[0.16em] uppercase mb-6 sm:mb-8 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
-                {isBangla ? "খাঁটি লিনেন • ঐতিহ্যবাহী সূচিকর্ম" : "Pure Flax • Master Needlework"}
+                Pure Flax • Master Needlework
               </p>
 
               {/* Minimalist Belgian Linen Ecru CTA Button with Brand Palette */}
@@ -184,18 +182,26 @@ export default function EditorialCampaignModal() {
                   onClick={handleOpenCampaign}
                   className="bg-[#F7F5F0] hover:bg-[#C5A059] text-[#161F15] hover:text-[#0E1410] font-brandon text-xs sm:text-sm font-bold tracking-[0.24em] uppercase px-9 sm:px-12 py-3 sm:py-3.5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer border border-[#C5A059]/40"
                 >
-                  {isBangla ? "কালেকশন দেখুন" : "SHOP NOW"}
+                  SHOP NOW
                 </button>
               </div>
 
               {/* Subtle Welcome Courtesy Microcopy */}
               <span className="mt-4 text-[10px] sm:text-[11px] text-[#E6DEC8]/90 font-sans tracking-widest uppercase drop-shadow-md">
-                {isBangla ? "অর্ডার করলেই থাকছে ১০% বিশেষ প্রিভিলেজ • কোড KEEN10" : "Includes 10% Welcome Courtesy • Code KEEN10"}
+                Includes 10% Welcome Courtesy • Code KEEN10
               </span>
             </div>
           </div>
         </div>
       )}
     </>
+  );
+}
+
+export default function EditorialCampaignModal() {
+  return (
+    <Suspense fallback={null}>
+      <EditorialCampaignModalContent />
+    </Suspense>
   );
 }

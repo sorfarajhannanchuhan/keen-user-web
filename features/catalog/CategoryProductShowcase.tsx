@@ -5,28 +5,25 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PRODUCTS } from "./products";
 import ProductCard from "./ProductCard";
-import { useLanguage } from "@/features/navigation";
 
 interface CategoryTab {
   id: string;
   key: string;
   name: string;
-  bengaliName: string;
   href: string;
 }
 
 const CATEGORY_TABS: CategoryTab[] = [
-  { id: "sashiko", key: "sashiko", name: "SASHIKO", bengaliName: "শাশিকো", href: "/collections?category=sashiko" },
-  { id: "patchwork", key: "patchwork", name: "PATCHWORK", bengaliName: "প্যাচওয়ার্ক", href: "/collections?category=patchwork" },
-  { id: "one-line-art", key: "one-line-art", name: "ONE LINE ART", bengaliName: "ওয়ান লাইন আর্ট", href: "/collections?category=one-line-art" },
-  { id: "solid-pattern", key: "solid-pattern", name: "SOLID PATTERN", bengaliName: "সলিড প্যাটার্ন", href: "/collections?category=solid-pattern" },
-  { id: "wall-hanging", key: "wall-hanging", name: "WALL HANGING", bengaliName: "ওয়াল হ্যাঙ্গিং", href: "/collections?category=wall-hanging" },
-  { id: "curtains", key: "curtains", name: "CURTAINS", bengaliName: "কার্টেনস", href: "/curtains" },
-  { id: "quilts", key: "quilts", name: "KANTHA QUILTS", bengaliName: "কাঁথা কুইল্টস", href: "/quilts" },
+  { id: "sashiko", key: "sashiko", name: "SASHIKO", href: "/collections?category=sashiko" },
+  { id: "patchwork", key: "patchwork", name: "PATCHWORK", href: "/collections?category=patchwork" },
+  { id: "one-line-art", key: "one-line-art", name: "ONE LINE ART", href: "/collections?category=one-line-art" },
+  { id: "solid-pattern", key: "solid-pattern", name: "SOLID PATTERN", href: "/collections?category=solid-pattern" },
+  { id: "wall-hanging", key: "wall-hanging", name: "WALL HANGING", href: "/collections?category=wall-hanging" },
+  { id: "curtains", key: "curtains", name: "CURTAINS", href: "/curtains" },
+  { id: "quilts", key: "quilts", name: "KANTHA QUILTS", href: "/quilts" },
 ];
 
 export default function CategoryProductShowcase() {
-  const { isBangla } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<string>("sashiko");
 
   // Filter products by active category pillar
@@ -106,10 +103,10 @@ export default function CategoryProductShowcase() {
         {/* Header: Editorial Kicker & Title */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
           <span className="font-sans text-[11px] uppercase tracking-[0.26em] text-[#C5A059] dark:text-[#D4AF37] font-semibold block mb-2">
-            {isBangla ? "ঐতিহ্যবাহী কারুশিল্প সম্ভার" : "CURATED BY CRAFT"}
+            CURATED BY CRAFT
           </span>
           <h2 className="font-brandon text-2xl sm:text-3xl md:text-4xl text-stone-900 dark:text-stone-100 font-medium tracking-tight uppercase">
-            {isBangla ? "ক্যাটাগরি ভিত্তিক কালেকশন" : "Category Collections"}
+            Category Collections
           </h2>
         </div>
 
@@ -128,7 +125,7 @@ export default function CategoryProductShowcase() {
                     : "bg-white dark:bg-[#151E17] text-stone-600 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:border-brand-gold hover:text-brand-gold"
                 }`}
               >
-                {isBangla ? tab.bengaliName : tab.name}
+                {tab.name}
               </button>
             );
           })}
@@ -148,9 +145,7 @@ export default function CategoryProductShowcase() {
             className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 border border-stone-300 dark:border-stone-700 hover:border-[#D4AF37] dark:hover:border-[#D4AF37] bg-white dark:bg-[#141B16] text-stone-850 dark:text-stone-200 hover:text-stone-950 dark:hover:text-white text-xs uppercase tracking-[0.2em] font-bold shadow-xs hover:shadow-md transition-all duration-300 group cursor-pointer"
           >
             <span>
-              {isBangla
-                ? `সকল ${activeTab.bengaliName} পিস দেখুন`
-                : `Explore All ${activeTab.name} Pieces`}
+              Explore All {activeTab.name} Pieces
             </span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 text-[#C5A059] dark:text-[#D4AF37]" />
           </Link>

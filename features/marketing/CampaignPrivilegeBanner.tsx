@@ -3,12 +3,10 @@
 import React, { useState } from "react";
 import { Sparkles, Check, Copy, ArrowRight } from "lucide-react";
 import { useCart } from "@/features/cart";
-import { useLanguage } from "@/features/navigation";
 import { ATELIER_CAMPAIGN_DATA } from "./campaign-data";
 
 export default function CampaignPrivilegeBanner() {
   const { appliedCoupon, applyCoupon, setIsCartOpen } = useCart();
-  const { isBangla } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const isActivated = appliedCoupon === ATELIER_CAMPAIGN_DATA.couponCode;
@@ -36,9 +34,7 @@ export default function CampaignPrivilegeBanner() {
           <div className="flex items-center gap-2">
             <Sparkles className="w-3.5 h-3.5 text-brand-gold shrink-0" />
             <span className="font-brandon text-xs sm:text-sm tracking-[0.14em] uppercase font-semibold text-stone-200">
-              {isBangla
-                ? "১০% আটেলিয়ার ওয়েলকাম প্রিভিলেজ সক্রিয় হয়েছে"
-                : "Atelier Welcome Privilege Activated"}
+              Atelier Welcome Privilege Activated
             </span>
           </div>
         </div>
@@ -60,7 +56,7 @@ export default function CampaignPrivilegeBanner() {
             onClick={handleEnsureApplied}
             className="text-[11px] uppercase tracking-[0.16em] font-semibold text-brand-gold hover:text-white transition-colors inline-flex items-center gap-1 cursor-pointer"
           >
-            <span>{isBangla ? "ব্যাগ দেখুন" : "View In Bag"}</span>
+            <span>View In Bag</span>
             <ArrowRight className="w-3 h-3" />
           </button>
         </div>

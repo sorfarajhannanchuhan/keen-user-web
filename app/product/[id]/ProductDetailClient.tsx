@@ -29,7 +29,6 @@ import {
 } from "@/features/catalog/products";
 import { useCart } from "@/features/cart";
 import { useWishlist } from "@/features/wishlist";
-import { useLanguage } from "@/features/navigation";
 import AtelierBreadcrumbs from "@/features/navigation/AtelierBreadcrumbs";
 
 interface Props {
@@ -39,7 +38,6 @@ interface Props {
 export default function ProductDetailClient({ product }: Props) {
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
-  const { isBangla } = useLanguage();
 
   // Effective 3 standard sizes (16*16, 18*18, 20*20)
   const effectiveSizes = product.sizes && product.sizes.length >= 2 ? product.sizes : STANDARD_SIZES;
@@ -222,11 +220,11 @@ export default function ProductDetailClient({ product }: Props) {
             <div className="pb-3 border-b border-stone-200/80 dark:border-stone-800/80">
               <div className="flex items-baseline gap-3">
                 <span className="font-sans text-2xl sm:text-[28px] font-bold text-stone-900 dark:text-white transition-all duration-200">
-                  {isBangla ? "৳" : "Tk "}{currentPrice.toLocaleString("en-BD")}
+                  ৳{currentPrice.toLocaleString("en-BD")}
                 </span>
                 {currentOriginalPrice && currentOriginalPrice > currentPrice && (
                   <span className="font-sans text-base text-stone-400 line-through transition-all duration-200">
-                    {isBangla ? "৳" : "Tk "}{currentOriginalPrice.toLocaleString("en-BD")}
+                    ৳{currentOriginalPrice.toLocaleString("en-BD")}
                   </span>
                 )}
               </div>
@@ -237,7 +235,7 @@ export default function ProductDetailClient({ product }: Props) {
               <div className="space-y-2 pt-3 border-t border-stone-200/60 dark:border-stone-800/60">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-brandon text-[11px] uppercase tracking-[0.16em] font-semibold text-stone-500 dark:text-stone-400">
-                    {isBangla ? "কালার" : "Color"}
+                    Color
                   </span>
                   <span className="font-sans font-medium text-stone-900 dark:text-stone-200">
                     {selectedColor?.name}
@@ -281,7 +279,7 @@ export default function ProductDetailClient({ product }: Props) {
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF6EE] dark:bg-[#1B2418] border border-[#C5A059]/30 dark:border-[#C5A059]/40 text-[#9E7A2E] dark:text-[#D4AF37] text-[11px] font-semibold tracking-wider uppercase shadow-xs">
                   <Clock className="w-3.5 h-3.5 stroke-[2.2] text-[#C5A059]" />
                   <span>
-                    {isBangla ? `স্টকে মাত্র ${product.stock} টি অবশিষ্ট` : `Only ${product.stock} Left In Stock`}
+                    Only {product.stock} Left In Stock
                   </span>
                 </div>
               )}
@@ -362,14 +360,14 @@ export default function ProductDetailClient({ product }: Props) {
                   }`}
                 >
                   {isOutOfStock ? (
-                    <span>{isBangla ? "স্টক শেষ" : "OUT OF STOCK"}</span>
+                    <span>OUT OF STOCK</span>
                   ) : isAdded ? (
                     <>
                       <Check className="w-4 h-4 stroke-[2.5]" />
-                      <span>{isBangla ? "ব্যাগে যোগ হয়েছে" : "ADDED TO BAG"}</span>
+                      <span>ADDED TO BAG</span>
                     </>
                   ) : (
-                    <span>{isBangla ? "ব্যাগে যোগ করুন" : "ADD TO BAG"}</span>
+                    <span>ADD TO BAG</span>
                   )}
                 </button>
 
@@ -424,7 +422,7 @@ export default function ProductDetailClient({ product }: Props) {
                     </svg>
                   </div>
                   <span className="font-sans text-[11px] sm:text-[12px] font-medium text-stone-800 dark:text-stone-200 leading-tight">
-                    {isBangla ? "হাতে তৈরি" : "Handmade"}
+                    Handmade
                   </span>
                 </div>
 
@@ -434,7 +432,7 @@ export default function ProductDetailClient({ product }: Props) {
                     <Handshake className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />
                   </div>
                   <span className="font-sans text-[11px] sm:text-[12px] font-medium text-stone-800 dark:text-stone-200 leading-tight">
-                    {isBangla ? "ন্যায্য বাণিজ্য" : "Fair Trade Verified"}
+                    Fair Trade Verified
                   </span>
                 </div>
 
@@ -448,7 +446,7 @@ export default function ProductDetailClient({ product }: Props) {
                     </svg>
                   </div>
                   <span className="font-sans text-[11px] sm:text-[12px] font-medium text-stone-800 dark:text-stone-200 leading-tight">
-                    {isBangla ? "নারী কারিগর" : "Made by Women"}
+                    Made by Women
                   </span>
                 </div>
 
@@ -464,7 +462,7 @@ export default function ProductDetailClient({ product }: Props) {
                     </svg>
                   </div>
                   <span className="font-sans text-[11px] sm:text-[12px] font-medium text-stone-800 dark:text-stone-200 leading-tight">
-                    {isBangla ? "টেকসই উপাদান" : "Sustainable Materials"}
+                    Sustainable Materials
                   </span>
                 </div>
               </div>

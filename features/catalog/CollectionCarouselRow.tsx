@@ -6,11 +6,9 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, ArrowUpRight, X, Heart } from "lucide-react";
 import { Product } from "./products";
 import { useWishlist } from "@/features/wishlist";
-import { useLanguage } from "@/features/navigation";
 
 interface CollectionCarouselRowProps {
   title: string;
-  bengaliTitle: string;
   products: Product[];
   viewMoreHref: string;
   isActive?: boolean;
@@ -18,12 +16,10 @@ interface CollectionCarouselRowProps {
 
 const CollectionCarouselRow = React.memo(function CollectionCarouselRow({
   title,
-  bengaliTitle,
   products,
   viewMoreHref,
   isActive = true,
 }: CollectionCarouselRowProps) {
-  const { isBangla } = useLanguage();
   const { isInWishlist, toggleWishlist } = useWishlist();
   
   // Safe guard: minimum 4 products
@@ -147,7 +143,7 @@ const CollectionCarouselRow = React.memo(function CollectionCarouselRow({
       {/* 1. Centered Minimal Header Title (Matching SS 1) */}
       <div className="text-center mb-6 sm:mb-8">
         <h2 className="font-brandon font-medium text-2xl sm:text-3xl lg:text-[30px] tracking-[0.08em] sm:tracking-[0.10em] text-stone-900 dark:text-stone-100 uppercase">
-          {isBangla ? bengaliTitle : title}
+          {title}
         </h2>
       </div>
 
@@ -298,7 +294,7 @@ const CollectionCarouselRow = React.memo(function CollectionCarouselRow({
           href={viewMoreHref}
           className="inline-block bg-[#111111] hover:bg-[#D4AF37] text-white hover:text-[#0E1410] dark:bg-stone-900 dark:hover:bg-[#D4AF37] dark:text-stone-100 dark:hover:text-[#0E1410] border border-black hover:border-[#D4AF37] dark:border-stone-800 dark:hover:border-[#D4AF37] font-brandon text-[11px] sm:text-xs font-bold uppercase tracking-[0.24em] px-8 sm:px-10 py-3 sm:py-3.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-md hover:shadow-[0_4px_22px_rgba(212,175,55,0.35)] cursor-pointer"
         >
-          {isBangla ? "আরও দেখুন" : "VIEW MORE"}
+          VIEW MORE
         </Link>
       </div>
     </div>

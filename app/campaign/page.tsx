@@ -3,14 +3,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Sparkles, Scissors, ShieldCheck, Leaf, Feather } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Scissors, Leaf, Feather } from "lucide-react";
 import { PRODUCTS, ProductCard } from "@/features/catalog";
-import { useLanguage } from "@/features/navigation";
 import { ATELIER_CAMPAIGN_DATA, CampaignPrivilegeBanner } from "@/features/marketing";
 
 export default function CampaignPage() {
-  const { isBangla } = useLanguage();
-
   // Curate campaign capsule products
   const capsuleProducts = PRODUCTS.filter((p) =>
     ATELIER_CAMPAIGN_DATA.capsuleProductIds.includes(p.id)
@@ -26,7 +23,7 @@ export default function CampaignPage() {
           className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-stone-500 hover:text-brand-gold transition-colors font-medium"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>{isBangla ? "হোম-এ ফিরুন" : "Return to Home"}</span>
+          <span>Return to Home</span>
         </Link>
       </div>
 
@@ -45,16 +42,16 @@ export default function CampaignPage() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#0E1410]/75 backdrop-blur-md text-brand-gold text-[10.5px] uppercase tracking-[0.28em] font-semibold border border-brand-sand">
             <Sparkles className="w-3.5 h-3.5 text-brand-gold" />
             <span>
-              {isBangla ? ATELIER_CAMPAIGN_DATA.bengaliEyebrow : ATELIER_CAMPAIGN_DATA.eyebrow}
+              {ATELIER_CAMPAIGN_DATA.eyebrow}
             </span>
           </div>
 
           <h1 className="font-brandon text-4xl sm:text-6xl md:text-7xl font-light sm:font-normal leading-tight tracking-tight drop-shadow-xl">
-            {isBangla ? "স্পর্শের কবিতা" : ATELIER_CAMPAIGN_DATA.scriptTitle}
+            {ATELIER_CAMPAIGN_DATA.scriptTitle}
           </h1>
 
           <p className="font-sans text-xs sm:text-sm text-stone-200 font-light tracking-[0.12em] uppercase max-w-xl mx-auto drop-shadow-md">
-            {isBangla ? "খাঁটি লিনেন • ইতালীয় ভেলভেট • নকশি সূচিকর্ম" : "Belgian Flax • Italian Velvet • Nakshi Needlework"}
+            Belgian Flax • Italian Velvet • Nakshi Needlework
           </p>
         </div>
       </section>
@@ -66,10 +63,10 @@ export default function CampaignPage() {
       <section className="py-14 sm:py-20 border-b border-stone-200/60 dark:border-stone-800/60 bg-stone-50/50 dark:bg-[#121914]">
         <div className="max-w-3xl mx-auto px-6 text-center space-y-4">
           <span className="font-brandon text-[11px] uppercase tracking-[0.32em] text-brand-gold font-semibold block">
-            {isBangla ? "আটেলিয়ার ম্যানিফেস্টো" : "ATELIER MANIFESTO"}
+            ATELIER MANIFESTO
           </span>
           <p className="font-brandon text-xl sm:text-2xl md:text-3xl text-stone-800 dark:text-stone-100 font-normal leading-relaxed">
-            "{isBangla ? ATELIER_CAMPAIGN_DATA.bengaliLeadCopy : ATELIER_CAMPAIGN_DATA.leadCopy}"
+            &quot;{ATELIER_CAMPAIGN_DATA.leadCopy}&quot;
           </p>
           <div className="w-12 h-[1px] bg-brand-gold mx-auto pt-2" />
         </div>
@@ -79,16 +76,14 @@ export default function CampaignPage() {
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <span className="font-brandon text-[11px] uppercase tracking-[0.3em] text-brand-gold font-semibold block mb-2">
-            {isBangla ? "ক্যাম্পেইন কালেকশন" : "CAPSULE EDITIONS"}
+            CAPSULE EDITIONS
           </span>
           <h2 className="font-brandon text-3xl sm:text-4xl font-medium tracking-tight">
-            {isBangla ? "নির্বাচিত আটেলিয়ার ক্রিয়েশন" : "Curated Campaign Pieces"}
+            Curated Campaign Pieces
           </h2>
           <div className="w-12 h-[1px] bg-brand-gold mx-auto mt-4 mb-4" />
           <p className="font-sans text-xs sm:text-sm text-stone-500 dark:text-stone-400 font-light">
-            {isBangla
-              ? "প্রতিটি পিসে স্বয়ংক্রিয়ভাবে ১০% ওয়েলকাম ডিসকাউন্ট প্রযোজ্য।"
-              : "Every piece includes your complimentary 10% welcome courtesy privilege applied at bag."}
+            Every piece includes your complimentary 10% welcome courtesy privilege applied at bag.
           </p>
         </div>
 
@@ -104,10 +99,10 @@ export default function CampaignPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <span className="font-brandon text-[11px] uppercase tracking-[0.3em] text-brand-gold font-semibold block mb-2">
-              {isBangla ? "ইন্টেরিয়র লুকবুক" : "STYLED INTERIORS"}
+              STYLED INTERIORS
             </span>
             <h2 className="font-brandon text-3xl sm:text-4xl font-medium tracking-tight">
-              {isBangla ? "আর্কিটেকচারাল স্টাইলিং ভিনিয়েট" : "Curated Room Arrangements"}
+              Curated Room Arrangements
             </h2>
             <div className="w-12 h-[1px] bg-brand-gold mx-auto mt-4 mb-4" />
           </div>
@@ -132,10 +127,10 @@ export default function CampaignPage() {
                       {vig.palette}
                     </span>
                     <h3 className="font-brandon text-lg font-semibold text-stone-900 dark:text-stone-100">
-                      {isBangla ? vig.bengaliTitle : vig.title}
+                      {vig.title}
                     </h3>
                     <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-light mt-2 leading-relaxed">
-                      {isBangla ? vig.bengaliDescription : vig.description}
+                      {vig.description}
                     </p>
                   </div>
 
@@ -143,7 +138,7 @@ export default function CampaignPage() {
                     href={vig.linkedCategory}
                     className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-stone-900 dark:text-stone-200 hover:text-brand-gold transition-colors pt-2 border-t border-stone-100 dark:border-stone-800"
                   >
-                    <span>{isBangla ? "এই স্টাইল দেখুন" : "Explore Style"}</span>
+                    <span>Explore Style</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -160,36 +155,30 @@ export default function CampaignPage() {
           <div className="p-6 border border-stone-200/70 dark:border-stone-800 text-center space-y-3">
             <Leaf className="w-6 h-6 text-brand-gold mx-auto" />
             <h4 className="font-brandon text-base font-semibold uppercase tracking-wider">
-              {isBangla ? "১০০% খাঁটি বেলজিয়ান লিনেন" : "100% Belgian Organic Flax"}
+              100% Belgian Organic Flax
             </h4>
             <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-light leading-relaxed">
-              {isBangla
-                ? "ইউরোপীয় সার্টিফাইড অর্গানিক ফ্ল্যাক্স থেকে বোনা যা ধোয়ার সাথে আরও নরম ও মার্জিত হয়।"
-                : "Certified long-staple European flax, stone-washed for enduring softness and tactile breathability."}
+              Certified long-staple European flax, stone-washed for enduring softness and tactile breathability.
             </p>
           </div>
 
           <div className="p-6 border border-stone-200/70 dark:border-stone-800 text-center space-y-3">
             <Scissors className="w-6 h-6 text-brand-gold mx-auto" />
             <h4 className="font-brandon text-base font-semibold uppercase tracking-wider">
-              {isBangla ? "ঐতিহ্যবাহী নকশি সূচিকর্ম" : "Ancestral Bengal Needlework"}
+              Ancestral Bengal Needlework
             </h4>
             <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-light leading-relaxed">
-              {isBangla
-                ? "জামালপুরের অভিজ্ঞ নারী কারিগরদের ৪০+ ঘণ্টার নিপুণ হাতের কাজের সেলাই।"
-                : "Each piece translates heirloom botanical motifs with 40+ hours of patient hand-embroidery."}
+              Each piece translates heirloom botanical motifs with 40+ hours of patient hand-embroidery.
             </p>
           </div>
 
           <div className="p-6 border border-stone-200/70 dark:border-stone-800 text-center space-y-3">
             <Feather className="w-6 h-6 text-brand-gold mx-auto" />
             <h4 className="font-brandon text-base font-semibold uppercase tracking-wider">
-              {isBangla ? "প্রিমিয়াম হাইপোঅ্যালার্জেনিক ইনার" : "Plush Hypoallergenic Inners"}
+              Plush Hypoallergenic Inners
             </h4>
             <p className="font-sans text-xs text-stone-500 dark:text-stone-400 font-light leading-relaxed">
-              {isBangla
-                ? "প্রতিটি কুশন কভারের সাথে হাই-লফট মাইক্রোফাইবার ইনার অন্তর্ভুক্ত।"
-                : "Includes our high-loft microfiber cushion pad that holds the coveted designer karate chop."}
+              Includes our high-loft microfiber cushion pad that holds the coveted designer karate chop.
             </p>
           </div>
 
@@ -201,7 +190,7 @@ export default function CampaignPage() {
             href="/collections"
             className="inline-flex items-center gap-2 bg-[#0E1410] dark:bg-stone-100 text-white dark:text-[#0E1410] font-brandon text-xs sm:text-sm font-semibold tracking-[0.24em] uppercase px-8 sm:px-10 py-3.5 sm:py-4 shadow-luxury hover:bg-brand-gold dark:hover:bg-brand-gold dark:hover:text-[#0E1410] transition-colors"
           >
-            <span>{isBangla ? "সম্পূর্ণ আর্কাইভ দেখুন (২৪টি পিস)" : "Explore Full Archive (24 Creations)"}</span>
+            <span>Explore Full Archive (24 Creations)</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

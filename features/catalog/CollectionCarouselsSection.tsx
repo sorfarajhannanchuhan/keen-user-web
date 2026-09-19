@@ -7,7 +7,6 @@ import { ENRICHED_SHOWCASE_PRODUCTS } from "./showcaseData";
 interface SectionConfig {
   id: string;
   title: string;
-  bengaliTitle: string;
   categoryKey: string;
   viewMoreHref: string;
 }
@@ -16,28 +15,24 @@ const SECTIONS: SectionConfig[] = [
   {
     id: "new-arrival",
     title: "WHAT'S NEW",
-    bengaliTitle: "নতুন আগমন",
     categoryKey: "new-arrival",
     viewMoreHref: "/collections?filter=new-arrivals",
   },
   {
     id: "best-seller",
     title: "BEST SELLERS",
-    bengaliTitle: "সেরা বিক্রিত সম্ভার",
     categoryKey: "best-seller",
     viewMoreHref: "/collections?filter=best-seller",
   },
   {
     id: "back-in-stock",
     title: "BACK IN STOCK",
-    bengaliTitle: "পুনরায় স্টকে এসেছে",
     categoryKey: "back-in-stock",
     viewMoreHref: "/collections?filter=back-in-stock",
   },
   {
     id: "upcoming",
     title: "UPCOMING EDITIONS",
-    bengaliTitle: "আসন্ন কালেকশন",
     categoryKey: "upcoming",
     viewMoreHref: "/collections?filter=upcoming",
   },
@@ -194,7 +189,6 @@ export default function CollectionCarouselsSection() {
               <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
                 <CollectionCarouselRow
                   title={sec.title}
-                  bengaliTitle={sec.bengaliTitle}
                   products={products}
                   viewMoreHref={sec.viewMoreHref}
                   isActive={state.isTop}

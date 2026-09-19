@@ -8,7 +8,6 @@ import { ShoppingBag, Menu, X, Sparkles, Search, ArrowRight, Phone, ChevronDown 
 import { useCart } from "@/features/cart";
 import { PRODUCTS } from "@/features/catalog";
 import ThemeToggle from "./ThemeToggle";
-import { useLanguage } from "./LanguageContext";
 import { useTheme } from "./ThemeContext";
 import { useAppearance } from "@/features/appearance";
 import { useFrontendContent } from "@/features/appearance";
@@ -506,9 +505,6 @@ export default function Navbar() {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
-  // Language Context
-  const { t, isBangla } = useLanguage();
-
   // Dynamic Navigation Categories
   const navCategories = useMemo(() => {
     if (content?.navigation && content.navigation.length > 0) {
@@ -521,15 +517,15 @@ export default function Navbar() {
         }));
     }
     return [
-      { key: "sashiko", name: isBangla ? "শাশিকো" : "SASHIKO", href: "/collections?category=sashiko" },
-      { key: "patchwork", name: isBangla ? "প্যাচওয়ার্ক" : "PATCHWORK", href: "/collections?category=patchwork" },
-      { key: "one-line-art", name: isBangla ? "ওয়ান লাইন আর্ট" : "ONE LINE ART", href: "/collections?category=one-line-art" },
-      { key: "solid-pattern", name: isBangla ? "সলিড প্যাটার্ন" : "SOLID PATTERN", href: "/collections?category=solid-pattern" },
-      { key: "wall-hanging", name: isBangla ? "ওয়াল হ্যাঙ্গিং" : "WALL HANGING", href: "/collections?category=wall-hanging" },
-      { key: "curtains", name: isBangla ? "কার্টেনস" : "CURTAIN", href: "/curtains" },
-      { key: "quilts", name: isBangla ? "কাঁথা কুইল্টস" : "KANTHA QUILTS", href: "/quilts" },
+      { key: "sashiko", name: "SASHIKO", href: "/collections?category=sashiko" },
+      { key: "patchwork", name: "PATCHWORK", href: "/collections?category=patchwork" },
+      { key: "one-line-art", name: "ONE LINE ART", href: "/collections?category=one-line-art" },
+      { key: "solid-pattern", name: "SOLID PATTERN", href: "/collections?category=solid-pattern" },
+      { key: "wall-hanging", name: "WALL HANGING", href: "/collections?category=wall-hanging" },
+      { key: "curtains", name: "CURTAIN", href: "/curtains" },
+      { key: "quilts", name: "KANTHA QUILTS", href: "/quilts" },
     ];
-  }, [content?.navigation, t, isBangla]);
+  }, [content?.navigation]);
 
   const currentMegaMenus = useMemo(() => {
     return {
@@ -858,7 +854,7 @@ export default function Navbar() {
               >
                 <Phone className="w-3.5 h-3.5 text-brand-gold transition-transform group-hover:scale-110 shrink-0" />
                 <span className="text-stone-400 group-hover:text-brand-gold transition-colors font-normal">
-                  {isBangla ? "ঢাকা কনসিয়ার্জ:" : "Dhaka Concierge:"}
+                  Dhaka Concierge:
                 </span>
                 <span className="font-semibold text-stone-200 group-hover:text-brand-gold transition-colors font-sans">
                   {content?.footer?.whatsappNumber || "+880 1700-000000"}
@@ -869,14 +865,12 @@ export default function Navbar() {
               <div className="flex-1 flex items-center justify-center gap-2 text-center">
                 <Sparkles className="w-3 h-3 text-brand-gold animate-pulse shrink-0" />
                 <span className="font-semibold text-stone-100 truncate sm:overflow-visible">
-                  {(isBangla ? t("announcementBadge") : (content?.announcement?.promoBadge || "COMPLIMENTARY")) && (
+                  {(content?.announcement?.promoBadge || "COMPLIMENTARY") && (
                     <span className="text-brand-gold mr-1.5 font-bold tracking-wider">
-                      [{isBangla ? t("announcementBadge") : (content?.announcement?.promoBadge || "COMPLIMENTARY")}]
+                      [{content?.announcement?.promoBadge || "COMPLIMENTARY"}]
                     </span>
                   )}
-                  {isBangla
-                    ? (t("announcementText") || "৩,০০০ টাকার বেশি অর্ডারে সারা বাংলাদেশে কমপ্লিমেন্টারি হোম ডেলিভারি")
-                    : (content?.announcement?.text || "Complimentary White-Glove Delivery on all orders above ৳3,000")}
+                  {content?.announcement?.text || "Complimentary White-Glove Delivery on all orders above ৳3,000"}
                 </span>
               </div>
 
@@ -948,7 +942,7 @@ export default function Navbar() {
                   <span className={`font-sans text-[8px] sm:text-[9px] uppercase tracking-[0.32em] font-normal mt-1 transition-colors ${
                     isFloatingOverHero ? "text-stone-300" : "text-brand-charcoal-muted"
                   }`}>
-                    {t("brandTagline")}
+                    ARTISANAL LIVING & TEXTILES
                   </span>
                 </div>
               </Link>
@@ -1016,8 +1010,8 @@ export default function Navbar() {
                     <div className="flex items-center justify-between pb-2 mb-3 border-b border-stone-200/70 dark:border-stone-800">
                       <span className="text-[11px] uppercase tracking-[0.2em] text-brand-gold font-bold">
                         {searchQuery.trim()
-                          ? `${isBangla ? "অনুসন্ধানের ফলাফল" : "Search Matches"} (${searchResults.length})`
-                          : t("searchFeatured")}
+                          ? `Search Matches (${searchResults.length})`
+                          : "Curated Recommendations"}
                       </span>
                       <button
                         type="button"
@@ -1037,50 +1031,50 @@ export default function Navbar() {
                         <div className="pb-3 border-b border-stone-200/70 dark:border-stone-800">
                           <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                             <span className="text-[10px] uppercase tracking-wider text-stone-400 font-semibold shrink-0">
-                              {t("popularSearchesTitle")}:
+                              Popular Searches:
                             </span>
                             <div className="flex items-center gap-1.5 flex-wrap">
                               <button
                                 type="button"
-                                onClick={() => handlePopularSearchClick(t("tagPatchwork"), "/collections?search=Patchwork")}
+                                onClick={() => handlePopularSearchClick("Patchwork", "/collections?search=Patchwork")}
                                 className="text-[11px] px-2.5 py-1 bg-stone-100 dark:bg-stone-800/80 hover:bg-brand-gold hover:text-[#0E1410] dark:hover:bg-brand-gold dark:hover:text-[#0E1410] text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700 rounded-full transition-all cursor-pointer font-medium"
                               >
-                                {t("tagPatchwork")}
+                                Patchwork
                               </button>
                               <button
                                 type="button"
-                                onClick={() => handlePopularSearchClick(t("tagCombo"), "/collections?search=Combo")}
+                                onClick={() => handlePopularSearchClick("Combo", "/collections?search=Combo")}
                                 className="text-[11px] px-2.5 py-1 bg-stone-100 dark:bg-stone-800/80 hover:bg-brand-gold hover:text-[#0E1410] dark:hover:bg-brand-gold dark:hover:text-[#0E1410] text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700 rounded-full transition-all cursor-pointer font-medium"
                               >
-                                {t("tagCombo")}
+                                Combo
                               </button>
                               <button
                                 type="button"
-                                onClick={() => handlePopularSearchClick(t("tagBestSeller"), "/collections?filter=best-seller")}
+                                onClick={() => handlePopularSearchClick("Best Seller", "/collections?filter=best-seller")}
                                 className="text-[11px] px-2.5 py-1 bg-stone-100 dark:bg-stone-800/80 hover:bg-brand-gold hover:text-[#0E1410] dark:hover:bg-brand-gold dark:hover:text-[#0E1410] text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700 rounded-full transition-all cursor-pointer font-medium"
                               >
-                                {t("tagBestSeller")}
+                                Best Seller
                               </button>
                               <button
                                 type="button"
-                                onClick={() => handlePopularSearchClick(t("tagBelgianLinen"), "/collections?search=Linen")}
+                                onClick={() => handlePopularSearchClick("Belgian Linen", "/collections?search=Linen")}
                                 className="text-[11px] px-2.5 py-1 bg-stone-100 dark:bg-stone-800/80 hover:bg-brand-gold hover:text-[#0E1410] dark:hover:bg-brand-gold dark:hover:text-[#0E1410] text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700 rounded-full transition-all cursor-pointer font-medium"
                               >
-                                {t("tagBelgianLinen")}
+                                Belgian Linen
                               </button>
                               <button
                                 type="button"
-                                onClick={() => handlePopularSearchClick(t("tagItalianVelvet"), "/collections?search=Velvet")}
+                                onClick={() => handlePopularSearchClick("Italian Velvet", "/collections?search=Velvet")}
                                 className="text-[11px] px-2.5 py-1 bg-stone-100 dark:bg-stone-800/80 hover:bg-brand-gold hover:text-[#0E1410] dark:hover:bg-brand-gold dark:hover:text-[#0E1410] text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700 rounded-full transition-all cursor-pointer font-medium"
                               >
-                                {t("tagItalianVelvet")}
+                                Italian Velvet
                               </button>
                               <button
                                 type="button"
-                                onClick={() => handlePopularSearchClick(t("tagNakshiKantha"), "/collections?search=Kantha")}
+                                onClick={() => handlePopularSearchClick("Nakshi Kantha", "/collections?search=Kantha")}
                                 className="text-[11px] px-2.5 py-1 bg-stone-100 dark:bg-stone-800/80 hover:bg-brand-gold hover:text-[#0E1410] dark:hover:bg-brand-gold dark:hover:text-[#0E1410] text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700 rounded-full transition-all cursor-pointer font-medium"
                               >
-                                {t("tagNakshiKantha")}
+                                Nakshi Kantha
                               </button>
                             </div>
                           </div>
@@ -1089,7 +1083,7 @@ export default function Navbar() {
                         {/* 2. Curated Highlights: Exactly 3 Attractive Discovery Cards */}
                         <div>
                           <span className="text-[10px] uppercase tracking-[0.2em] text-stone-400 dark:text-stone-500 font-semibold block mb-2.5">
-                            {isBangla ? "কিউরেটেড কালেকশন" : "Curated Collections"}
+                            Curated Collections
                           </span>
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             
@@ -1102,21 +1096,21 @@ export default function Navbar() {
                               <div className="relative aspect-[4/3] overflow-hidden bg-stone-200 dark:bg-stone-800 mb-2">
                                 <Image
                                   src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=800&auto=format&fit=crop"
-                                  alt={t("cardNewArrivalTitle")}
+                                  alt="The 2026 Atelier Cushion Edit"
                                   fill
                                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute top-2 left-2">
                                   <span className="bg-brand-gold text-[#0E1410] text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 shadow-sm">
-                                    {t("cardNewArrivalBadge")}
+                                    NEW ARRIVAL
                                   </span>
                                 </div>
                               </div>
                               <h5 className="font-brandon text-xs sm:text-sm font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
-                                {t("cardNewArrivalTitle")}
+                                The 2026 Atelier Cushion Edit
                               </h5>
                               <p className="font-sans text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
-                                {t("cardNewArrivalDesc")}
+                                Stone-washed flax & double-pile Italian velvet
                               </p>
                             </Link>
 
@@ -1129,21 +1123,21 @@ export default function Navbar() {
                               <div className="relative aspect-[4/3] overflow-hidden bg-stone-200 dark:bg-stone-800 mb-2">
                                 <Image
                                   src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=800&auto=format&fit=crop"
-                                  alt={t("cardBackInStockTitle")}
+                                  alt="Nakshi Heritage Needlework Pillow"
                                   fill
                                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute top-2 left-2">
                                   <span className="bg-[#3F4D38] text-brand-gold text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 shadow-sm border border-brand-gold/40">
-                                    {t("cardBackInStockBadge")}
+                                    BACK IN STOCK
                                   </span>
                                 </div>
                               </div>
                               <h5 className="font-brandon text-xs sm:text-sm font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
-                                {t("cardBackInStockTitle")}
+                                Nakshi Heritage Needlework Pillow
                               </h5>
                               <p className="font-sans text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
-                                {t("cardBackInStockDesc")}
+                                Restocked in limited hand-stitched batches
                               </p>
                             </Link>
 
@@ -1156,21 +1150,21 @@ export default function Navbar() {
                               <div className="relative aspect-[4/3] overflow-hidden bg-stone-200 dark:bg-stone-800 mb-2">
                                 <Image
                                   src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop"
-                                  alt={t("cardUpcomingTitle")}
+                                  alt="Cascading Flax Linen Panels"
                                   fill
                                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute top-2 left-2">
                                   <span className="bg-stone-900/90 text-stone-200 text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 shadow-sm border border-stone-700">
-                                    {t("cardUpcomingBadge")}
+                                    UPCOMING
                                   </span>
                                 </div>
                               </div>
                               <h5 className="font-brandon text-xs sm:text-sm font-bold uppercase tracking-[0.04em] text-stone-900 dark:text-stone-100 group-hover:text-brand-gold transition-colors line-clamp-1">
-                                {t("cardUpcomingTitle")}
+                                Cascading Flax Linen Panels
                               </h5>
                               <p className="font-sans text-[10px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">
-                                {t("cardUpcomingDesc")}
+                                Bespoke ceiling-to-floor drape collection
                               </p>
                             </Link>
 
@@ -1183,10 +1177,10 @@ export default function Navbar() {
                         {searchResults.length === 0 ? (
                           <div className="py-6 text-center space-y-1">
                             <p className="text-xs font-brandon text-stone-800 dark:text-stone-200">
-                              {isBangla ? `"${searchQuery}" এর জন্য কোনো প্রোডাক্ট পাওয়া যায়নি` : `No pieces found for "${searchQuery}"`}
+                              {`No pieces found for "${searchQuery}"`}
                             </p>
                             <p className="text-[10px] text-stone-400">
-                              {isBangla ? "Linen, Velvet, বা Silk দিয়ে খুঁজে দেখতে পারেন" : "Try searching for Linen, Velvet, or Silk"}
+                              Try searching for Linen, Velvet, or Silk
                             </p>
                           </div>
                         ) : (
@@ -1232,7 +1226,7 @@ export default function Navbar() {
                             onClick={() => setIsSearchDropdownOpen(false)}
                             className="block text-center text-[10px] uppercase tracking-widest text-brand-gold hover:text-brand-gold-hover font-semibold pt-2.5 mt-2.5 border-t border-stone-200/70 dark:border-stone-800"
                           >
-                            {isBangla ? `সবগুলো (${searchResults.length}) ফলাফল দেখুন →` : `View All ${searchResults.length} Products →`}
+                            {`View All ${searchResults.length} Products →`}
                           </Link>
                         )}
                       </div>
@@ -1432,8 +1426,8 @@ export default function Navbar() {
                       {currentMegaMenus[activeMegaMenu].featured.slice(0, 2).map((item, fIdx) => {
                         const isFirst = fIdx === 0;
                         const label = isFirst
-                          ? (isBangla ? "নতুন কালেকশন" : "New Arrivals")
-                          : (isBangla ? "পুনরায় স্টকে" : "Back in Stock");
+                          ? "New Arrivals"
+                          : "Back in Stock";
                         const href = isFirst
                           ? `/collections?filter=new-arrivals&category=${activeMegaMenu}`
                           : `/collections?filter=back-in-stock&category=${activeMegaMenu}`;
